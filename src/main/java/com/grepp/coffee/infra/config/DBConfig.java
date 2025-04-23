@@ -34,7 +34,7 @@ public class DBConfig {
     @Value("${spring.datasource.hikari.maximum-pool-size}")
     private int poolSize;
 
-    @Value("${schema.script.name:empty-schema.sql}")
+    @Value("${schema.script.name:schema.sql}")
     private String schema;
 
     @Value("${data.script.name:empty-data.sql}")
