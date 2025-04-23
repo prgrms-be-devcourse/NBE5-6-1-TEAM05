@@ -11,21 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class OrderServiceImpl {
+public class OrderService {
 
     private final OrderRepository orderRepository;
 
     // 주문을 확정했을 때, 상세 주문 DB에 데이터 추가 또는 업데이트
     @Transactional
-    public void processOrder(OrderDto orderDto, List<DetailedOrderDto> detailedOrderLists) {
+    public boolean processOrder(OrderDto orderDto, List<DetailedOrderDto> detailedOrderLists) {
         // 동일한 이메일, 주소(우편번호)로 들어온 주문인지 검증
         orderRepository.saveOrderSmart(orderDto, detailedOrderLists);
+        return true;
     }
 
     // 주문을 취소 했을 때 처리
     @Transactional
-    public void deleteOrder(OrderDto orderDto) {
+    public boolean deleteOrder(OrderDto orderDto) {
         //TODO: orderDto를 넘겨서 존재하는 주문 목록을 삭제
+        return true;
     }
 
     // 상세 주문 정보를 가져온다.
