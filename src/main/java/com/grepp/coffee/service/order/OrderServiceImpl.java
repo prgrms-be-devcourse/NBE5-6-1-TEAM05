@@ -1,7 +1,7 @@
 package com.grepp.coffee.service.order;
 
 
-import com.grepp.coffee.app.model.detailedorder.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.dto.DetailedOrderDto;
 
 public class OrderServiceImpl implements OrderService {
 
