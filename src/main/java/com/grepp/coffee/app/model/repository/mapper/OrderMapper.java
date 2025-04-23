@@ -22,12 +22,15 @@ public interface OrderMapper {
     // 커피 재고 차감
     void decreaseStock(@Param("coffeeId") Integer coffeeId, @Param("quantity") Integer quantity);
 
-    // 주문 번호로 상세 주문 목록 조회
-    List<DetailedOrderDto> selectDetailedOrderByOrderNum(@Param("orderNum") Integer orderNum);
-
-    // 주문 번호로 주문 정보 조회
-    OrderDto selectOrderByOrderNum(@Param("orderNum") Integer orderNum);
-
-    // 이메일 기준으로 오늘 주문 조회 (하루 1건만 처리용)
+    // 이메일, 주소번호 기준으로 오늘 주문 조회 (하루 1건만 처리용)
     OrderDto findTodayOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
+
+    // 주문 번호로 상세 주문 목록 조회
+    List<DetailedOrderDto> findDetailedOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
+
+    // 이메일, 주소번호 기준으로 주문 삭제
+    void deleteOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
+
+    // 이메일, 주소번호 기준으로 주문 삭제
+    void deleteDetailedOrdersByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
 }

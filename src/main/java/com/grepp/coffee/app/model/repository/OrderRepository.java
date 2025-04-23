@@ -58,13 +58,14 @@ public class OrderRepository {
         return orderMapper.selectCoffeeById(coffeeId);
     }
 
-    // 주문 단건 조회
-    public OrderDto getOrderByOrderNum(int orderNum) {
-        return orderMapper.selectOrderByOrderNum(orderNum);
+    // 주문 삭제
+    public void deleteOrder(String email, int postNum) {
+        orderMapper.deleteDetailedOrdersByEmailAndPostNum(email, postNum);
+        orderMapper.deleteOrderByEmailAndPostNum(email, postNum);
     }
 
-    // 주문 상세 목록 조회
-    public List<DetailedOrderDto> getOrderDetailsByOrderNum(int orderNum) {
-        return orderMapper.selectDetailedOrderByOrderNum(orderNum);
+    // 상세 주문 조회
+    public List<DetailedOrderDto> getDetailedOrdersByEmailAndPostNum(String email, int postNum) {
+        return orderMapper.findDetailedOrderByEmailAndPostNum(email, postNum);
     }
 }
