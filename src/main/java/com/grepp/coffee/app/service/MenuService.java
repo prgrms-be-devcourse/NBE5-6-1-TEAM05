@@ -20,7 +20,6 @@ public class MenuService {
 
     // DB에 저장된 커피 메뉴들을 가져옴
     public List<CoffeeDto> getAllCoffee() {
-        // 커피의 ID는 필요하지 않음
         return null;
     }
 
