@@ -31,6 +31,28 @@ public class OrderRepository {
         }
     }
 
+    // 이메일 기준으로 오늘 주문이 있으면 detail만 추가, 없다면 주문 생성 후 detail 추가
+    public void saveOrderSmart(OrderDto order, List<DetailedOrderDto> orderItems) {
+        OrderDto existingOrder = orderMapper.findTodayOrderByEmail(order.getEmail());
+
+        if (existingOrder == null) {
+            // 새 주문
+            orderMapper.insertOrder(order);
+            for (DetailedOrderDto item : orderItems) {
+                item.setOrderNum(order.getOrderNum());
+                orderMapper.insertDetailedOrder(item);
+                orderMapper.decreaseStock(item.getCoffeeId(), item.getQuantity());
+            }
+        } else {
+            // 기존 주문이 있으면 상세만 추가
+            for (DetailedOrderDto item : orderItems) {
+                item.setOrderNum(existingOrder.getOrderNum());
+                orderMapper.insertDetailedOrder(item);
+                orderMapper.decreaseStock(item.getCoffeeId(), item.getQuantity());
+            }
+        }
+    }
+
     // 커피 가격/재고 조회
     public CoffeeDto getCoffeeInfo(int coffeeId) {
         return orderMapper.selectCoffeeById(coffeeId);
