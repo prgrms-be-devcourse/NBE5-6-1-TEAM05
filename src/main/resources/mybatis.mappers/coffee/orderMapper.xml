@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.grepp.coffee.app.model.order.dto.repository.mapper.OrderMapper">
+  <!-- 주문 등록 -->
+  <insert id="insertOrder" parameterType="com.grepp.coffee.app.model.order.dto.OrderDto" useGeneratedKeys="true" keyProperty="orderNum">
+    INSERT INTO ORDERS (email, address, post_num, order_time)
+    VALUES (#{email}, #{address}, #{postNum}, NOW())
+  </insert>
+
+  <!-- 상세 주문 등록 -->
+  <insert id="insertDetailedOrder" parameterType="com.grepp.coffee.app.model.detailedorder.dto.DetailedOrderDto">
+    INSERT INTO DETAIL (order_num, coffee_id, quantity)
+    VALUES (#{orderNum}, #{coffeeId}, #{quantity})
+  </insert>
+
+  <!-- 커피 1개 조회 -->
+  <select id="selectCoffeeById" resultType="com.grepp.coffee.app.model.coffee.dto.CoffeeDto" parameterType="int">
+    SELECT coffee_id, coffee_name, price, stock
+    FROM COFFEE
+    WHERE coffee_id = #{coffeeId}
+  </select>
+
+  <!-- 커피 재고 차감 -->
+  <update id="decreaseStock">
+    UPDATE COFFEE
+    SET stock = stock - #{quantity}
+    WHERE coffee_id = #{coffeeId}
+  </update>
+
+  <!-- 주문 번호로 상세 주문 목록 조회 -->
+  <select id="selectDetailedOrderByOrderNum"
+    resultType="com.grepp.coffee.app.model.detailedorder.dto.DetailedOrderDto"
+    parameterType="int">
+    SELECT detail_num, order_num, coffee_id, quantity
+    FROM DETAIL
+    WHERE order_num = #{orderNum}
+  </select>
+
+  <!-- 주문 번호로 주문 정보 조회 -->
+  <select id="selectOrderByOrderNum"
+    resultType="com.grepp.coffee.app.model.order.dto.OrderDto"
+    parameterType="int">
+    SELECT order_num, email, address, post_num, order_time
+    FROM ORDERS
+    WHERE order_num = #{orderNum}
+  </select>
+</mapper>
