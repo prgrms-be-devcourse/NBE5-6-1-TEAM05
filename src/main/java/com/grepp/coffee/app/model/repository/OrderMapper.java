@@ -1,4 +1,4 @@
-package com.grepp.coffee.app.model.order.dto.repository.mapper;
+package com.grepp.coffee.app.model.repository;
 
 import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import com.grepp.coffee.app.model.detailedorder.dto.DetailedOrderDto;
