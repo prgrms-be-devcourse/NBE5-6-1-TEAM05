@@ -1,4 +1,4 @@
-package com.grepp.coffee.app.model.detailedorder.dto;
+package com.grepp.coffee.app.model.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
