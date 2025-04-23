@@ -9,6 +9,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public void addMenu(CoffeeDto coffeeDto) {
 
+        int test;
     }
 
     @Override
