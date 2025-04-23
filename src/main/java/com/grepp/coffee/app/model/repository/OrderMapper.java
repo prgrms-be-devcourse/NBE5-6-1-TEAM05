@@ -1,8 +1,8 @@
 package com.grepp.coffee.app.model.repository;
 
-import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
-import com.grepp.coffee.app.model.detailedorder.dto.DetailedOrderDto;
-import com.grepp.coffee.app.model.order.dto.OrderDto;
+import com.grepp.coffee.app.model.dto.CoffeeDto;
+import com.grepp.coffee.app.model.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.dto.OrderDto;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
