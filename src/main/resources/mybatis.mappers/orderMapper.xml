@@ -43,10 +43,11 @@
     WHERE order_num = #{orderNum}
   </select>
 
-  <select id="findTodayOrderByEmail" parameterType="string" resultType="OrderDto">
+  <select id="findTodayOrderByEmailAndPostNum" parameterType="string" resultType="OrderDto">
     SELECT *
     FROM ORDERS
     WHERE email = #{email}
+    AND post_num = #{postNum}
     AND DATE(order_time) = CURRENT_DATE
     ORDER BY order_time DESC
     LIMIT 1

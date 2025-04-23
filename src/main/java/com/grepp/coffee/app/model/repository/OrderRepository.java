@@ -33,7 +33,7 @@ public class OrderRepository {
 
     // 이메일 기준으로 오늘 주문이 있으면 detail만 추가, 없다면 주문 생성 후 detail 추가
     public void saveOrderSmart(OrderDto order, List<DetailedOrderDto> orderItems) {
-        OrderDto existingOrder = orderMapper.findTodayOrderByEmail(order.getEmail());
+        OrderDto existingOrder = orderMapper.findTodayOrderByEmailAndPostNum(order.getEmail(), order.getPostNum());
 
         if (existingOrder == null) {
             // 새 주문

@@ -29,5 +29,5 @@ public interface OrderMapper {
     OrderDto selectOrderByOrderNum(@Param("orderNum") Integer orderNum);
 
     // 이메일 기준으로 오늘 주문 조회 (하루 1건만 처리용)
-    OrderDto findTodayOrderByEmail(@Param("email") String email);
+    OrderDto findTodayOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
 }
