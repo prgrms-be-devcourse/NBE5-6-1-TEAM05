@@ -29,20 +29,6 @@
     WHERE coffee_id = #{coffeeId}
   </update>
 
-  <!-- 주문 번호로 상세 주문 목록 조회 -->
-  <select id="selectDetailedOrderByOrderNum" resultType="DetailedOrderDto" parameterType="int">
-    SELECT detail_num, order_num, coffee_id, quantity
-    FROM DETAIL
-    WHERE order_num = #{orderNum}
-  </select>
-
-  <!-- 주문 번호로 주문 정보 조회 -->
-  <select id="selectOrderByOrderNum" resultType="OrderDto" parameterType="int">
-    SELECT order_num, email, address, post_num, order_time
-    FROM ORDERS
-    WHERE order_num = #{orderNum}
-  </select>
-
   <select id="findTodayOrderByEmailAndPostNum" parameterType="string" resultType="OrderDto">
     SELECT *
     FROM ORDERS
@@ -52,4 +38,26 @@
     ORDER BY order_time DESC
     LIMIT 1
   </select>
+
+  <select id="findDetailedOrderByEmailAndPostNum" resultType="DetailedOrderDto">
+    SELECT *
+    FROM DETAIL
+    WHERE order_num IN (
+    SELECT order_num FROM ORDERS
+    WHERE email = #{email} AND post_num = #{postNum}
+    )
+  </select>
+
+  <delete id="deleteOrderByEmailAndPostNum">
+    DELETE FROM ORDERS
+    WHERE email = #{email} AND post_num = #{postNum}
+  </delete>
+
+  <delete id="deleteDetailedOrdersByEmailAndPostNum">
+    DELETE FROM DETAIL
+    WHERE order_num IN (
+    SELECT order_num FROM ORDERS
+    WHERE email = #{email} AND post_num = #{postNum}
+    )
+  </delete>
 </mapper>
