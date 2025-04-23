@@ -1,4 +1,4 @@
-package com.grepp.coffee.service.menu;
+package com.grepp.coffee.app.service.menu;
 
 import com.grepp.coffee.app.model.dto.CoffeeDto;
 import java.util.List;
