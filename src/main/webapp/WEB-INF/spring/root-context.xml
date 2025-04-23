@@ -39,4 +39,5 @@
 
   <mybatis:scan base-package="com.grepp.coffee.app.model" annotation="org.apache.ibatis.annotations.Mapper"/>
   <context:component-scan base-package="com.grepp.coffee"/>
+  <context:property-placeholder location="classpath:application.properties"/>
 </beans>
