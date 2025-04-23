@@ -13,7 +13,7 @@
     <div class="card-panel red lighten-2 text-white">${param.error}</div>
 </c:if>
 <h4>Index</h4>
-<%--    <a href="/order">상품 주문하기</a>--%>
+    <a href="/order">상품 주문하기</a>
 </main>
 <%@include file="/WEB-INF/view/include/footer.jsp" %>
 

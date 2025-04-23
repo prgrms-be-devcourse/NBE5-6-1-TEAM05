@@ -2,6 +2,7 @@ package com.grepp.coffee.infra.config;
 
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
+import static org.springframework.http.HttpMethod.PUT;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -69,7 +70,11 @@ public class SecurityConfig {
             .authorizeHttpRequests(
                 (requests) -> requests
                                     .requestMatchers(GET, "/order").permitAll()
+                                    .requestMatchers(PUT, "/api/add/**").permitAll()
                                   .anyRequest().permitAll()
+            )
+            .csrf(csrf -> csrf
+                .ignoringRequestMatchers("/api/**")
             )
             .formLogin((form) -> form
                                      .loginPage("/member/signin")
