@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 // TODO : 매서드 수정
 
 @Service
-public class MenuServiceImpl {
+public class MenuService {
 
     // 커피 추가시 ID는 DB에서 자동으로 +1씩 추가됨
     // DB에 새로운 커피 메뉴 추가
