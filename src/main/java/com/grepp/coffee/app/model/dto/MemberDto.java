@@ -1,20 +1,19 @@
 package com.grepp.coffee.app.model.dto;
 
-import java.time.LocalDateTime;
+import com.grepp.coffee.app.model.dto.code.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.ibatis.type.Alias;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Alias("OrderDto")
-public class OrderDto {
+public class MemberDto {
 
-    private Integer orderNum;
     private String email;
+    private String password;
     private String address;
     private Integer postNum;
-    private LocalDateTime orderTime;
+    private Role role;
+    private Boolean enabled;
 }
