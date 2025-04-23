@@ -1,0 +1,10 @@
+package com.grepp.coffee.service.order;
+
+import com.grepp.coffee.app.model.detailedorder.dto.DetailedOrderDto;
+
+public interface OrderService {
+    void processOrder(DetailedOrderDto detailedOrderDto);
+    void updateOrder(DetailedOrderDto detailedOrderDto);
+    void deleteOrder(DetailedOrderDto detailedOrderDto);
+    DetailedOrderDto getDetailedOrderDto();
+}
