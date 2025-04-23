@@ -37,6 +37,6 @@
     <constructor-arg index="0" ref="sqlSessionFactory"/>
   </bean>
 
-  <mybatis:scan base-package="com.grepp.spring.app.model" annotation="org.apache.ibatis.annotations.Mapper"/>
+  <mybatis:scan base-package="com.grepp.coffee.app.model" annotation="org.apache.ibatis.annotations.Mapper"/>
   <context:component-scan base-package="com.grepp.coffee"/>
 </beans>
