@@ -40,14 +40,14 @@
   <!-- 재고 추가 -->
   <update id="increaseStock">
     UPDATE COFFEE
-    SET STOCK = STOCK - #{quantity}
+    SET STOCK = STOCK + #{quantity}
     WHERE COFFEE_ID = #{coffeeId}
   </update>
 
   <!-- 재고 감소 -->
   <update id="decreaseStock">
     UPDATE COFFEE
-    SET STOCK = STOCK + #{quantity}
+    SET STOCK = STOCK - #{quantity}
     WHERE COFFEE_ID = #{coffeeId}
   </update>
 </mapper>
