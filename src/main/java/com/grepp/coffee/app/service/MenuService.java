@@ -1,40 +1,44 @@
 package com.grepp.coffee.app.service;
 
 import com.grepp.coffee.app.model.dto.CoffeeDto;
+import com.grepp.coffee.app.model.repository.CoffeeRepository;
 import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-// TODO : 매서드 수정
-
 @Service
+@RequiredArgsConstructor
 public class MenuService {
 
-    // 커피 추가시 ID는 DB에서 자동으로 +1씩 추가됨
-    // DB에 새로운 커피 메뉴 추가
+    private final CoffeeRepository coffeeRepository;
+
+    // DB로 새로운 커피 메뉴의 추가요청을 보냅니다.
     @Transactional
     public boolean addMenu(CoffeeDto coffeeDto) {
         // 커피 이름, 가격, 재고가 전달 되야함.
-        return true;
+        return coffeeRepository.insertCoffee(coffeeDto);
     }
 
-    // DB에 저장된 커피 메뉴들을 가져옴
+    // DB에 존재하는 모든 커피 메뉴들을 가져옵니다.
     public List<CoffeeDto> getAllCoffee() {
-        return null;
+        return coffeeRepository.getAllCoffee();
     }
 
-    // DB에 저장된 커피 메뉴를 수정함
+    // DB로부터 특정 커피에 대한 데이터를 가져옵니다.
+    public CoffeeDto getCoffee(CoffeeDto coffeeDto) {
+        return coffeeRepository.getCoffeeById(coffeeDto.getCoffeeId());
+    }
+
+    // DB에 저장된 커피 메뉴를 수정합니다.
     @Transactional
     public boolean updateMenu(CoffeeDto coffeeDto) {
-        // 커피의 이름, 가격, 재고 중 일부를 수정함
-        return true;
+        return coffeeRepository.updateCoffee(coffeeDto);
     }
 
-    // DB에 저장된 커피메뉴를 삭제함
+    // DB에 저장된 커피메뉴를 삭제합니다.
     @Transactional
     public boolean deleteMenu(CoffeeDto coffeeDto) {
-        // 커피를 삭제함
-        return true;
+        return coffeeRepository.deleteCoffee(coffeeDto.getCoffeeId());
     }
 }
