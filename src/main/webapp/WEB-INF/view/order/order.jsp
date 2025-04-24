@@ -1,6 +1,5 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@include file="/WEB-INF/view/include/page.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html lang='ko'>
 <head>
 
@@ -86,22 +85,22 @@
                 <ul class="list-group products">
 
 
-                    <c:if test="${not empty coffeeDtos}">
-                        <c:forEach items="${coffeeDtos}" var="coffee">
-                            <li class="list-group-item d-flex mt-3">
-                                <div class="col">
-                                    <div class="row"><c:out value="${coffee.name}"/></div>
-                                </div>
-                                <div class="col text-center price"><c:out value="${coffee.price}"/></div>
-                                <div class="col text-end action">
-                                    <a class="btn btn-small btn-outline-dark" href="" coffeeId="${coffee.coffeeId}">+</a>
-                                </div>
-                                <div class="col text-end action">
-                                    <a class="btn btn-small btn-outline-dark" href="" coffeeId="${coffee.coffeeId}">-</a>
-                                </div>
-                            </li>
-                        </c:forEach>
-                    </c:if>
+<%--                    <c:if test="${not empty coffeeDtos}">--%>
+<%--                        <c:forEach items="${coffeeDtos}" var="coffee">--%>
+<%--                            <li class="list-group-item d-flex mt-3">--%>
+<%--                                <div class="col">--%>
+<%--                                    <div class="row"><c:out value="${coffee.name}"/></div>--%>
+<%--                                </div>--%>
+<%--                                <div class="col text-center price"><c:out value="${coffee.price}"/></div>--%>
+<%--                                <div class="col text-end action">--%>
+<%--                                    <a class="btn btn-small btn-outline-dark add-btn" href="" data-coffee-id="${coffee.coffeeId}">+</a>--%>
+<%--                                </div>--%>
+<%--                                <div class="col text-end action">--%>
+<%--                                    <a class="btn btn-small btn-outline-dark sub-btn" href="" data-coffee-id="${coffee.coffeeId}">-</a>--%>
+<%--                                </div>--%>
+<%--                            </li>--%>
+<%--                        </c:forEach>--%>
+<%--                    </c:if>--%>
 
 
                     <li class="list-group-item d-flex mt-3">
@@ -111,32 +110,9 @@
                             <div class="row">Columbia Nariñó</div>
                         </div>
                         <div class="col text-center price">5000원</div>
-                        <div class="col text-end action"><a class="btn btn-small btn-outline-dark add-btn" href="" coffeeId="1">+</a></div>
-                        <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">-</a></div>
+                        <div class="col text-end action"><a class="btn btn-small btn-outline-dark add-btn" href="" data-coffeeId="1">+</a></div>
+                        <div class="col text-end action"><a class="btn btn-small btn-outline-dark sub-btn" href="" data-coffeeId="1">-</a></div>
                     </li>
-                    <li class="list-group-item d-flex mt-2">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-                        <div class="col">
-                            <div class="row text-muted">커피콩</div>
-                            <div class="row">Columbia Nariñó</div>
-                        </div>
-                        <div class="col text-center price">5000원</div>
-                        <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">+</a></div>
-                        <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">-</a></div>
-                    </li>
-                    <li class="list-group-item d-flex mt-2">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-                        <div class="col">
-                            <div class="row text-muted">커피콩</div>
-                            <div class="row">Columbia Nariñó</div>
-                        </div>
-                        <div class="col text-center price">5000원</div>
-                        <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">+</a></div>
-                        <div class="col text-end action"><a class="btn btn-small btn-outline-dark" href="">-</a></div>
-                    </li>
-
-
-
                 </ul>
             </div>
             <div class="col-md-4 summary p-4">
@@ -144,32 +120,31 @@
                     <h5 class="m-0 p-0"><b>Summary</b></h5>
                 </div>
                 <hr>
+
+                <div class="row">
+                    <h6 class="p-0">Columbia Nariñó <span class="badge bg-dark text- coffee-count" data-coffeeId="1">2개</span></h6>
+                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark delete-btn" data-coffeeId="1" href="">X</a></div>
+                </div>
+
 <%--                세션에서 받아온 값 넣기 --%>
 
-                <div id="coffee-template" style="display:none;">
-                    <div class="row coffee-row">
-                        <h6 class="p-0">
-                            <span class="coffee-name"></span>
-                            <span class="badge bg-dark coffee-count">0</span>
-                        </h6>
-                    </div>
-                </div>
 
-                <!-- 생성될 영역 -->
-                <div id="coffee-list"></div>
+<%--                <!-- 생성될 영역 -->--%>
+<%--                <div class="coffee-list">--%>
+<%--                    <c:if test="${not empty coffeeDtos}">--%>
+<%--                        <c:forEach items="${coffeeCart}" var="entry">--%>
+<%--                                <div class="row">--%>
+<%--                                    <h6 class="p-0">${entry.value.name} <span class="badge bg-dark coffee-count" data-coffeeId="${entry.value.id}"><c:out value="${entry.value.count}"></c:out></span></h6>--%>
+<%--                                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark delete-btn" data-coffeeId="${entry.value.id}" href="">X</a></div>--%>
+<%--                                </div>--%>
+<%--                        </c:forEach>--%>
+<%--                    </c:if>--%>
+<%--                </div>--%>
 
-                <c:if test="${not empty coffeeDtos}">
-                    <c:forEach items="${coffeeCart}" var="entry">
-                            <div class="row">
-                                <h6 class="p-0">${entry.value.name} <span class="badge bg-dark coffee-${entry}"><c:out value="${entry.value.count}"></c:out></span></h6>
-                            </div>
-                    </c:forEach>
-                </c:if>
-
-
-                <div class="row" id="coffeeCartListTemplate" style="display:none;">
-                    <h6 class="p-0 coffee-name">  <span class="badge bg-dark coffee-${entry} coffee-count"></span></h6>
-                </div>
+<%--                <div class="row" id="coffeeCartListTemplate" style="display:none;">--%>
+<%--                    <h6 class="p-0 coffee-name">  <span class="badge bg-dark coffee-count" data-coffeeId="0"></span></h6>--%>
+<%--                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark delete-btn" data-coffeeId="0" href="">X</a></div>--%>
+<%--                </div>--%>
 
 
                 <form:form modelAttribute="orderRequest" class="col s12" action="/order" method="post" id="signupForm">
@@ -202,36 +177,6 @@
 </main>
 </body>
 
-<script>
-  const createOrder = data => {
-    const clone = document.querySelector(
-        '#coffeeCartListTemplate').firstElementChild.cloneNode(true);
-    const coffeeName = clone.querySelector('.coffee-name');
-    const coffeeCount = clone.querySelector('.coffee-count');
-
-    coffeeName.textContent = data.name;
-    coffeeCount.textContent = data.count;
-    return clone;
-  }
-
-  document.querySelectorAll(".add-btn")
-  .forEach((btn) => {
-    btn.addEventListener("click", async function() {
-      const coffeeId = this.getAttribute("coffeeId");
-      const response = await fetch(
-          `/api/add/${coffeeId}`);
-      const data = await response.json();
-      const coffeeCart = data.data;
-
-      if(!coffeeCart){
-        return;
-      }
-
-      const clone = createOrder(coffeeCart);
-    });
-  });
-
-</script>
-
+<script src="${context}/assets/js/order.js" defer defer></script>
 
 </html>

@@ -17,12 +17,12 @@ public class CoffeeRepository {
     }
 
     // 커피 한 건 조회
-    public CoffeeDto getCoffeeById(int coffeeId) {
-        return coffeeMapper.selectCoffeeById(coffeeId);
+    public CoffeeDto selectByCoffeeId(int coffeeId) {
+        return coffeeMapper.selectByCoffeeId(coffeeId);
     }
 
     // 모든 커피 목록 조회
-    public List<CoffeeDto> getAllCoffee() {
+    public List<CoffeeDto> selectAllCoffee() {
         return coffeeMapper.selectAllCoffee();
     }
 
