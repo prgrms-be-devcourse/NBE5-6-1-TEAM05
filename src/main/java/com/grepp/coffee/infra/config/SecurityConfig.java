@@ -82,7 +82,7 @@ public class SecurityConfig {
             )
             .formLogin((form) -> form
                                      .loginPage("/member/signin")
-                                     .usernameParameter("userId")
+                                     .usernameParameter("email")
                                      .loginProcessingUrl("/member/signin")
                                      .defaultSuccessUrl("/")
                                      .successHandler(successHandler())

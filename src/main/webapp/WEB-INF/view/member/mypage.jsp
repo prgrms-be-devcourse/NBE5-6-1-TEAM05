@@ -9,9 +9,9 @@
 <%@ include file="/WEB-INF/view/include/header.jsp" %>
 
 <main class="container">
-    <h4><c:out value="${member.userId}"/></h4>
-    <h4><c:out value="${member.address}"/></h4>
-    <h4><c:out value="${member.postNum}"/></h4>
+    <h4>email : <span<c:out value="${member.email}"/>></span></h4>
+    <h4>address : <span<c:out value="${member.address}"/>></span></h4>
+    <h4>postNum : <span<c:out value="${member.postNum}"/>></span></h4>
 </main>
 <%@ include file="/WEB-INF/view/include/footer.jsp" %>
 </body>
