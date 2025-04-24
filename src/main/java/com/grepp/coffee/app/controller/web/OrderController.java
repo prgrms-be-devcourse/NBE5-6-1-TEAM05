@@ -4,10 +4,13 @@ import com.grepp.coffee.app.controller.session.CoffeeSessionData;
 import com.grepp.coffee.app.controller.web.payload.OrderRequest;
 
 import com.grepp.coffee.app.model.dto.CoffeeDto;
+import com.grepp.coffee.app.model.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.dto.OrderDto;
 import com.grepp.coffee.app.service.MenuService;
 import com.grepp.coffee.app.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -64,14 +67,32 @@ public class OrderController {
             return "order/order";
         }
 
-        // 커피 이름 가져오기
-        // session에서 이름으로 조회해서 수량 받아오기
+        // OrderDto 만들기
+        OrderDto orderDto = request.toOrderDto();
+        List<DetailedOrderDto> details = new ArrayList<>();
 
-        // order에 업데이트 하기
-        // orderDto를 사용해서 넘기기
+        // 커피 모두 가져오기
+        List<CoffeeDto> coffeeDtos = menuService.getAllCoffee();
+        // session에서 아이디로 조회해서 수량 받아와 DatailedOrderDto List에 추가
+        coffeeDtos.forEach(coffee -> {
+            DetailedOrderDto detailedOrderDto = new DetailedOrderDto();
+            detailedOrderDto.setOrderNum(null);
+            detailedOrderDto.setDetailNum(null);
+            detailedOrderDto.setCoffeeId(coffee.getCoffeeId());
 
+            String key = "coffee"+coffee.getCoffeeId();
+            CoffeeSessionData value = (CoffeeSessionData) session.getAttribute(key);
+            detailedOrderDto.setQuantity(value.getCoffeeCount());
 
-        return "order/order";
+            details.add(detailedOrderDto);
+        });
+
+        // 서비스론 넘겨 추가 하기
+        if(orderService.processOrder(orderDto, details))
+            return "redirect:/";  // 임시 페이지
+        else{
+            return "order/order";
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package com.grepp.coffee.app.controller.web.payload;
 
+import com.grepp.coffee.app.model.dto.OrderDto;
 import jakarta.validation.constraints.Email;
 import lombok.Data;
 import lombok.Getter;
@@ -15,5 +16,13 @@ public class OrderRequest {
     private String email;
     private String address;
     private Integer postNum;
+
+    public OrderDto toOrderDto() {
+        OrderDto orderDto = new OrderDto();
+        orderDto.setEmail(email);
+        orderDto.setAddress(address);
+        orderDto.setPostNum(postNum);
+        return orderDto;
+    }
 
 }
