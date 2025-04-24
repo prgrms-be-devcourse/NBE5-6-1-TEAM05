@@ -29,6 +29,7 @@
     WHERE coffee_id = #{coffeeId}
   </update>
 
+  <!-- 주문 목록 조회 -->
   <select id="findTodayOrderByEmailAndPostNum" parameterType="string" resultType="OrderDto">
     SELECT *
     FROM ORDERS
