@@ -14,8 +14,9 @@ public class MenuService {
     // 커피 추가시 ID는 DB에서 자동으로 +1씩 추가됨
     // DB에 새로운 커피 메뉴 추가
     @Transactional
-    public void addMenu(CoffeeDto coffeeDto) {
+    public boolean addMenu(CoffeeDto coffeeDto) {
         // 커피 이름, 가격, 재고가 전달 되야함.
+        return true;
     }
 
     // DB에 저장된 커피 메뉴들을 가져옴
@@ -25,13 +26,15 @@ public class MenuService {
 
     // DB에 저장된 커피 메뉴를 수정함
     @Transactional
-    public void updateMenu(CoffeeDto coffeeDto) {
+    public boolean updateMenu(CoffeeDto coffeeDto) {
         // 커피의 이름, 가격, 재고 중 일부를 수정함
+        return true;
     }
 
     // DB에 저장된 커피메뉴를 삭제함
     @Transactional
-    public void deleteMenu(CoffeeDto coffeeDto) {
+    public boolean deleteMenu(CoffeeDto coffeeDto) {
         // 커피를 삭제함
+        return true;
     }
 }
