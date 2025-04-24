@@ -37,13 +37,15 @@ public class OrderController {
         // 커피 데이터 가져오기
         List<CoffeeDto> coffeeDtos = menuService.getAllCoffee();
 
-        // TODO DB 연결하고 확인하기~~
+        //세션 데이터 가져오기
         Map<String, CoffeeSessionData> coffeeCart = new HashMap<>();
-        coffeeDtos.forEach(coffee -> {
+        for(CoffeeDto coffee : coffeeDtos) {
             String key = "coffee"+coffee.getCoffeeId();
             Object value = session.getAttribute(key);
-            coffeeCart.put(key, (CoffeeSessionData) value);
-        });
+            if(value !=null){
+                coffeeCart.put(key, (CoffeeSessionData) value);
+            }
+        }
 
         model.addAttribute("coffeeDtos", coffeeDtos);
         model.addAttribute("coffeeCart", coffeeCart);
@@ -51,9 +53,31 @@ public class OrderController {
         return "order/order";
     }
 
+    @GetMapping("payment")
+    public String payment(OrderRequest request, HttpSession session, Model model) {
 
-    // 결제 완료 버튼을 눌렀을 때
-    @PostMapping
+        // 커피 데이터 가져오기
+        List<CoffeeDto> coffeeDtos = menuService.getAllCoffee();
+        int count=0;
+
+        // 장바구니 데이터 가져오기
+        Map<String, CoffeeSessionData> coffeeCart = new HashMap<>();
+        for(CoffeeDto coffee : coffeeDtos) {
+            String key = "coffee"+coffee.getCoffeeId();
+            Object value = session.getAttribute(key);
+            if(value !=null){
+                coffeeCart.put(key, (CoffeeSessionData) value);
+                count+=coffee.getPrice()*((CoffeeSessionData) value).getCoffeeCount();
+            }
+        }
+
+        model.addAttribute("total", count);
+        model.addAttribute("coffeeCart", coffeeCart);
+        return "order/payment";
+    }
+
+    // 결제 하기 버튼을 눌렀을 때
+    @PostMapping("payment")
     public String postOrder(
         @Valid
         OrderRequest request,
@@ -74,24 +98,28 @@ public class OrderController {
         List<CoffeeDto> coffeeDtos = menuService.getAllCoffee();
         // session에서 아이디로 조회해서 수량 받아와 DatailedOrderDto List에 추가
         coffeeDtos.forEach(coffee -> {
-            DetailedOrderDto detailedOrderDto = new DetailedOrderDto();
-            detailedOrderDto.setOrderNum(null);
-            detailedOrderDto.setDetailNum(null);
-            detailedOrderDto.setCoffeeId(coffee.getCoffeeId());
-
             String key = "coffee"+coffee.getCoffeeId();
             CoffeeSessionData value = (CoffeeSessionData) session.getAttribute(key);
-            detailedOrderDto.setQuantity(value.getCoffeeCount());
+            if(value!=null){
+                DetailedOrderDto detailedOrderDto = new DetailedOrderDto();
+                detailedOrderDto.setOrderNum(null);
+                detailedOrderDto.setDetailNum(null);
+                detailedOrderDto.setCoffeeId(coffee.getCoffeeId());
 
-            details.add(detailedOrderDto);
+                detailedOrderDto.setQuantity(value.getCoffeeCount());
+
+                details.add(detailedOrderDto);
+            }
         });
 
         // 서비스론 넘겨 추가 하기
         if(orderService.processOrder(orderDto, details))
             return "redirect:/";  // 임시 페이지
         else{
-            return "order/order";
+            return "order/payment";
         }
     }
+
+
 
 }

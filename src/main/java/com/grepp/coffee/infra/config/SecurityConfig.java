@@ -1,5 +1,6 @@
 package com.grepp.coffee.infra.config;
 
+import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
@@ -70,7 +71,11 @@ public class SecurityConfig {
             .authorizeHttpRequests(
                 (requests) -> requests
                                     .requestMatchers(GET, "/order").permitAll()
+                                    .requestMatchers(GET, "/order/payment").permitAll()
+                                    .requestMatchers(POST, "/order/payment").permitAll()
                                     .requestMatchers(PUT, "/api/add/**").permitAll()
+                                    .requestMatchers(PUT, "/api/sub/**").permitAll()
+                                    .requestMatchers(DELETE, "/api/delete/**").permitAll()
                                     .requestMatchers(GET, "/api/member/exists/*").permitAll()
                                     .requestMatchers(GET, "/member/signup").permitAll()
                                     .requestMatchers(GET, "/member/signin").permitAll()
