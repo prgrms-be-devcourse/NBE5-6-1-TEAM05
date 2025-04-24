@@ -42,6 +42,37 @@ class CoffeeRepositoryTest {
     @Test
     public void updateCoffee() {
         CoffeeDto dto = new CoffeeDto();
-
+        dto.setCoffeeId(4);
+        dto.setCoffeeName("kanu");
+        dto.setPrice(2500);
+        coffeeRepository.updateCoffee(dto);
+        log.info("{}", dto);
     }
+
+//    @Test
+//    public void deleteCoffee() {
+//        CoffeeDto dto = new CoffeeDto();
+//        coffeeRepository.deleteCoffee(4);
+//        log.info("{}", dto);
+//    }
+//
+//    @Test
+//    public void increaseStock() {
+//        CoffeeDto dto = new CoffeeDto();
+//        dto.setCoffeeId(4);
+//        dto.setCoffeeName("kanu");
+//        dto.setPrice(2500);
+//        coffeeRepository.updateCoffee(dto);
+//        log.info("{}", dto);
+//    }
+//
+//    @Test
+//    public void decreaseStock() {
+//        CoffeeDto dto = new CoffeeDto();
+//        dto.setCoffeeId(4);
+//        dto.setCoffeeName("kanu");
+//        dto.setPrice(2500);
+//        coffeeRepository.updateCoffee(dto);
+//        log.info("{}", dto);
+//    }
 }

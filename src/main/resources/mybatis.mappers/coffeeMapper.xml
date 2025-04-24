@@ -28,10 +28,10 @@
     UPDATE COFFEE
     <set>
       <if test="coffeeName != null">COFFEE_NAME = #{coffeeName},</if>
-      <if test="coffeeName != null">PRICE = #{price},</if>
-      <if test="coffeeName != null">STOCK = #{stock}</if>
+      <if test="price != null">PRICE = #{price},</if>
+      <if test="stock != null">STOCK = #{stock}</if>
     </set>
-    WHERE COFFEE_ID = #{coffee_id}
+    WHERE COFFEE_ID = #{coffeeId}
   </update>
 
   <!-- 커피 삭제 -->
