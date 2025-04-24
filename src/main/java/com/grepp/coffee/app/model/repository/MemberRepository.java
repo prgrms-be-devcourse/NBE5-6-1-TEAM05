@@ -28,8 +28,8 @@ public class MemberRepository {
     }
 
     // 회원 등록
-    public boolean insertMember(MemberDto memberDto) {
-        return memberMapper.insertMember(memberDto) > 0;
+    public boolean insertMember(MemberDto dto) {
+        return memberMapper.insertMember(dto) > 0;
     }
 
     // 회원 정보 수정 (동적 SQL)

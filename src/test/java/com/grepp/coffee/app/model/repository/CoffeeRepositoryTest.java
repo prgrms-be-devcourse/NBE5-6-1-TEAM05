@@ -38,4 +38,10 @@ class CoffeeRepositoryTest {
         coffeeRepository.insertCoffee(dto);
         log.info("{}", dto);
     }
+
+    @Test
+    public void updateCoffee() {
+        CoffeeDto dto = new CoffeeDto();
+
+    }
 }
