@@ -2,22 +2,43 @@ package com.grepp.coffee.app.model.repository;
 
 
 import com.grepp.coffee.app.model.dto.MemberDto;
+import com.grepp.coffee.app.model.repository.mapper.MemberMapper;
 import java.util.Optional;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Mapper
 @Repository
-public interface MemberRepository {
+public class MemberRepository {
 
-    Optional<MemberDto> selectByEmail(String userEmail);
+    private final MemberMapper memberMapper;
 
-    @Select("select count(*) from member where EMAIL = #{email}")
-    Boolean existsMember(String userId);
+    @Autowired
+    public MemberRepository(MemberMapper memberMapper) {
+        this.memberMapper = memberMapper;
+    }
 
-    @Insert("insert into member (EMAIL, PASSWORD, ADDRESS, POST_NUM, ROLE, ENABLED) "
-        + "values(#{email}, #{password}, #{address}, #{postNum}, #{role}, #{enabled})")
-    void insert(MemberDto dto);
+    // 회원 조회
+    public Optional<MemberDto> selectByEmail(String email) {
+        return Optional.ofNullable(memberMapper.selectByEmail(email));
+    }
+
+    // 중복 확인
+    public boolean existsByEmail(String email) {
+        return memberMapper.existsByEmail(email);
+    }
+
+    // 회원 등록
+    public boolean insertMember(MemberDto memberDto) {
+        return memberMapper.insertMember(memberDto) > 0;
+    }
+
+    // 회원 정보 수정 (동적 SQL)
+    public boolean updateMemberInfo(MemberDto dto) {
+        return memberMapper.updateMemberInfo(dto.getEmail(), dto.getPassword(), dto.getAddress(), dto.getPostNum()) > 0;
+    }
+
+    // 계정 활성화
+    public boolean enableMember(String email) {
+        return memberMapper.enableMember(email) > 0;
+    }
 }
