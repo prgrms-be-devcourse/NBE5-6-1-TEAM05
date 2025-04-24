@@ -1,7 +1,7 @@
-package com.grepp.coffee.app.controller.web;
+package com.grepp.coffee.app.controller.web.order;
 
 import com.grepp.coffee.app.controller.session.CoffeeSessionData;
-import com.grepp.coffee.app.controller.web.payload.OrderRequest;
+import com.grepp.coffee.app.controller.web.order.payload.OrderRequest;
 
 import com.grepp.coffee.app.model.dto.CoffeeDto;
 import com.grepp.coffee.app.model.dto.DetailedOrderDto;
@@ -11,7 +11,6 @@ import com.grepp.coffee.app.service.OrderService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

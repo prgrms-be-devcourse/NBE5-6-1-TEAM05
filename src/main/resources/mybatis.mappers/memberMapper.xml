@@ -23,7 +23,7 @@
     INSERT INTO MEMBER (
     EMAIL, PASSWORD, ADDRESS, POST_NUM, ROLE, ENABLED
     ) VALUES (
-    #{email}, #{password}, #{address}, #{postNum}, #{role}, #{enabled}
+    #{email}, #{password}, #{address}, #{postNum}, #{role}, TRUE
     )
   </insert>
 
