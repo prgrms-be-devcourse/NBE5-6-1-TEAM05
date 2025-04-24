@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="">
+
+  <!-- 회원 조회 -->
+  <select id="selectByEmail" resultType="com.grepp.coffee.app.model.dto.MemberDto">
+    SELECT *
+    FROM MEMBER
+    WHERE EMAIL = #{email}
+  </select>
+
+  <!-- 이메일 중복 확인 -->
+  <select id="existsByEmail" resultType="boolean">
+    SELECT COUNT(*) > 0
+    FROM MEMBER
+    WHERE EMAIL = #{email}
+  </select>
+
+  <!-- 회원 등록 -->
+  <insert id="insertMember" parameterType="com.grepp.coffee.app.model.dto.MemberDto">
+    INSERT INTO MEMBER (
+    EMAIL, PASSWORD, ADDRESS, POST_NUM, ROLE, ENABLED
+    ) VALUES (
+    #{email}, #{password}, #{address}, #{postNum}, #{role}, #{enabled}
+    )
+  </insert>
+
+  <!-- 회원 정보 수정 (동적 SQL로 null 방지) -->
+  <update id="updateMemberInfo">
+    UPDATE MEMBER
+    <set>
+      <if test="password != null">PASSWORD = #{password},</if>
+      <if test="address != null">ADDRESS = #{address},</if>
+      <if test="postNum != null">POST_NUM = #{postNum},</if>
+    </set>
+    WHERE EMAIL = #{email}
+  </update>
+
+  <!-- 계정 활성화 -->
+  <update id="enableMember">
+    UPDATE MEMBER
+    SET ENABLED = true
+    WHERE EMAIL = #{email}
+  </update>
+</mapper>

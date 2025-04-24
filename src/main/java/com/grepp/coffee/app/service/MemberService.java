@@ -25,14 +25,14 @@ public class MemberService{
 
     @Transactional
     public void signup(MemberDto dto, Role role) {
-        if(memberRepository.existsMember(dto.getEmail()))
+        if(memberRepository.existsByEmail(dto.getEmail()))
             throw new CommonException(ResponseCode.BAD_REQUEST);
 
         String encodedPassword = passwordEncoder.encode(dto.getPassword());
         dto.setPassword(encodedPassword);
 
         dto.setRole(role);
-        memberRepository.insert(dto);
+        memberRepository.insertMember(dto);
     }
 
     public PrincipalDto signin(String userId, String password) {
@@ -51,7 +51,7 @@ public class MemberService{
     }
 
     public Boolean isDuplicatedId(String id) {
-        return memberRepository.existsMember(id);
+        return memberRepository.existsByEmail(id);
     }
 
     public MemberDto findById(String userId) {
