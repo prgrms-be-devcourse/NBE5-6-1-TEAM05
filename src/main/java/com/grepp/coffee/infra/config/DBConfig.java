@@ -37,7 +37,7 @@ public class DBConfig {
     @Value("${schema.script.name:schema.sql}")
     private String schema;
 
-    @Value("${data.script.name:empty-data.sql}")
+    @Value("${data.script.name:data.sql}")
     private String data;
 
     @Bean
