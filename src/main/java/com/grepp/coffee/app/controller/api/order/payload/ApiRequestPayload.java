@@ -1,4 +1,4 @@
-package com.grepp.coffee.app.controller.api.payload;
+package com.grepp.coffee.app.controller.api.order.payload;
 
 import lombok.Data;
 

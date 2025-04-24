@@ -71,6 +71,10 @@ public class SecurityConfig {
                 (requests) -> requests
                                     .requestMatchers(GET, "/order").permitAll()
                                     .requestMatchers(PUT, "/api/add/**").permitAll()
+                                    .requestMatchers(GET, "/api/member/exists/*").permitAll()
+                                    .requestMatchers(GET, "/member/signup").permitAll()
+                                    .requestMatchers(GET, "/member/signin").permitAll()
+                                    .requestMatchers(POST, "/member/signin", "/member/signup").permitAll()
                                   .anyRequest().permitAll()
             )
             .csrf(csrf -> csrf
