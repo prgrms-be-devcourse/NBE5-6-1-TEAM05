@@ -11,16 +11,16 @@ import org.apache.ibatis.annotations.Param;
 public interface OrderMapper {
 
     // 주문 등록
-    void insertOrder(OrderDto order);
+    int insertOrder(OrderDto order);
 
     // 상세 주문 등록
-    void insertDetailedOrder(DetailedOrderDto detailedOrder);
+    int insertDetailedOrder(DetailedOrderDto detailedOrder);
 
     // 커피 조회
     CoffeeDto selectCoffeeById(@Param("coffeeId") Integer coffeeId);
 
     // 커피 재고 차감
-    void decreaseStock(@Param("coffeeId") Integer coffeeId, @Param("quantity") Integer quantity);
+    boolean decreaseStock(@Param("coffeeId") Integer coffeeId, @Param("quantity") Integer quantity);
 
     // 이메일, 주소번호 기준으로 오늘 주문 조회 (하루 1건만 처리용)
     OrderDto findTodayOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
@@ -29,8 +29,8 @@ public interface OrderMapper {
     List<DetailedOrderDto> findDetailedOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
 
     // 이메일, 주소번호 기준으로 주문 삭제
-    void deleteOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
+    int deleteOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
 
-    // 이메일, 주소번호 기준으로 주문 삭제
-    void deleteDetailedOrdersByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
+    // 이메일, 주소번호 기준으로 상세 주문 삭제
+    int deleteDetailedOrdersByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
 }
