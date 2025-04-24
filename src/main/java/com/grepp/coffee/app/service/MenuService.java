@@ -22,12 +22,12 @@ public class MenuService {
 
     // DB에 존재하는 모든 커피 메뉴들을 가져옵니다.
     public List<CoffeeDto> getAllCoffee() {
-        return coffeeRepository.getAllCoffee();
+        return coffeeRepository.selectAllCoffee();
     }
 
     // DB로부터 특정 커피에 대한 데이터를 가져옵니다.
     public CoffeeDto getCoffee(CoffeeDto coffeeDto) {
-        return coffeeRepository.getCoffeeById(coffeeDto.getCoffeeId());
+        return coffeeRepository.selectByCoffeeId(coffeeDto.getCoffeeId());
     }
 
     // DB에 저장된 커피 메뉴를 수정합니다.
