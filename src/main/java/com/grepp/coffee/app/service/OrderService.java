@@ -15,25 +15,21 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
 
-    // 주문을 확정했을 때, 상세 주문 DB에 데이터 추가 또는 업데이트
+    /** 고객이 주문을 확정 했을 때 해당 주문을 DB에 반영합니다. */
     @Transactional
     public boolean processOrder(OrderDto orderDto, List<DetailedOrderDto> detailedOrderLists) {
-        // 동일한 이메일, 주소(우편번호)로 들어온 주문인지 검증
-        orderRepository.saveOrderSmart(orderDto, detailedOrderLists);
-        return true;
+        return orderRepository.saveOrderSmart(orderDto, detailedOrderLists);
     }
 
-    // 주문을 취소 했을 때 처리
+    /** 고객이 주문을 취소한 경우 해당 취소 내역을 DB에 반영합니다. */
     @Transactional
     public boolean deleteOrder(OrderDto orderDto) {
-        //TODO: orderDto를 넘겨서 존재하는 주문 목록을 삭제
-        return true;
+        return orderRepository.deleteOrder(orderDto.getEmail(), orderDto.getPostNum());
     }
 
-    // 상세 주문 정보를 가져온다.
+    /** 고객이 주문정보 열람시 고객의 주문 정보를 가져옵니다. */
     @Transactional
-    public DetailedOrderDto getDetailedOrderDto(OrderDto orderDto) {
-
-        return null;
+    public List<DetailedOrderDto> getDetailedOrderList(OrderDto orderDto) {
+        return orderRepository.getDetailedOrdersByEmailAndPostNum(orderDto.getEmail(), orderDto.getPostNum());
     }
 }
