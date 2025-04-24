@@ -19,38 +19,50 @@ public class OrderRepository {
     }
 
     // 주문 + 상세 주문 + 재고 차감까지 일괄 처리
-    public void saveOrderWithItems(OrderDto order, List<DetailedOrderDto> orderItems) {
-        // 주문 저장 (orderNum 생성됨)
-        orderMapper.insertOrder(order);
+    public boolean saveOrderWithItems(OrderDto order, List<DetailedOrderDto> orderItems) {
+        int result = orderMapper.insertOrder(order);
+        if (result == 0) return false;
 
-        // 상세 주문 저장 및 재고 차감
         for (DetailedOrderDto item : orderItems) {
             item.setOrderNum(order.getOrderNum());
-            orderMapper.insertDetailedOrder(item);
-            orderMapper.decreaseStock(item.getCoffeeId(), item.getQuantity());
+
+            int detailResult = orderMapper.insertDetailedOrder(item);
+            boolean stockResult = orderMapper.decreaseStock(item.getCoffeeId(), item.getQuantity());
+
+            if (detailResult == 0 || !stockResult) {
+                return false;
+            }
         }
+
+        return true;
     }
 
     // 이메일 기준으로 오늘 주문이 있으면 detail만 추가, 없다면 주문 생성 후 detail 추가
-    public void saveOrderSmart(OrderDto order, List<DetailedOrderDto> orderItems) {
+    public boolean saveOrderSmart(OrderDto order, List<DetailedOrderDto> orderItems) {
         OrderDto existingOrder = orderMapper.findTodayOrderByEmailAndPostNum(order.getEmail(), order.getPostNum());
 
         if (existingOrder == null) {
-            // 새 주문
-            orderMapper.insertOrder(order);
+            int result = orderMapper.insertOrder(order);
+            if (result == 0) return false;
+
             for (DetailedOrderDto item : orderItems) {
                 item.setOrderNum(order.getOrderNum());
-                orderMapper.insertDetailedOrder(item);
-                orderMapper.decreaseStock(item.getCoffeeId(), item.getQuantity());
+                if (orderMapper.insertDetailedOrder(item) == 0 ||
+                    !orderMapper.decreaseStock(item.getCoffeeId(), item.getQuantity())) {
+                    return false;
+                }
             }
         } else {
-            // 기존 주문이 있으면 상세만 추가
             for (DetailedOrderDto item : orderItems) {
                 item.setOrderNum(existingOrder.getOrderNum());
-                orderMapper.insertDetailedOrder(item);
-                orderMapper.decreaseStock(item.getCoffeeId(), item.getQuantity());
+                if (orderMapper.insertDetailedOrder(item) == 0 ||
+                    !orderMapper.decreaseStock(item.getCoffeeId(), item.getQuantity())) {
+                    return false;
+                }
             }
         }
+
+        return true;
     }
 
     // 커피 가격/재고 조회
@@ -59,9 +71,10 @@ public class OrderRepository {
     }
 
     // 주문 삭제
-    public void deleteOrder(String email, int postNum) {
-        orderMapper.deleteDetailedOrdersByEmailAndPostNum(email, postNum);
-        orderMapper.deleteOrderByEmailAndPostNum(email, postNum);
+    public boolean deleteOrder(String email, int postNum) {
+        int detailDeleted = orderMapper.deleteDetailedOrdersByEmailAndPostNum(email, postNum);
+        int orderDeleted = orderMapper.deleteOrderByEmailAndPostNum(email, postNum);
+        return detailDeleted > 0 && orderDeleted > 0;
     }
 
     // 상세 주문 조회
