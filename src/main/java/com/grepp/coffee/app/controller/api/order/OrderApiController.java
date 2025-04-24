@@ -29,12 +29,20 @@ public class OrderApiController {
         @PathVariable
         Integer id, HttpSession session) {
         
-        CoffeeDto coffeeDto = menuService.getCoffee(new CoffeeDto(id,null,null,null));
-
         // session에 저장된 값이 없으면 새로 생성
         if(session.getAttribute("coffee"+id) == null) {
+            // 생성할 데이터 가져오기
+            CoffeeDto coffeeDto = menuService.getCoffee(new CoffeeDto(id,null,null,null));
+            
+            // 세션에 넣을 데이터 가공
+            CoffeeSessionData coffeeSessionData = new CoffeeSessionData();
+            coffeeSessionData.setId(coffeeDto.getCoffeeId());
+            coffeeSessionData.setName(coffeeDto.getCoffeeName());
+            coffeeSessionData.setCoffeeCount(1);
+            
+            // 세션에 추가
             String key = "coffee"+id;
-            session.setAttribute(key, coffeeDto);
+            session.setAttribute(key, coffeeSessionData);
         }else{
             CoffeeSessionData count = (CoffeeSessionData) session.getAttribute("coffee"+id);
             count.setCoffeeCount(count.getCoffeeCount()+1);
@@ -47,7 +55,7 @@ public class OrderApiController {
         return ResponseEntity.ok(ApiResponse.success(payload));
     }
 
-    @PutMapping("/sub/{name}")
+    @PutMapping("/sub/{id}")
     public ResponseEntity<ApiResponse<CoffeeSessionData>> subCount(
         @PathVariable
         Integer id, HttpSession session) {
@@ -65,12 +73,12 @@ public class OrderApiController {
         return ResponseEntity.ok(ApiResponse.success(payload));
     }
     
-    @DeleteMapping("/delete/{name}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<ApiResponse<CoffeeSessionData>> deleteCount(
         @PathVariable
         Integer id, HttpSession session){
         
-        // 세션에서 삭제하가 구현
+        // 세션에서 삭제하기 구현
         session.removeAttribute("coffee"+id);
         
         return ResponseEntity.ok(ApiResponse.noContent());

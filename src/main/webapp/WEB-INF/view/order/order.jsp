@@ -76,7 +76,7 @@
 <main class="container">
 
     <div class="row justify-content-center m-4">
-        <h1 class="text-center">Grids & Circle</h1>
+        <h6 class="col text-center"><a class="btn title fs-1" href="http://localhost:8080/">Grids & Circle</a></h6>
     </div>
     <div class="card">
         <div class="row">
@@ -85,34 +85,23 @@
                 <ul class="list-group products">
 
 
-<%--                    <c:if test="${not empty coffeeDtos}">--%>
-<%--                        <c:forEach items="${coffeeDtos}" var="coffee">--%>
-<%--                            <li class="list-group-item d-flex mt-3">--%>
-<%--                                <div class="col">--%>
-<%--                                    <div class="row"><c:out value="${coffee.name}"/></div>--%>
-<%--                                </div>--%>
-<%--                                <div class="col text-center price"><c:out value="${coffee.price}"/></div>--%>
-<%--                                <div class="col text-end action">--%>
-<%--                                    <a class="btn btn-small btn-outline-dark add-btn" href="" data-coffee-id="${coffee.coffeeId}">+</a>--%>
-<%--                                </div>--%>
-<%--                                <div class="col text-end action">--%>
-<%--                                    <a class="btn btn-small btn-outline-dark sub-btn" href="" data-coffee-id="${coffee.coffeeId}">-</a>--%>
-<%--                                </div>--%>
-<%--                            </li>--%>
-<%--                        </c:forEach>--%>
-<%--                    </c:if>--%>
+                    <c:if test="${not empty coffeeDtos}">
+                        <c:forEach items="${coffeeDtos}" var="coffee">
+                            <li class="list-group-item d-flex mt-3">
+                                <div class="col">
+                                    <div class="row"><c:out value="${coffee.coffeeName}"/></div>
+                                </div>
+                                <div class="col text-center price"><c:out value="${coffee.price}"/></div>
+                                <div class="col text-end action">
+                                    <a class="btn btn-small btn-outline-dark add-btn" href="" data-coffeeId="${coffee.coffeeId}">+</a>
+                                </div>
+                                <div class="col text-end action">
+                                    <a class="btn btn-small btn-outline-dark sub-btn" href="" data-coffeeId="${coffee.coffeeId}">-</a>
+                                </div>
+                            </li>
+                        </c:forEach>
+                    </c:if>
 
-
-                    <li class="list-group-item d-flex mt-3">
-                        <div class="col-2"><img class="img-fluid" src="https://i.imgur.com/HKOFQYa.jpeg" alt=""></div>
-                        <div class="col">
-                            <div class="row text-muted">커피콩</div>
-                            <div class="row">Columbia Nariñó</div>
-                        </div>
-                        <div class="col text-center price">5000원</div>
-                        <div class="col text-end action"><a class="btn btn-small btn-outline-dark add-btn" href="" data-coffeeId="1">+</a></div>
-                        <div class="col text-end action"><a class="btn btn-small btn-outline-dark sub-btn" href="" data-coffeeId="1">-</a></div>
-                    </li>
                 </ul>
             </div>
             <div class="col-md-4 summary p-4">
@@ -121,55 +110,32 @@
                 </div>
                 <hr>
 
-                <div class="row">
-                    <h6 class="p-0">Columbia Nariñó <span class="badge bg-dark text- coffee-count" data-coffeeId="1">2개</span></h6>
-                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark delete-btn" data-coffeeId="1" href="">X</a></div>
+
+                <div class="coffee-list">
+                    <c:if test="${not empty coffeeCart.value}">
+                        <c:forEach items="${coffeeCart}" var="entry">
+                            <div class="coffee-li d-flex align-items-center" data-coffeeId="${entry.value.id}">
+                                <div class="row">
+                                <h6 class="coffee-name mb-0 me-2"><c:out value="${entry.value.name}"/></h6>
+                                <span class="badge bg-dark coffee-count me-2" data-coffeeId="${entry.value.id}"><c:out value="${entry.value.count}"/></span>
+                                </div>
+                                <div class="col text-end action"><a class="btn btn-sm btn-outline-dark delete-btn" data-coffeeId="${entry.value.id}" href="">X</a></div>
+
+                            </div>
+                        </c:forEach>
+                    </c:if>
                 </div>
 
-<%--                세션에서 받아온 값 넣기 --%>
-
-
-<%--                <!-- 생성될 영역 -->--%>
-<%--                <div class="coffee-list">--%>
-<%--                    <c:if test="${not empty coffeeDtos}">--%>
-<%--                        <c:forEach items="${coffeeCart}" var="entry">--%>
-<%--                                <div class="row">--%>
-<%--                                    <h6 class="p-0">${entry.value.name} <span class="badge bg-dark coffee-count" data-coffeeId="${entry.value.id}"><c:out value="${entry.value.count}"></c:out></span></h6>--%>
-<%--                                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark delete-btn" data-coffeeId="${entry.value.id}" href="">X</a></div>--%>
-<%--                                </div>--%>
-<%--                        </c:forEach>--%>
-<%--                    </c:if>--%>
-<%--                </div>--%>
-
-<%--                <div class="row" id="coffeeCartListTemplate" style="display:none;">--%>
-<%--                    <h6 class="p-0 coffee-name">  <span class="badge bg-dark coffee-count" data-coffeeId="0"></span></h6>--%>
-<%--                    <div class="col text-end action"><a class="btn btn-small btn-outline-dark delete-btn" data-coffeeId="0" href="">X</a></div>--%>
-<%--                </div>--%>
-
-
-                <form:form modelAttribute="orderRequest" class="col s12" action="/order" method="post" id="signupForm">
-                    <div class="mb-3">
-                        <form:input path="email" id="email" name="email" type="email" placeholder="email"
-                                    class="validate"/>
-                        <form:errors path="email" cssClass="helper-text"/>
+                <div class="row" id="coffeeCartListTemplate" style="display:none;">
+                    <div class="coffee-li d-flex align-items-center" data-coffeeId="0">
+                        <h6 class="coffee-name mb-0 me-2">커피이름</h6>
+                        <span class="badge bg-dark coffee-count me-2" data-coffeeId="0">0</span>
+                        <div class="col text-end action"><a class="btn btn-sm btn-outline-dark delete-btn" data-coffeeId="0" href="">X</a></div>
                     </div>
-                    <div class="mb-3">
-                        <form:input path="address" id="address" name="address" type="text" placeholder="address"
-                                    class="validate"/>
-                        <form:errors path="address" cssClass="helper-text"/>
-                    </div>
-                    <div class="mb-3">
-                        <form:input path="postNum" id="postNum" name="postNum" type="text" placeholder="postNum"
-                                    class="validate"/>
-                        <form:errors path="postNum" cssClass="helper-text"/>
-                    </div>
-                    <div>당일 오후 2시 이후의 주문은 다음날 배송을 시작합니다.</div>
-                    <div class="row pt-2 pb-2 border-top">
-                        <h5 class="col">총금액</h5>
-                        <h5 class="col text-end">15000원</h5>
-                    </div>
-                    <button class="btn btn-dark col-12" type="submit" name="action">결제하기</button>
-                </form:form>
+                </div>
+
+                <div class="col"><a class="btn btn-dark" data-coffeeId="0" href="http://localhost:8080/order/payment">구매하기</a></div>
+
             </div>
         </div>
     </div>
@@ -177,6 +143,7 @@
 </main>
 </body>
 
-<script src="${context}/assets/js/order.js" defer defer></script>
+<script src="${context}/assets/js/count.js" defer></script>
+
 
 </html>
