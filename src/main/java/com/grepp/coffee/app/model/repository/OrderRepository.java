@@ -37,6 +37,25 @@ public class OrderRepository {
         return true;
     }
 
+    /** 2시 이전에 같은 주소로의 주문이 있는지 확인합니다. */
+    public OrderDto findTodayOrder(String email, int postNum){
+        return orderMapper.findTodayOrderByEmailAndPostNum(email, postNum);
+    }
+
+    /** 새로운 주문을 DB에 반영합니다. */
+    public boolean insertOrder(OrderDto order) {
+        return orderMapper.insertOrder(order) > 0;
+    }
+
+    /** 상세 주문 내역을 반영하고 재고를 차감합니다. */
+    public boolean insertDetailAndDecreaseStock(DetailedOrderDto detailedOrderDto) {
+        return orderMapper.insertDetailedOrder(detailedOrderDto) > 0 &&
+            orderMapper.decreaseStock(
+                detailedOrderDto.getCoffeeId(),
+                detailedOrderDto.getQuantity()
+            );
+    }
+
     // 이메일 기준으로 오늘 주문이 있으면 detail만 추가, 없다면 주문 생성 후 detail 추가
     public boolean saveOrderSmart(OrderDto order, List<DetailedOrderDto> orderItems) {
         OrderDto existingOrder = orderMapper.findTodayOrderByEmailAndPostNum(order.getEmail(), order.getPostNum());
