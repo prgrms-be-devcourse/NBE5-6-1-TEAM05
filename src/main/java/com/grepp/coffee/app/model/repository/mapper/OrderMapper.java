@@ -25,7 +25,7 @@ public interface OrderMapper {
     // 이메일, 주소번호 기준으로 오늘 주문 조회 (하루 1건만 처리용)
     OrderDto findTodayOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
 
-    // 주문 번호로 상세 주문 목록 조회
+    // 이메일, 주소번호 기준으로 상세 주문 목록 조회
     List<DetailedOrderDto> findDetailedOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
 
     // 이메일, 주소번호 기준으로 주문 삭제

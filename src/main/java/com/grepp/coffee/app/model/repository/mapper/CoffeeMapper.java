@@ -8,21 +8,24 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface CoffeeMapper {
 
-    // 모든 커피 목록 조회
-    List<CoffeeDto> selectAll();
-
     // 커피 한 건 조회
-    CoffeeDto selectById(@Param("coffeeId") Integer coffeeId);
+    CoffeeDto selectCoffeeById(@Param("coffeeId") Integer coffeeId);
 
-    // 재고 증가 (입고용)
-    void increaseStock(@Param("coffeeId") Integer coffeeId, @Param("quantity") Integer quantity);
+    // 모든 커피 목록 조회
+    List<CoffeeDto> selectAllCoffee();
 
-    // 재고 감소 (출고용 - 주문 시 사용)
-    void decreaseStock(@Param("coffeeId") Integer coffeeId, @Param("quantity") Integer quantity);
+    // 커피 등록
+    int insertCoffee(CoffeeDto coffeeDto);
 
-    // (선택) 커피 추가
-    void insertCoffee(CoffeeDto coffeeDto);
+    // 커피 수정
+    int updateCoffee(CoffeeDto coffeeDto);
 
-    // (선택) 커피 삭제
-    void deleteCoffee(@Param("coffeeId") Integer coffeeId);
+    // 커피 삭제
+    int deleteCoffee(@Param("coffeeId") Integer coffeeId);
+
+    // 커피 재고 증가
+    int increaseStock(@Param("coffeeId") Integer coffeeId, @Param("quantity") Integer quantity);
+
+    // 커피 재고 감소
+    int decreaseStock(@Param("coffeeId") Integer coffeeId, @Param("quantity") Integer quantity);
 }
