@@ -1,10 +1,12 @@
-package com.grepp.coffee.app.controller.web.payload;
+package com.grepp.coffee.app.controller.web.order.payload;
 
 import com.grepp.coffee.app.model.dto.OrderDto;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 public class OrderRequest {
@@ -13,8 +15,12 @@ public class OrderRequest {
     // 고객 email과 주소, 우편번호만 받기
 
     @Email
+    @NotBlank
     private String email;
+    @NotBlank
     private String address;
+    @Min(10000)
+    @Max(99999)
     private Integer postNum;
 
     public OrderDto toOrderDto() {
