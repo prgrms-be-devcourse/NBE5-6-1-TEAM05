@@ -23,6 +23,12 @@
     VALUES (#{coffeeName}, #{price}, #{stock})
   </insert>
 
+  <!-- 커피 이미지 등록 -->
+  <insert id="insertCoffeeImg" parameterType="CoffeeImgDto">
+    INSERT INTO COFFEE_IMG(COFFEE_ID, TYPE, ORIGIN_FILE_NAME, RENAME_FILE_NAME, SAVE_PATH)
+    VALUES (#{coffeeId}, #{type}, #{originFileName}, #{renameFileName}, #{savePath})
+  </insert>
+
   <!-- 커피 수정 (동적 SQL로 null 방지) -->
   <update id="updateCoffee" parameterType="CoffeeDto">
     UPDATE COFFEE
