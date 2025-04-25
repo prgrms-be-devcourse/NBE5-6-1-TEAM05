@@ -17,4 +17,5 @@ public class OrderDto {
     private String address;
     private Integer postNum;
     private LocalDateTime orderTime;
+    private Boolean isDelivered;
 }

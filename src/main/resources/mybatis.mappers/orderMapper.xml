@@ -5,8 +5,8 @@
 <mapper namespace="com.grepp.coffee.app.model.repository.mapper.OrderMapper">
   <!-- 주문 등록 -->
   <insert id="insertOrder" parameterType="OrderDto" useGeneratedKeys="true" keyProperty="orderNum">
-    INSERT INTO ORDERS (email, address, post_num, order_time)
-    VALUES (#{email}, #{address}, #{postNum}, NOW())
+    INSERT INTO ORDERS (email, address, post_num, order_time, is_delivered)
+    VALUES (#{email}, #{address}, #{postNum}, NOW(), FALSE)
   </insert>
 
   <!-- 상세 주문 등록 -->
