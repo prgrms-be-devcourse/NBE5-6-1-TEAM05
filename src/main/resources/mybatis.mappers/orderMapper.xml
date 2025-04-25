@@ -30,7 +30,7 @@
   </update>
 
   <!-- 주문 목록 조회 -->
-  <select id="findTodayOrderByEmailAndPostNum" parameterType="string" resultType="OrderDto">
+  <select id="findTodayOrderByEmailAndPostNum" parameterType="OrderDto" resultType="OrderDto">
     SELECT *
     FROM ORDERS
     WHERE email = #{email}
