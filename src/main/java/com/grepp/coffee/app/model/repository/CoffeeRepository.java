@@ -1,6 +1,7 @@
 package com.grepp.coffee.app.model.repository;
 
 import com.grepp.coffee.app.model.dto.CoffeeDto;
+import com.grepp.coffee.app.model.dto.CoffeeImgDto;
 import com.grepp.coffee.app.model.repository.mapper.CoffeeMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,11 @@ public class CoffeeRepository {
     // 커피 추가
     public boolean insertCoffee(CoffeeDto dto) {
         return coffeeMapper.insertCoffee(dto) > 0;
+    }
+
+    // 커피 이미지 추가
+    public boolean insertCoffeeImg(CoffeeImgDto dto) {
+        return coffeeMapper.insertCoffeeImg(dto) > 0;
     }
 
     // 커피 수정
