@@ -1,9 +1,8 @@
 package com.grepp.coffee.app.model.member;
 
 import com.grepp.coffee.app.model.auth.code.Role;
-import com.grepp.coffee.app.model.dto.MemberDto;
-import com.grepp.coffee.app.model.dto.PrincipalDto;
-import com.grepp.coffee.app.model.repository.MemberRepository;
+import com.grepp.coffee.app.model.member.dto.MemberDto;
+import com.grepp.coffee.app.model.member.dto.PrincipalDto;
 import com.grepp.coffee.infra.error.exceptions.CommonException;
 import com.grepp.coffee.infra.response.ResponseCode;
 import java.time.LocalDateTime;
@@ -45,7 +44,7 @@ public class MemberService{
         MemberDto member = optional.get();
 
         if(!member.getPassword().equals(password))
-            return com.grepp.coffee.app.model.dto.PrincipalDto.ANONYMOUS;
+            return PrincipalDto.ANONYMOUS;
 
         return new PrincipalDto(userId, List.of(Role.ROLE_USER), LocalDateTime.now());
     }

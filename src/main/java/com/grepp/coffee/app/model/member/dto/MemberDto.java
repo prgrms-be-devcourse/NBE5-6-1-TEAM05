@@ -1,4 +1,4 @@
-package com.grepp.coffee.app.model.dto;
+package com.grepp.coffee.app.model.member.dto;
 
 import com.grepp.coffee.app.model.auth.code.Role;
 import lombok.AllArgsConstructor;

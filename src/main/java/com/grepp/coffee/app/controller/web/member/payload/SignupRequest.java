@@ -1,6 +1,6 @@
 package com.grepp.coffee.app.controller.web.member.payload;
 
-import com.grepp.coffee.app.model.dto.MemberDto;
+import com.grepp.coffee.app.model.member.dto.MemberDto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

@@ -2,8 +2,8 @@ package com.grepp.coffee.app.model.auth;
 
 
 import com.grepp.coffee.app.model.auth.domain.Principal;
-import com.grepp.coffee.app.model.dto.MemberDto;
-import com.grepp.coffee.app.model.repository.MemberRepository;
+import com.grepp.coffee.app.model.member.dto.MemberDto;
+import com.grepp.coffee.app.model.member.MemberRepository;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;

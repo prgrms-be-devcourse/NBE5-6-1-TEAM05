@@ -1,6 +1,6 @@
-package com.grepp.coffee.app.model.repository.mapper;
+package com.grepp.coffee.app.model.member.mapper;
 
-import com.grepp.coffee.app.model.dto.MemberDto;
+import com.grepp.coffee.app.model.member.dto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
