@@ -1,9 +1,9 @@
 package com.grepp.coffee.app.model.order;
 
 
-import com.grepp.coffee.app.model.dto.DetailedOrderDto;
-import com.grepp.coffee.app.model.dto.OrderDto;
-import com.grepp.coffee.app.model.repository.OrderRepository;
+import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
+import com.grepp.coffee.app.model.order.dto.OrderDto;
 import java.time.LocalDateTime;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -64,9 +64,9 @@ public class OrderService {
         return orderRepository.deleteOrder(orderDto.getEmail(), orderDto.getPostNum());
     }
 
-    /** 고객이 주문정보 열람시 고객의 주문 정보를 가져옵니다. */
+    /** 고객이 주문정보 열람시 고객의 모든 주문 정보를 가져옵니다. */
     @Transactional
-    public List<DetailedOrderDto> getDetailedOrderList(OrderDto orderDto) {
-        return orderRepository.getDetailedOrdersByEmailAndPostNum(orderDto.getEmail(), orderDto.getPostNum());
+    public List<MyPageOrderDto> getDetailedOrderList(String email) {
+        return orderRepository.getDetailedOrdersByEmail(email);
     }
 }

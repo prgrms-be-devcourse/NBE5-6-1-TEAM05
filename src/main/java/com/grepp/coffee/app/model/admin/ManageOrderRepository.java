@@ -1,7 +1,7 @@
 package com.grepp.coffee.app.model.admin;
 
-import com.grepp.coffee.app.model.dto.DetailedOrderDto;
-import com.grepp.coffee.app.model.dto.OrderDto;
+import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.order.dto.OrderDto;
 import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;

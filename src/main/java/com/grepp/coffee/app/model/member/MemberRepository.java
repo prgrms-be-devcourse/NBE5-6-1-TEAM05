@@ -41,4 +41,9 @@ public class MemberRepository {
     public boolean enableMember(String email) {
         return memberMapper.enableMember(email) > 0;
     }
+
+    // 회원의 주소를 수정
+    public boolean updateAddressByEmail(String email, String address) {
+        return memberMapper.updateAddressByEmail(email, address);
+    }
 }
