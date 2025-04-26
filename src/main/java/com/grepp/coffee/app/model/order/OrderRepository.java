@@ -1,8 +1,9 @@
-package com.grepp.coffee.app.model.repository;
+package com.grepp.coffee.app.model.order;
 
-import com.grepp.coffee.app.model.dto.DetailedOrderDto;
-import com.grepp.coffee.app.model.dto.OrderDto;
-import com.grepp.coffee.app.model.repository.mapper.OrderMapper;
+import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
+import com.grepp.coffee.app.model.order.dto.OrderDto;
+import com.grepp.coffee.app.model.order.mapper.OrderMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -46,5 +47,10 @@ public class OrderRepository {
     // 상세 주문 조회
     public List<DetailedOrderDto> getDetailedOrdersByEmailAndPostNum(String email, int postNum) {
         return orderMapper.findDetailedOrderByEmailAndPostNum(email, postNum);
+    }
+
+    // 고객의 주문내역 조회
+    public List<MyPageOrderDto> getDetailedOrdersByEmail(String email) {
+        return orderMapper.selectMyPageOrdersByEmail(email);
     }
 }

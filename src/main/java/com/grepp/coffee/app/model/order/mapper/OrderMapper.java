@@ -1,8 +1,8 @@
-package com.grepp.coffee.app.model.repository.mapper;
+package com.grepp.coffee.app.model.order.mapper;
 
-import com.grepp.coffee.app.model.dto.CoffeeDto;
-import com.grepp.coffee.app.model.dto.DetailedOrderDto;
-import com.grepp.coffee.app.model.dto.OrderDto;
+import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
+import com.grepp.coffee.app.model.order.dto.OrderDto;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,9 +15,6 @@ public interface OrderMapper {
 
     // 상세 주문 등록
     int insertDetailedOrder(DetailedOrderDto detailedOrder);
-
-    // 커피 조회
-    CoffeeDto selectCoffeeById(@Param("coffeeId") Integer coffeeId);
 
     // 커피 재고 차감
     boolean decreaseStock(@Param("coffeeId") Integer coffeeId, @Param("quantity") Integer quantity);
@@ -33,4 +30,6 @@ public interface OrderMapper {
 
     // 이메일, 주소번호 기준으로 상세 주문 삭제
     int deleteDetailedOrdersByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
+
+    List<MyPageOrderDto> selectMyPageOrdersByEmail(@Param("email") String email);
 }

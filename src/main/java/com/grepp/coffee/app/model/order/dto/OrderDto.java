@@ -1,4 +1,4 @@
-package com.grepp.coffee.app.model.dto;
+package com.grepp.coffee.app.model.order.dto;
 
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;

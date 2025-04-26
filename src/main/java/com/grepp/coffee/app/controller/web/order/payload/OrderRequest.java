@@ -1,11 +1,10 @@
 package com.grepp.coffee.app.controller.web.order.payload;
 
-import com.grepp.coffee.app.model.dto.OrderDto;
+import com.grepp.coffee.app.model.order.dto.OrderDto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
