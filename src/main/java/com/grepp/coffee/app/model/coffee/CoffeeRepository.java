@@ -1,8 +1,8 @@
-package com.grepp.coffee.app.model.repository;
+package com.grepp.coffee.app.model.coffee;
 
-import com.grepp.coffee.app.model.dto.CoffeeDto;
-import com.grepp.coffee.app.model.dto.CoffeeImgDto;
-import com.grepp.coffee.app.model.repository.mapper.CoffeeMapper;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeImgDto;
+import com.grepp.coffee.app.model.coffee.mapper.CoffeeMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

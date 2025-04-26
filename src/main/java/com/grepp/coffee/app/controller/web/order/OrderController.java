@@ -3,10 +3,10 @@ package com.grepp.coffee.app.controller.web.order;
 import com.grepp.coffee.app.controller.session.CoffeeSessionData;
 import com.grepp.coffee.app.controller.web.order.payload.OrderRequest;
 
-import com.grepp.coffee.app.model.dto.CoffeeDto;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
-import com.grepp.coffee.app.model.menu.MenuService;
+import com.grepp.coffee.app.model.coffee.CoffeeService;
 import com.grepp.coffee.app.model.order.OrderService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -30,12 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class OrderController {
 
     private final OrderService orderService;
-    private final MenuService menuService;
+    private final CoffeeService coffeeService;
 
     @GetMapping
     public String getOrder(OrderRequest request, HttpSession session, Model model) {
         // 커피 데이터 가져오기
-        List<CoffeeDto> coffeeDtos = menuService.getAllCoffee();
+        List<CoffeeDto> coffeeDtos = coffeeService.getAllCoffee();
 
         //세션 데이터 가져오기
         Map<String, CoffeeSessionData> coffeeCart = new HashMap<>();
@@ -57,7 +57,7 @@ public class OrderController {
     public String payment(OrderRequest request, HttpSession session, Model model) {
 
         // 커피 데이터 가져오기
-        List<CoffeeDto> coffeeDtos = menuService.getAllCoffee();
+        List<CoffeeDto> coffeeDtos = coffeeService.getAllCoffee();
         int count=0;
 
         // 장바구니 데이터 가져오기
@@ -95,7 +95,7 @@ public class OrderController {
         List<DetailedOrderDto> details = new ArrayList<>();
 
         // 커피 모두 가져오기
-        List<CoffeeDto> coffeeDtos = menuService.getAllCoffee();
+        List<CoffeeDto> coffeeDtos = coffeeService.getAllCoffee();
         // session에서 아이디로 조회해서 수량 받아와 DatailedOrderDto List에 추가
         coffeeDtos.forEach(coffee -> {
             String key = "coffee"+coffee.getCoffeeId();

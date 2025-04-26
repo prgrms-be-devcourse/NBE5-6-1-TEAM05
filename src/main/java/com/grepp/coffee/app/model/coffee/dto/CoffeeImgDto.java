@@ -1,6 +1,6 @@
-package com.grepp.coffee.app.model.dto;
+package com.grepp.coffee.app.model.coffee.dto;
 
-import com.grepp.coffee.app.model.dto.code.CoffeeImgType;
+import com.grepp.coffee.app.model.coffee.code.CoffeeImgType;
 import com.grepp.coffee.infra.util.file.FileDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;

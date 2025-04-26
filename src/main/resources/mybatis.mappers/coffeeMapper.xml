@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.grepp.coffee.app.model.repository.mapper.CoffeeMapper">
+<mapper namespace="com.grepp.coffee.app.model.coffee.mapper.CoffeeMapper">
   <!-- 커피 한 건 조회 -->
   <select id="selectByCoffeeId" resultType="CoffeeDto">
     SELECT *

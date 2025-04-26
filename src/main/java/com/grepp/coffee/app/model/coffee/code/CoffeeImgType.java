@@ -1,4 +1,4 @@
-package com.grepp.coffee.app.model.dto.code;
+package com.grepp.coffee.app.model.coffee.code;
 
 public enum CoffeeImgType {
     THUMBNAIL,

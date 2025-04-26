@@ -1,7 +1,7 @@
-package com.grepp.coffee.app.model.repository.mapper;
+package com.grepp.coffee.app.model.coffee.mapper;
 
-import com.grepp.coffee.app.model.dto.CoffeeDto;
-import com.grepp.coffee.app.model.dto.CoffeeImgDto;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeImgDto;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

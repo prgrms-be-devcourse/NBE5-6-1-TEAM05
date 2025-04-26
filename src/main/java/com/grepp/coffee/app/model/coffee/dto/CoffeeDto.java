@@ -1,4 +1,4 @@
-package com.grepp.coffee.app.model.dto;
+package com.grepp.coffee.app.model.coffee.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
