@@ -5,7 +5,7 @@ import com.grepp.coffee.app.controller.web.member.payload.SigninRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SignupRequest;
 import com.grepp.coffee.app.model.auth.code.Role;
 import com.grepp.coffee.app.model.dto.MemberDto;
-import com.grepp.coffee.app.service.MemberService;
+import com.grepp.coffee.app.model.member.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

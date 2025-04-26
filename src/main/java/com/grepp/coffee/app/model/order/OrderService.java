@@ -1,4 +1,4 @@
-package com.grepp.coffee.app.service;
+package com.grepp.coffee.app.model.order;
 
 
 import com.grepp.coffee.app.model.dto.DetailedOrderDto;

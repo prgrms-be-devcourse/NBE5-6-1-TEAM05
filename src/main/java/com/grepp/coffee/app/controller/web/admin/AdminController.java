@@ -2,9 +2,9 @@ package com.grepp.coffee.app.controller.web.admin;
 
 import com.grepp.coffee.app.controller.web.admin.payload.CoffeeRegistRequest;
 import com.grepp.coffee.app.model.dto.CoffeeDto;
-import com.grepp.coffee.app.service.MemberService;
-import com.grepp.coffee.app.service.MenuService;
-import com.grepp.coffee.app.service.OrderService;
+import com.grepp.coffee.app.model.member.MemberService;
+import com.grepp.coffee.app.model.menu.MenuService;
+import com.grepp.coffee.app.model.order.OrderService;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -12,11 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
