@@ -92,6 +92,7 @@
                                     <div class="row"><c:out value="${coffee.coffeeName}"/></div>
                                 </div>
                                 <div class="col text-center price"><c:out value="${coffee.price}"/></div>
+                                <div class="col text-center price"><c:out value="${coffee.stock}"/></div>
                                 <div class="col text-end action">
                                     <a class="btn btn-small btn-outline-dark add-btn" href="" data-coffeeId="${coffee.coffeeId}">+</a>
                                 </div>
