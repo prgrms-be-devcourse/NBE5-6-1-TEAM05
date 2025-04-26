@@ -1,6 +1,7 @@
-package com.grepp.coffee.app.service;
+package com.grepp.coffee.app.model.menu;
 
 import com.grepp.coffee.app.model.dto.CoffeeDto;
+import com.grepp.coffee.app.model.dto.CoffeeImgDto;
 import com.grepp.coffee.app.model.repository.CoffeeRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -19,16 +20,19 @@ public class MenuService {
         return coffeeRepository.insertCoffee(coffeeDto);
     }
 
+    //TODO : 커피에 해당하는 이미지 가져오는 매서드 사용하여 수정
     /** DB로부터 모든 커피 메뉴들을 가져옵니다. */
     public List<CoffeeDto> getAllCoffee() {
         return coffeeRepository.selectAllCoffee();
     }
 
+    //TODO : 커피에 해당하는 이미지 가져오는 매서드 사용하여 수정
     /** DB로부터 특정 커피 메뉴에 대한 데이터를 가져옵니다. */
     public CoffeeDto getCoffee(CoffeeDto coffeeDto) {
         return coffeeRepository.selectByCoffeeId(coffeeDto.getCoffeeId());
     }
 
+    //TODO : 이미지 수정에 사용할 매서드 사용하여 수정
     /** DB에 저장된 커피 메뉴를 수정합니다. */
     @Transactional
     public boolean updateMenu(CoffeeDto coffeeDto) {

@@ -1,4 +1,4 @@
-package com.grepp.coffee.app.service;
+package com.grepp.coffee.app.model.member;
 
 import com.grepp.coffee.app.model.auth.code.Role;
 import com.grepp.coffee.app.model.dto.MemberDto;

@@ -1,6 +1,6 @@
 package com.grepp.coffee.app.controller.api.member;
 
-import com.grepp.coffee.app.service.MemberService;
+import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.infra.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

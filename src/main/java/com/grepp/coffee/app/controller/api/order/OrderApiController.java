@@ -2,7 +2,7 @@ package com.grepp.coffee.app.controller.api.order;
 
 import com.grepp.coffee.app.controller.session.CoffeeSessionData;
 import com.grepp.coffee.app.model.dto.CoffeeDto;
-import com.grepp.coffee.app.service.MenuService;
+import com.grepp.coffee.app.model.menu.MenuService;
 import com.grepp.coffee.infra.response.ApiResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
