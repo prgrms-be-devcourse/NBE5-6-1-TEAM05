@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.grepp.coffee.app.model.repository.mapper.MemberMapper">
+<mapper namespace="com.grepp.coffee.app.model.member.mapper.MemberMapper">
 
   <!-- 회원 조회 -->
-  <select id="selectByEmail" resultType="com.grepp.coffee.app.model.dto.MemberDto">
+  <select id="selectByEmail" resultType="com.grepp.coffee.app.model.member.dto.MemberDto">
     SELECT *
     FROM MEMBER
     WHERE EMAIL = #{email}
@@ -19,7 +19,7 @@
   </select>
 
   <!-- 회원 등록 -->
-  <insert id="insertMember" parameterType="com.grepp.coffee.app.model.dto.MemberDto">
+  <insert id="insertMember" parameterType="com.grepp.coffee.app.model.member.dto.MemberDto">
     INSERT INTO MEMBER (
     EMAIL, PASSWORD, ADDRESS, POST_NUM, ROLE, ENABLED
     ) VALUES (

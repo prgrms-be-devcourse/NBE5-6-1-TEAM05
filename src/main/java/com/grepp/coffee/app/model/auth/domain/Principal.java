@@ -1,7 +1,7 @@
 package com.grepp.coffee.app.model.auth.domain;
 
 
-import com.grepp.coffee.app.model.dto.MemberDto;
+import com.grepp.coffee.app.model.member.dto.MemberDto;
 import java.util.Collection;
 import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
