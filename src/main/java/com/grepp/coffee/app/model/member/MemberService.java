@@ -1,6 +1,8 @@
 package com.grepp.coffee.app.model.member;
 
 import com.grepp.coffee.app.model.auth.code.Role;
+import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.order.dto.OrderDto;
 import com.grepp.coffee.app.model.member.dto.MemberDto;
 import com.grepp.coffee.app.model.member.dto.PrincipalDto;
 import com.grepp.coffee.infra.error.exceptions.CommonException;
@@ -22,6 +24,7 @@ public class MemberService{
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
 
+    // ==================== 인증 및 가입 관련 ==================== //
     @Transactional
     public void signup(MemberDto dto, Role role) {
         if(memberRepository.existsByEmail(dto.getEmail()))
@@ -56,5 +59,21 @@ public class MemberService{
     public MemberDto findById(String userId) {
         return memberRepository.selectByEmail(userId)
             .orElseThrow(() -> new CommonException(ResponseCode.BAD_REQUEST));
+    }
+
+    // ==================== 마이페이지 관련 ==================== //
+    // Update address
+    public boolean updateAddressByEmail(String email, String address) {
+        return memberRepository.updateAddressByEmail(email, address);
+    }
+
+    // Get member's order lists
+    public List<OrderDto> orderListByEmail(String email) {
+        return  null;
+    }
+
+    // Get member's order details
+    public List<DetailedOrderDto> detailedOrderListByEmail(String email) {
+        return null;
     }
 }

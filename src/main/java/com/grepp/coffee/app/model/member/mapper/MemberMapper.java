@@ -26,4 +26,7 @@ public interface MemberMapper {
 
     // 회원 활성화
     int enableMember(@Param("email") String email);
+
+    // 주소 수정
+    boolean updateAddressByEmail(@Param("email") String email, @Param("address") String address);
 }

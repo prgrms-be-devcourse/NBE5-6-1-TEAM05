@@ -44,4 +44,11 @@
     SET ENABLED = true
     WHERE EMAIL = #{email}
   </update>
+
+  <!-- update address -->
+  <update id="updateAddress">
+    update member
+    set address = #{address}
+    where email = #{email}
+  </update>
 </mapper>
