@@ -11,15 +11,15 @@
 <main class="container">
     <form:form action="${context}/admin/menu/update/${coffeeRegistRequest.coffeeId}" method="post" enctype="multipart/form-data" modelAttribute="coffeeRegistRequest">
         <input type="hidden" name="_method" value="PUT"/>
-        <%--        <div class="row">--%>
-<%--            <div class="btn">--%>
-<%--                <span>File</span>--%>
-<%--                <input type="file" name="thumbnail">--%>
-<%--            </div>--%>
-<%--            <div class="file-path-wrapper">--%>
-<%--                <input class="file-path validate" type="text">--%>
-<%--            </div>--%>
-<%--        </div>--%>
+                <div class="row">
+            <div class="btn">
+                <span>File</span>
+                <input type="file" name="thumbnail">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">mode_edit</i>

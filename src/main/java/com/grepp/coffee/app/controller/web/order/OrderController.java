@@ -92,6 +92,10 @@ public class OrderController {
 
         // OrderDto 만들기
         OrderDto orderDto = request.toOrderDto();
+
+        log.info("{}",orderDto.getPostNum());
+
+
         List<DetailedOrderDto> details = new ArrayList<>();
 
         // 커피 모두 가져오기
@@ -113,8 +117,14 @@ public class OrderController {
         });
 
         // 서비스론 넘겨 추가 하기
-        if(orderService.processOrder(orderDto, details))
+        if(orderService.processOrder(orderDto, details)){
+            coffeeDtos.forEach(coffee -> {
+                String key = "coffee"+coffee.getCoffeeId();
+                session.removeAttribute(key);
+            });
             return "redirect:/";  // 임시 페이지
+        }
+
         else{
             return "order/payment";
         }
