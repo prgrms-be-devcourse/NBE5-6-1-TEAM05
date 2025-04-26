@@ -14,8 +14,19 @@
                         </a>
                     </li>
                 </sec:authorize>
-                <sec:authorize access="isAuthenticated()">
+                <sec:authorize access="hasRole('USER')">
                     <li><a href="/member/mypage" class="grey-text">mypage</a></li>
+                    <li><a href="#" id="logout" class="grey-text">logout</a></li>
+                    <li>
+                        <a href="mobile.html">
+                            <i class="material-icons grey-text sidenav-trigger"
+                               data-target="slide-out">more_vert</i>
+                        </a>
+                    </li>
+                </sec:authorize>
+<%--                이게 관리자 권한이 맞는지 확인--%>
+                <sec:authorize access="hasRole('ADMIN')">
+                    <li><a href="/admin" class="grey-text">admin page</a></li>
                     <li><a href="#" id="logout" class="grey-text">logout</a></li>
                     <li>
                         <a href="mobile.html">

@@ -70,20 +70,20 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(
                 (requests) -> requests
-                                    .requestMatchers(GET, "/order").permitAll()
-                                    .requestMatchers(GET, "/order/payment").permitAll()
+                                    .requestMatchers(GET, "/order","/order/payment").permitAll()
                                     .requestMatchers(POST, "/order/payment").permitAll()
-                                    .requestMatchers(PUT, "/api/add/**").permitAll()
-                                    .requestMatchers(PUT, "/api/sub/**").permitAll()
+                                    .requestMatchers(PUT, "/api/add/**", "/api/sub/**").permitAll()
                                     .requestMatchers(DELETE, "/api/delete/**").permitAll()
                                     .requestMatchers(GET, "/api/member/exists/*").permitAll()
-                                    .requestMatchers(GET, "/member/signup").permitAll()
-                                    .requestMatchers(GET, "/member/signin").permitAll()
+                                    .requestMatchers(GET, "/member/signup","/member/signin").permitAll()
                                     .requestMatchers(POST, "/member/signin", "/member/signup").permitAll()
+                                    .requestMatchers(GET, "admin/menu/**").permitAll()
+                    .requestMatchers(POST, "admin/menu/**").permitAll()
                                   .anyRequest().permitAll()
             )
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers("/api/**")
+                .ignoringRequestMatchers("/admin/menu/regist","/admin/menu/update/**")
             )
             .formLogin((form) -> form
                                      .loginPage("/member/signin")
