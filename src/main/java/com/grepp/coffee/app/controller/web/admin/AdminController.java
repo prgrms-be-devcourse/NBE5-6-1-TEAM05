@@ -1,12 +1,16 @@
 package com.grepp.coffee.app.controller.web.admin;
 
 import com.grepp.coffee.app.controller.web.admin.payload.CoffeeRegistRequest;
+import com.grepp.coffee.app.model.admin.ManageOrderService;
 import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.app.model.coffee.CoffeeService;
-import com.grepp.coffee.app.model.order.OrderService;
+import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.order.dto.OrderDto;
 import jakarta.validation.Valid;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -15,6 +19,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -24,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AdminController {
 
     private final MemberService memberService;
-    private final OrderService orderService;
+    private final ManageOrderService manageOrderService;
     private final CoffeeService coffeeService;
 
     @GetMapping
@@ -34,13 +39,23 @@ public class AdminController {
     }
 
 
-    @GetMapping("order-list")
+    @GetMapping("order/list")
     public String showOrders(Model model){
 
-        // service 작성 되는 거 보고 데이터 받아서 뿌리기
+        List<OrderDto> orderDtos= manageOrderService.getOrders();
 
-        return "member/admin/order-list";
+        Map<OrderDto, List<DetailedOrderDto>> orderMap = new LinkedHashMap<>();
+        orderDtos.forEach(orderDto -> {
+            List<DetailedOrderDto> detailedOrderDtos = manageOrderService.getDetailedOrders(orderDto.getOrderNum());
+            orderMap.put(orderDto, detailedOrderDtos);
+        });
+
+        model.addAttribute("orderMap", orderMap);
+
+        return "admin/order-list";
     }
+
+
 
     @GetMapping("menu/list")
     public String showMenus(Model model){
@@ -83,7 +98,7 @@ public class AdminController {
         return "admin/menu-update";
     }
 
-    @PostMapping("menu/update/{id}")
+    @PutMapping("menu/update/{id}")
     public String registMenu(@PathVariable Integer id, CoffeeRegistRequest request, BindingResult bindingResult
         ,Model model){
 
