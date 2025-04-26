@@ -1,6 +1,6 @@
 package com.grepp.coffee.app.controller.web.admin.payload;
 
-import com.grepp.coffee.app.model.dto.CoffeeDto;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import java.util.List;

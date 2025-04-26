@@ -1,7 +1,7 @@
 package com.grepp.coffee.app.controller.api.admin;
 
-import com.grepp.coffee.app.model.dto.CoffeeDto;
-import com.grepp.coffee.app.model.menu.MenuService;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
+import com.grepp.coffee.app.model.coffee.CoffeeService;
 import com.grepp.coffee.infra.response.ApiResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/admin")
 public class AdminApiController {
 
-    private final MenuService menuService;
+    private final CoffeeService coffeeService;
 
     @DeleteMapping("menu/delete/{id}")
     public ResponseEntity<ApiResponse<Boolean>> deleteMenu(@PathVariable Integer id
         , Model model){
 
         return ResponseEntity.ok(ApiResponse.success(
-            menuService.deleteMenu(new CoffeeDto(id,null,null,null))
+            coffeeService.deleteMenu(new CoffeeDto(id,null,null,null))
         ));
     }
 

@@ -1,6 +1,7 @@
 package com.grepp.coffee.app.model.repository;
 
-import com.grepp.coffee.app.model.dto.CoffeeDto;
+import com.grepp.coffee.app.model.coffee.CoffeeRepository;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

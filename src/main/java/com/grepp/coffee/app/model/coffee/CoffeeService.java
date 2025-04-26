@@ -1,8 +1,6 @@
-package com.grepp.coffee.app.model.menu;
+package com.grepp.coffee.app.model.coffee;
 
-import com.grepp.coffee.app.model.dto.CoffeeDto;
-import com.grepp.coffee.app.model.dto.CoffeeImgDto;
-import com.grepp.coffee.app.model.repository.CoffeeRepository;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -10,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class MenuService {
+public class CoffeeService {
 
     private final CoffeeRepository coffeeRepository;
 

@@ -1,9 +1,9 @@
 package com.grepp.coffee.app.controller.web.admin;
 
 import com.grepp.coffee.app.controller.web.admin.payload.CoffeeRegistRequest;
-import com.grepp.coffee.app.model.dto.CoffeeDto;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import com.grepp.coffee.app.model.member.MemberService;
-import com.grepp.coffee.app.model.menu.MenuService;
+import com.grepp.coffee.app.model.coffee.CoffeeService;
 import com.grepp.coffee.app.model.order.OrderService;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -25,7 +25,7 @@ public class AdminController {
 
     private final MemberService memberService;
     private final OrderService orderService;
-    private final MenuService menuService;
+    private final CoffeeService coffeeService;
 
     @GetMapping
     public String admin(Model model) {
@@ -44,7 +44,7 @@ public class AdminController {
 
     @GetMapping("menu/list")
     public String showMenus(Model model){
-        List<CoffeeDto> coffeeDtos = menuService.getAllCoffee();
+        List<CoffeeDto> coffeeDtos = coffeeService.getAllCoffee();
 
         model.addAttribute("coffeeDtos", coffeeDtos);
         return "admin/menu-list";
@@ -64,7 +64,7 @@ public class AdminController {
             return "admin/menu-regist";
         }
 
-        menuService.addMenu(form.toDto());
+        coffeeService.addMenu(form.toDto());
         return "redirect:/admin/menu/list";
     }
 
@@ -72,7 +72,7 @@ public class AdminController {
     public String updateMenu(@PathVariable Integer id, CoffeeRegistRequest request
         ,Model model){
 
-        CoffeeDto update = menuService.getCoffee(new CoffeeDto(id,null,null,null));
+        CoffeeDto update = coffeeService.getCoffee(new CoffeeDto(id,null,null,null));
         request.setCoffeeId(update.getCoffeeId());
         request.setCoffeeName(update.getCoffeeName());
         request.setPrice(update.getPrice());
@@ -93,7 +93,7 @@ public class AdminController {
 
         log.info("{}",request.getStock());
 
-        menuService.updateMenu(request.toDto());
+        coffeeService.updateMenu(request.toDto());
 
         return "redirect:/admin/menu/list";
     }

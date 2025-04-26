@@ -1,8 +1,8 @@
 package com.grepp.coffee.app.controller.api.order;
 
 import com.grepp.coffee.app.controller.session.CoffeeSessionData;
-import com.grepp.coffee.app.model.dto.CoffeeDto;
-import com.grepp.coffee.app.model.menu.MenuService;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
+import com.grepp.coffee.app.model.coffee.CoffeeService;
 import com.grepp.coffee.infra.response.ApiResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class OrderApiController {
 
     // TODO 잘 굴러가는지 확인 일단 데이터 불러오는 거 다 빼고 Js에서 확인해보기
     
-    private final MenuService menuService;
+    private final CoffeeService coffeeService;
 
     @PutMapping("add/{id}")
     public ResponseEntity<ApiResponse<CoffeeSessionData>> addCount(
@@ -32,7 +32,7 @@ public class OrderApiController {
         // session에 저장된 값이 없으면 새로 생성
         if(session.getAttribute("coffee"+id) == null) {
             // 생성할 데이터 가져오기
-            CoffeeDto coffeeDto = menuService.getCoffee(new CoffeeDto(id,null,null,null));
+            CoffeeDto coffeeDto = coffeeService.getCoffee(new CoffeeDto(id,null,null,null));
             
             // 세션에 넣을 데이터 가공
             CoffeeSessionData coffeeSessionData = new CoffeeSessionData();
