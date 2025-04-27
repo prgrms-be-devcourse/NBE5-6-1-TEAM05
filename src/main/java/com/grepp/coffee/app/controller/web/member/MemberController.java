@@ -68,7 +68,8 @@ public class MemberController {
 
         List<MyPageOrderDto> myPageOrderDtos = memberService.detailedOrderListByEmail(userId);
 
-        model.addAttribute("myPageOrderDtos", myPageOrderDtos);
+        List<OrderDto> orderDtos= memberService.orderListByEmail(userId);
+        List<MyPageOrderDto> detailedOrderDtos = memberService.detailedOrderListByEmail(userId);
 
         return "member/mypage";
     }
