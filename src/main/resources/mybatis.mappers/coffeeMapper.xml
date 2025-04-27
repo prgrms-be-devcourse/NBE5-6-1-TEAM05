@@ -14,12 +14,12 @@
   </select>
 
   <!-- 커피 한 건 조회 -->
-  <select id="selectByCoffeeId" resultType="coffeeMap">
+  <select id="selectByCoffeeId" resultMap="coffeeMap">
     SELECT * FROM COFFEE WHERE COFFEE_ID = #{coffeeId}
   </select>
 
   <!-- 모든 커피 목록 조회 -->
-  <select id="selectAll" resultType="coffeeMap">
+  <select id="selectAll" resultMap="coffeeMap">
     SELECT * FROM COFFEE ORDER BY COFFEE_ID ASC
   </select>
 
