@@ -1,9 +1,9 @@
 -- === MEMBER ===
 INSERT INTO MEMBER (EMAIL, PASSWORD, ADDRESS, POST_NUM, ROLE, ENABLED) VALUES
-('john@example.com', 'encoded_password1', '서울시 강남구', 12345, 'USER', true),
-('emma@example.com', 'encoded_password2', '부산시 해운대구', 54321, 'USER', true),
-('admin@example.com', 'encoded_password3', '대전시 중구', 11111, 'ADMIN', true),
-('test@test.com', 'test', 'sampleAddress', 00000, 'ADMIN', true);
+('john@example.com', 'encoded_password1', '서울시 강남구', 12345, 'ROLE_USER', true),
+('emma@example.com', 'encoded_password2', '부산시 해운대구', 54321, 'ROLE_USER', true),
+('admin@example.com', 'encoded_password3', '대전시 중구', 11111, 'ROLE_ADMIN', true),
+('test@test.com', '{noop}test', 'sampleAddress', 00000, 'ROLE_ADMIN', true);
 
 -- === COFFEE ===
 INSERT INTO COFFEE (COFFEE_NAME, PRICE, STOCK) VALUES
