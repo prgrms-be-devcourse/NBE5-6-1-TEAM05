@@ -46,7 +46,7 @@ public class MemberController {
             return "member/signup";
         }
         
-        memberService.signup(signupRequest.toDto(), Role.USER);
+        memberService.signup(signupRequest.toDto(), Role.ROLE_USER);
         return "redirect:/";
     }
     
