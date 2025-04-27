@@ -1,150 +1,197 @@
-<%@include file="/WEB-INF/view/include/page.jsp" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
-<html lang='ko'>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ include file="/WEB-INF/view/include/page.jsp" %>
+<html lang="ko">
 <head>
+    <title>구매하기</title>
+    <%@ include file="/WEB-INF/view/include/static.jsp" %>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <style>
       body {
-        background: #ddd;
+        background-color: #f9f7f4;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
 
-      .card {
-        margin: auto;
-        max-width: 950px;
-        width: 90%;
-        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        border-radius: 1rem;
-        border: transparent
-      }
-
-      .summary {
-        background-color: #ddd;
-        border-top-right-radius: 1rem;
-        border-bottom-right-radius: 1rem;
-        padding: 4vh;
-        color: rgb(65, 65, 65)
-      }
-
-      @media (max-width: 767px) {
-        .summary {
-          border-top-right-radius: unset;
-          border-bottom-left-radius: 1rem
-        }
-      }
-
-      .row {
-        margin: 0
-      }
-
-      .title b {
-        font-size: 1.5rem
-      }
-
-      .col-2,
-      .col {
-        padding: 0 1vh
-      }
-
-      img {
-        width: 3.5rem
-      }
-
-      hr {
-        margin-top: 1.25rem
-      }
-      .products {
+      main.container {
         width: 100%;
+        padding: 0 2rem; /* 양옆 살짝만 띄우기 */
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
-      .products .price, .products .action {
-        line-height: 38px;
+
+      .order-layout {
+        display: flex;
+        width: 100%;
+        max-width: 1600px; /* 화면이 커도 1600px까지만 */
+        margin: 2rem auto;
+        gap: 2rem;
+        height: calc(100vh - 160px);
+        padding: 0;
       }
-      .products .action {
-        line-height: 38px;
+
+      .product-list {
+        flex: 2;
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        overflow-y: auto;
+      }
+
+      .product-list h5 {
+        font-weight: bold;
+        margin-bottom: 2rem;
+      }
+
+      .product-item {
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+        border-bottom: 1px solid #eee;
+      }
+
+      .product-item img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 8px;
+        margin-right: 1rem;
+      }
+
+      .product-info {
+        flex: 1;
+      }
+
+      .product-name {
+        font-weight: bold;
+      }
+
+      .product-price {
+        margin-top: 0.3rem;
+        color: #666;
+      }
+
+      .add-btn {
+        padding: 0.5rem 1rem;
+        border: 1px solid #333;
+        background: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .cart-section {
+        flex: 1;
+        background: #e5e5e5;
+        padding: 2rem;
+        border-radius: 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+      }
+
+      .cart-title {
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-align: center;
+      }
+      .divider {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 1rem 0;
+      }
+
+      .cart-section h5 {
+        font-weight: bold;
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .badge {
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.8rem;
+      }
+
+      .purchase-btn {
+        width: 100%;
+        background-color: #a4745b;
+        color: white;
+        font-weight: bold;
+        border: none;
+        padding: 1rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+      }
+
+      .purchase-btn:hover {
+        background-color: #93624c;
       }
 
     </style>
-    <title>Title</title>
-<%--    <%@ include file="/WEB-INF/view/include/static.jsp" %>--%>
+
 </head>
 
 <body>
-<%--    <%@ include file="/WEB-INF/view/include/header.jsp" %>--%>
-<%--    <%@include file="/WEB-INF/view/include/sidenav.jsp" %>--%>
+
+<%@ include file="/WEB-INF/view/include/header.jsp" %>
+
 <main class="container">
+    <div class="order-layout">
+        <!-- 상품 목록 영역 -->
+        <div class="product-list">
+            <h5>상품 목록</h5>
 
-    <div class="row justify-content-center m-4">
-        <h6 class="col text-center"><a class="btn title fs-1" href="http://localhost:8080/">Grids & Circle</a></h6>
-    </div>
-    <div class="card">
-        <div class="row">
-            <div class="col-md-8 mt-4 d-flex flex-column align-items-start p-3 pt-0">
-                <h5 class="flex-grow-0"><b>상품 목록</b></h5>
-                <ul class="list-group products">
-
-
-                    <c:if test="${not empty coffeeDtos}">
-                        <c:forEach items="${coffeeDtos}" var="coffee">
-                            <li class="list-group-item d-flex mt-3">
-                                <div class="col">
-                                    <div class="row"><c:out value="${coffee.coffeeName}"/></div>
-                                </div>
-                                <div class="col text-center price"><c:out value="${coffee.price}"/></div>
-                                <div class="col text-center price"><c:out value="${coffee.stock}"/></div>
-                                <div class="col text-end action">
-                                    <a class="btn btn-small btn-outline-dark add-btn" href="" data-coffeeId="${coffee.coffeeId}">+</a>
-                                </div>
-                                <div class="col text-end action">
-                                    <a class="btn btn-small btn-outline-dark sub-btn" href="" data-coffeeId="${coffee.coffeeId}">-</a>
-                                </div>
-                            </li>
-                        </c:forEach>
-                    </c:if>
-
-                </ul>
-            </div>
-            <div class="col-md-4 summary p-4">
-                <div>
-                    <h5 class="m-0 p-0"><b>Summary</b></h5>
-                </div>
-                <hr>
-
-
-                <div class="coffee-list">
-                    <c:if test="${not empty coffeeCart.value}">
-                        <c:forEach items="${coffeeCart}" var="entry">
-                            <div class="coffee-li d-flex align-items-center" data-coffeeId="${entry.value.id}">
-                                <div class="row">
-                                <h6 class="coffee-name mb-0 me-2"><c:out value="${entry.value.name}"/></h6>
-                                <span class="badge bg-dark coffee-count me-2" data-coffeeId="${entry.value.id}"><c:out value="${entry.value.count}"/></span>
-                                </div>
-                                <div class="col text-end action"><a class="btn btn-sm btn-outline-dark delete-btn" data-coffeeId="${entry.value.id}" href="">X</a></div>
-
-                            </div>
-                        </c:forEach>
-                    </c:if>
-                </div>
-
-                <div class="row" id="coffeeCartListTemplate" style="display:none;">
-                    <div class="coffee-li d-flex align-items-center" data-coffeeId="0">
-                        <h6 class="coffee-name mb-0 me-2">커피이름</h6>
-                        <span class="badge bg-dark coffee-count me-2" data-coffeeId="0">0</span>
-                        <div class="col text-end action"><a class="btn btn-sm btn-outline-dark delete-btn" data-coffeeId="0" href="">X</a></div>
+            <c:forEach items="${coffeeDtos}" var="coffee">
+                <div class="product-item">
+                    <img src="${coffee.imageUrl}" alt="커피 이미지" />
+                    <div class="product-info">
+                        <div class="product-name">${coffee.coffeeName}</div>
+                        <div class="product-price">${coffee.price}원</div>
                     </div>
+                    <button class="add-btn" data-coffeeId="${coffee.coffeeId}">추가</button>
                 </div>
+            </c:forEach>
 
-                <div class="col"><a class="btn btn-dark" data-coffeeId="0" href="http://localhost:8080/order/payment">구매하기</a></div>
-
-            </div>
         </div>
-    </div>
 
+        <!-- 장바구니 영역 -->
+        <div class="cart-section">
+            <div>
+                <div class="cart-title">장바구니</div>
+                <hr class="divider">
+                <c:forEach items="${coffeeCart}" var="entry">
+                    <div class="cart-item">
+                        <span>${entry.value.name}</span>
+                        <span class="badge">${entry.value.count}개</span>
+                    </div>
+                </c:forEach>
+            </div>
+
+            <button class="purchase-btn">구매하기</button>
+        </div>
+
+    </div>
 </main>
-</body>
+
+<%@ include file="/WEB-INF/view/include/footer.jsp" %>
 
 <script src="${context}/assets/js/count.js" defer></script>
 
-
+</body>
 </html>

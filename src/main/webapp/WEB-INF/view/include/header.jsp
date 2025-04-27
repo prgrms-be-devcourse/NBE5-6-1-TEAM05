@@ -9,8 +9,8 @@
 
             <!-- ✨ 비로그인 사용자 -->
             <sec:authorize access="isAnonymous()">
-                <li><a href="/" class="black-text">메인</a></li>
-                <li><a href="/order" class="black-text">상품 목록</a></li>
+                <li><a href="/" class="black-text">홈</a></li>
+                <li><a href="/order" class="black-text">구매하기</a></li>
                 <li><a href="/member/signup" class="black-text">회원가입</a></li>
                 <li><a href="/member/signin"
                        class="btn-flat waves-effect black-text"
