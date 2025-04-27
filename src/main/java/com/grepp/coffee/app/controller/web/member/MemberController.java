@@ -5,9 +5,11 @@ import com.grepp.coffee.app.controller.web.member.payload.SigninRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SignupRequest;
 import com.grepp.coffee.app.controller.web.member.payload.UpdateAddressRequest;
 import com.grepp.coffee.app.model.auth.code.Role;
+import com.grepp.coffee.app.model.coffee.CoffeeService;
 import com.grepp.coffee.app.model.member.dto.MemberDto;
 import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
     
     private final MemberService memberService;
+    private final CoffeeService coffeeService;
 
     @GetMapping("signup")
     public String signup(SignupRequest signupRequest){
@@ -63,12 +66,9 @@ public class MemberController {
         MemberDto memberDto = memberService.findById(userId);
         model.addAttribute("member", memberDto);
 
+        List<MyPageOrderDto> myPageOrderDtos = memberService.detailedOrderListByEmail(userId);
 
-        List<OrderDto> orderDtos= memberService.orderListByEmail(userId);
-        List<DetailedOrderDto> detailedOrderDtos = memberService.detailedOrderListByEmail(userId);
-
-        model.addAttribute("orders", orderDtos);
-        model.addAttribute("detailedOrders", detailedOrderDtos);
+        model.addAttribute("myPageOrderDtos", myPageOrderDtos);
 
         return "member/mypage";
     }
