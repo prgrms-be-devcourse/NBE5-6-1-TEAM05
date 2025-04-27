@@ -30,6 +30,15 @@
                 <form:input path="password" class="custom-input" placeholder="Password" type="password" />
             </div>
 
+            <div class="row">
+                <p>
+                    <label>
+                        <input type="checkbox" name="remember-me" />
+                        <span>로그인 상태 유지</span>
+                    </label>
+                </p>
+            </div>
+
             <div style="margin-top: 2rem;">
                 <button type="submit" class="btn custom-btn">로그인</button>
             </div>
