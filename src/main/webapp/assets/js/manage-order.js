@@ -10,9 +10,12 @@ document.querySelectorAll(".delivery-btn")
           method: 'PUT'
         });
 
-    if (response.ok) {
+    if (response.data) {
       alert("배송 완료 처리되었습니다..");
       window.location.reload();
+    }
+    else{
+      alert("문제가 발생하였습니다.");
     }
   });
 });
@@ -29,9 +32,12 @@ document.querySelectorAll(".delete-btn")
           method: 'DELETE'
         });
 
-    if (response.ok) {
+    if (response.data) {
       alert("취소 처리 되었습니다.");
       window.location.reload();
+    }
+    else{
+      alert("문제가 발생하였습니다.")
     }
   });
 });
