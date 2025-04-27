@@ -4,16 +4,13 @@ package com.grepp.coffee.app.controller.web.member;
 import com.grepp.coffee.app.controller.web.member.payload.SigninRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SignupRequest;
 import com.grepp.coffee.app.controller.web.member.payload.UpdateAddressRequest;
-import com.grepp.coffee.app.model.admin.ManageOrderService;
 import com.grepp.coffee.app.model.auth.code.Role;
 import com.grepp.coffee.app.model.member.dto.MemberDto;
 import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import jakarta.validation.Valid;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,7 +21,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -50,7 +46,7 @@ public class MemberController {
             return "member/signup";
         }
         
-        memberService.signup(signupRequest.toDto(), Role.ROLE_USER);
+        memberService.signup(signupRequest.toDto(), Role.USER);
         return "redirect:/";
     }
     
