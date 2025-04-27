@@ -6,15 +6,17 @@
   <!-- 커피 한 건 조회 -->
   <select id="selectByCoffeeId" resultType="CoffeeDto">
     SELECT *
-    FROM COFFEE
+    FROM COFFEE c
+    JOIN COFFEE_IMG ci ON c.COFFEE_ID = ci.COFFEE_ID
     WHERE COFFEE_ID = #{coffeeId}
   </select>
 
   <!-- 모든 커피 목록 조회 -->
   <select id="selectAllCoffee" resultType="CoffeeDto">
     SELECT *
-    FROM COFFEE
-    ORDER BY COFFEE_ID
+    FROM COFFEE c
+    JOIN COFFEE_IMG ci ON c.COFFEE_ID = ci.COFFEE_ID
+    ORDER BY c.COFFEE_ID
   </select>
 
   <!-- 커피 등록 -->
@@ -40,9 +42,26 @@
     WHERE COFFEE_ID = #{coffeeId}
   </update>
 
+  <!-- 커피 이미지 수정 (동적 SQL로 null 방지) -->
+  <update id="updateCoffeeImg" parameterType="CoffeeImgDto">
+    UPDATE COFFEE_IMG
+    <set>
+      <if test="type != null">TYPE = #{type},</if>
+      <if test="originFileName != null">ORIGIN_FILE_NAME = #{originFileName},</if>
+      <if test="renameFileName != null">RENAME_FILE_NAME = #{renameFileName},</if>
+      <if test="savePath != null">SAVE_PATH = #{savePath}</if>
+    </set>
+    WHERE IMG_ID = #{imgId}
+  </update>
+
   <!-- 커피 삭제 -->
   <delete id="deleteCoffee" parameterType="int">
     DELETE FROM COFFEE WHERE COFFEE_ID = #{coffeeId}
+  </delete>
+
+  <!-- 커피 이미지 삭제 -->
+  <delete id="deleteCoffeeImg" parameterType="int">
+    DELETE FROM COFFEE_IMG WHERE IMG_ID = #{imgId}
   </delete>
 
   <!-- 재고 추가 -->

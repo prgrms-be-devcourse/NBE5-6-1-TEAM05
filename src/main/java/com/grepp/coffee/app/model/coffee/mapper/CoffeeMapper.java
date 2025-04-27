@@ -24,8 +24,14 @@ public interface CoffeeMapper {
     // 커피 수정
     int updateCoffee(CoffeeDto coffeeDto);
 
+    // 커피 이미지 수정
+    int updateCoffeeImg(CoffeeImgDto coffeeImgDto);
+
     // 커피 삭제
     int deleteCoffee(@Param("coffeeId") Integer coffeeId);
+
+    // 커피 이미지 삭제
+    int deleteCoffeeImg(@Param("imgId") Integer imgId);
 
     // 커피 재고 증가
     int increaseStock(@Param("coffeeId") Integer coffeeId, @Param("quantity") Integer quantity);
