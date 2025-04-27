@@ -2,111 +2,157 @@
 <%@ include file="/WEB-INF/view/include/page.jsp" %>
 <html lang='ko'>
 <head>
-    <title>Title</title>
+    <title>전체 상품 목록</title>
+    <%@ include file="/WEB-INF/view/include/static.jsp" %>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <style>
       body {
-        background: #ddd;
+        background-color: #f9f7f4;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
 
-      .card {
-        margin: auto;
-        max-width: 950px;
-        width: 90%;
-        box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        border-radius: 1rem;
-        border: transparent
+      main.container {
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
-      .summary {
-        background-color: #ddd;
-        border-top-right-radius: 1rem;
-        border-bottom-right-radius: 1rem;
-        padding: 4vh;
-        color: rgb(65, 65, 65)
+      .page-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #333;
+        align-self: flex-start;
       }
 
-      @media (max-width: 767px) {
-        .summary {
-          border-top-right-radius: unset;
-          border-bottom-left-radius: 1rem
-        }
-      }
-
-      .row {
-        margin: 0
-      }
-
-      .title b {
-        font-size: 1.5rem
-      }
-
-      .col-2,
-      .col {
-        padding: 0 1vh
-      }
-
-      img {
-        width: 3.5rem
-      }
-
-      hr {
-        margin-top: 1.25rem
-      }
-      .products {
+      .product-table-wrapper {
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 12px;
         width: 100%;
+        max-width: 1100px;
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        min-height: 400px;
       }
-      .products .price, .products .action {
-        line-height: 38px;
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 900px;
       }
-      .products .action {
-        line-height: 38px;
+
+      th, td {
+        padding: 1rem;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+      }
+
+      th {
+        background-color: #f4f4f4;
+        font-weight: bold;
+      }
+
+      .product-img {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+
+      .action-btn {
+        padding: 0.6rem 1rem;
+        background-color: #333;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        cursor: pointer;
+      }
+
+      .action-btn:hover {
+        background-color: #555;
+      }
+
+      .add-btn {
+        background-color: #333;
+        color: white;
+        font-weight: bold;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        text-align: center;
+        cursor: pointer;
+        margin-top: 1rem;
+        width: 100%;
+        max-width: 1100px;
+      }
+
+      .add-btn:hover {
+        background-color: #555;
       }
 
     </style>
-
 </head>
+
 <body>
+
+<%@ include file="/WEB-INF/view/include/header.jsp" %>
 
 <main class="container">
 
-    <div class="row justify-content-center m-4">
-        <h6 class="col text-center"><a class="btn title fs-1" href="http://localhost:8080/">Grids & Circle</a></h6>
-    </div>
-    <div class="card">
-        <div class="p-3 pt-4">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <h5 class="mb-0"><b>주문 목록</b></h5>
-                <a class="btn btn-outline-dark add-btn" href="http://localhost:8080/admin/menu/regist">메뉴 추가</a>
-            </div>
+    <div class="page-title">전체 상품 목록</div>
 
-            <ul class="list-group products">
-                <c:if test="${not empty coffeeDtos}">
-                    <c:forEach items="${coffeeDtos}" var="coffee">
-                        <li class="list-group-item d-flex mt-3">
-                            <div class="col">
-                                <div class="row"><c:out value="${coffee.coffeeName}"/></div>
-                            </div>
-                            <div class="col text-center price"><c:out value="${coffee.price}"/></div>
-                            <div class="col text-center price"><c:out value="${coffee.stock}"/></div>
-                            <div class="col text-end action">
-                                <a class="btn btn-small btn-outline-dark update-btn" href="http://localhost:8080/admin/menu/update/${coffee.coffeeId}">수정</a>
-                            </div>
-                            <div class="col text-end action">
-                                <a class="btn btn-small btn-outline-dark delete-btn" href="" data-coffeeId="${coffee.coffeeId}">삭제</a>
-                            </div>
-                        </li>
-                    </c:forEach>
-                </c:if>
-            </ul>
-        </div>
+    <div class="product-table-wrapper">
+        <table>
+            <thead>
+            <tr>
+                <th>사진</th>
+                <th>ID</th>
+                <th>상품명</th>
+                <th>가격</th>
+                <th>재고</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${coffeeDtos}" var="coffee">
+                <tr>
+                    <td><img src="${coffee.images}" alt="커피 사진" class="product-img" /></td>
+                    <td><c:out value="${coffee.coffeeId}" /></td>
+                    <td><c:out value="${coffee.coffeeName}" /></td>
+                    <td><c:out value="${coffee.price}" />원</td>
+                    <td><c:out value="${coffee.stock}" />개</td>
+                    <td>
+                        <a href="/admin/menu/update/${coffee.coffeeId}" class="action-btn">수정</a>
+                    </td>
+                    <td>
+                        <a href="#" class="action-btn delete-btn" data-coffeeId="${coffee.coffeeId}">삭제</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
     </div>
+
+    <a href="/admin/menu/regist" class="add-btn">상품 추가</a>
 
 </main>
-</body>
+
+<%@ include file="/WEB-INF/view/include/footer.jsp" %>
 
 <script src="${context}/assets/js/menu-btn.js" defer></script>
+
+</body>
 </html>
