@@ -129,7 +129,7 @@
 
       .purchase-btn {
         width: 100%;
-        background-color: #a4745b;
+        background-color: #333;
         color: white;
         font-weight: bold;
         border: none;
@@ -140,7 +140,7 @@
       }
 
       .purchase-btn:hover {
-        background-color: #93624c;
+        background-color: #555;
       }
 
     </style>
@@ -183,7 +183,7 @@
                 </c:forEach>
             </div>
 
-            <button class="purchase-btn">구매하기</button>
+            <button class="purchase-btn" onclick="location.href='/order/payment'">구매하기</button>
         </div>
 
     </div>
