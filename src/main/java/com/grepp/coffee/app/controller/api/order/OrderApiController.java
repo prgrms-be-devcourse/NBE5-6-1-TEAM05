@@ -29,7 +29,7 @@ public class OrderApiController {
         @PathVariable
         Integer id, HttpSession session) {
         // stock 관리
-        CoffeeDto coffeeDto = coffeeService.getCoffee(new CoffeeDto(id,null,null,null));
+        CoffeeDto coffeeDto = coffeeService.getCoffee(id);
         if (coffeeDto.getStock()<=0) {
             return ResponseEntity.ok(ApiResponse.noContent());
         }

@@ -8,6 +8,7 @@ import com.grepp.coffee.app.model.auth.code.Role;
 import com.grepp.coffee.app.model.member.dto.MemberDto;
 import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import jakarta.validation.Valid;
 import java.util.List;
@@ -65,7 +66,7 @@ public class MemberController {
 
 
         List<OrderDto> orderDtos= memberService.orderListByEmail(userId);
-        List<DetailedOrderDto> detailedOrderDtos = memberService.detailedOrderListByEmail(userId);
+        List<MyPageOrderDto> detailedOrderDtos = memberService.detailedOrderListByEmail(userId);
 
         model.addAttribute("orders", orderDtos);
         model.addAttribute("detailedOrders", detailedOrderDtos);
