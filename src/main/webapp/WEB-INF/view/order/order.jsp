@@ -163,6 +163,12 @@
                     <div class="product-info">
                         <div class="product-name">${coffee.coffeeName}</div>
                         <div class="product-price">${coffee.price}원</div>
+                        <c:if test="${coffee.stock}>0">
+                            <div class="product-stock">${coffee.stock}개</div>
+                        </c:if>
+                        <c:if test="${coffee.stock}<=0">
+                            <div class="product-stock">품절</div>
+                        </c:if>
                     </div>
                     <button class="add-btn" data-coffeeId="${coffee.coffeeId}">추가</button>
                 </div>
@@ -183,7 +189,9 @@
                 </c:forEach>
             </div>
 
-            <button class="purchase-btn" onclick="location.href='/order/payment'">구매하기</button>
+            <form:form modelAttribute="orderRequest" class="col s12" action="/order" method="post" id="orderRequest">
+                <button class="purchase-btn">구매하기</button>
+            </form:form>
         </div>
 
     </div>

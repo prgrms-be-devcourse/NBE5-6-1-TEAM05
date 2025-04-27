@@ -45,7 +45,7 @@ document.querySelectorAll(".add-btn")
     const coffeeCart = data.data;
 
     if(coffeeCart===null){
-      console.log("data가 넘어오지 않았습니다.")
+      alert("재고가 부족하여 이 이상 담을 수 없습니다.")
       return;
     }
 
@@ -96,3 +96,4 @@ document.querySelectorAll(".sub-btn")
     count.textContent = coffeeCart.coffeeCount;
   });
 });
+

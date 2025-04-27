@@ -28,12 +28,15 @@ public class OrderApiController {
     public ResponseEntity<ApiResponse<CoffeeSessionData>> addCount(
         @PathVariable
         Integer id, HttpSession session) {
-        
+        // stock 관리
+        CoffeeDto coffeeDto = coffeeService.getCoffee(new CoffeeDto(id,null,null,null));
+        if (coffeeDto.getStock()<=0) {
+            return ResponseEntity.ok(ApiResponse.noContent());
+        }
+
         // session에 저장된 값이 없으면 새로 생성
         if(session.getAttribute("coffee"+id) == null) {
-            // 생성할 데이터 가져오기
-            CoffeeDto coffeeDto = coffeeService.getCoffee(new CoffeeDto(id,null,null,null));
-            
+
             // 세션에 넣을 데이터 가공
             CoffeeSessionData coffeeSessionData = new CoffeeSessionData();
             coffeeSessionData.setId(coffeeDto.getCoffeeId());
