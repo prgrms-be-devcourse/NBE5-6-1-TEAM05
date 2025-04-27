@@ -31,7 +31,7 @@ public interface CoffeeMapper {
     int deleteCoffee(@Param("coffeeId") Integer coffeeId);
 
     // 커피 이미지 삭제
-    int deleteCoffeeImg(@Param("imgId") Integer imgId);
+    int deleteCoffeeImg(@Param("coffeeId") Integer coffeeId);
 
     // 커피 재고 증가
     int increaseStock(@Param("coffeeId") Integer coffeeId, @Param("quantity") Integer quantity);

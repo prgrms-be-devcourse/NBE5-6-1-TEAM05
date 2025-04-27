@@ -61,7 +61,7 @@
 
   <!-- 커피 이미지 삭제 -->
   <delete id="deleteCoffeeImg" parameterType="int">
-    DELETE FROM COFFEE_IMG WHERE IMG_ID = #{imgId}
+    DELETE FROM COFFEE_IMG WHERE COFFEE_ID = #{coffeeId}
   </delete>
 
   <!-- 재고 추가 -->

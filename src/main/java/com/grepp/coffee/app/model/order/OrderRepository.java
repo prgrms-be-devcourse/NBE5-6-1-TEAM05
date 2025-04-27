@@ -7,6 +7,7 @@ import com.grepp.coffee.app.model.order.mapper.OrderMapper;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class OrderRepository {
@@ -37,10 +38,23 @@ public class OrderRepository {
             );
     }
 
+    public boolean updateAllOrdersToDelivered() {
+        int updateRows = orderMapper.updateAllOrdersToDelivered();
+        return updateRows > 0;
+    }
+
     // 주문 삭제
     public boolean deleteOrder(String email, int postNum) {
         int detailDeleted = orderMapper.deleteDetailedOrdersByEmailAndPostNum(email, postNum);
         int orderDeleted = orderMapper.deleteOrderByEmailAndPostNum(email, postNum);
+        return detailDeleted > 0 && orderDeleted > 0;
+    }
+
+    // 배송 완료된 주문 일괄 삭제
+    @Transactional
+    public boolean deleteOrdersAndDetailsByIsDelivered() {
+        int detailDeleted = orderMapper.deleteDetailedOrdersByIsDelivered(Boolean.TRUE);
+        int orderDeleted = orderMapper.deleteOrdersByIsDelivered(Boolean.TRUE);
         return detailDeleted > 0 && orderDeleted > 0;
     }
 
