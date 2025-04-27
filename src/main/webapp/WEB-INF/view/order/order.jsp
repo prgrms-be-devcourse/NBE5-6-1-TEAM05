@@ -159,7 +159,13 @@
 
             <c:forEach items="${coffeeDtos}" var="coffee">
                 <div class="product-item">
-                    <img src="${coffee.imageUrl}" alt="커피 이미지" />
+                    <c:if test="${not empty coffee.images}">
+                        <c:forEach items="${coffee.images}" var="image">
+                            <c:if test="${image.type.name() == 'THUMBNAIL'}">
+                                <img src="${image.url}" alt="커피 이미지">
+                            </c:if>
+                        </c:forEach>
+                    </c:if>
                     <div class="product-info">
                         <div class="product-name">${coffee.coffeeName}</div>
                         <div class="product-price">${coffee.price}원</div>

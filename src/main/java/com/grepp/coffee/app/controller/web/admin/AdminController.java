@@ -7,6 +7,8 @@ import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.app.model.coffee.CoffeeService;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
+import com.grepp.coffee.infra.error.exceptions.CommonException;
+import com.grepp.coffee.infra.response.ResponseCode;
 import jakarta.validation.Valid;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -79,8 +81,12 @@ public class AdminController {
             return "admin/menu-regist";
         }
 
-        coffeeService.addMenu(form.getThumbnail(),form.toDto());
-        return "redirect:/admin/menu/list";
+        if(coffeeService.addMenu(form.getThumbnail(),form.toDto())){
+            return "redirect:/admin/menu/list";
+        }
+        else{
+            throw new CommonException(ResponseCode.BAD_REQUEST);
+        }
     }
 
     @GetMapping("menu/update/{id}")
@@ -98,7 +104,7 @@ public class AdminController {
         return "admin/menu-update";
     }
 
-    @PutMapping("menu/update/{id}")
+    @PostMapping("menu/update/{id}")
     public String registMenu(@PathVariable Integer id, CoffeeRegistRequest request, BindingResult bindingResult
         ,Model model){
 
@@ -108,9 +114,12 @@ public class AdminController {
 
         log.info("{}",request.getStock());
 
-        coffeeService.updateMenu(request.getThumbnail(),request.toDto());
+        if(coffeeService.updateMenu(request.getThumbnail(),request.toDto())){
+            return "redirect:/admin/menu/list";
+        }else{
+            throw new CommonException(ResponseCode.BAD_REQUEST);
+        }
 
-        return "redirect:/admin/menu/list";
     }
 
 

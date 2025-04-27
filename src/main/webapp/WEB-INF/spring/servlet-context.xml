@@ -19,6 +19,6 @@
 
   <mvc:resources location="/assets" mapping="/assets/**"/>
 
-<!--  <mvc:resources location="file:${upload.path}" mapping="/download/**"/>-->
+  <mvc:resources location="file:${upload.path}" mapping="/download/**"/>
 
 </beans>
