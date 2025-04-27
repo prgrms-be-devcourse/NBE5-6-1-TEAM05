@@ -55,7 +55,7 @@
       <if test="renameFileName != null">RENAME_FILE_NAME = #{renameFileName},</if>
       <if test="savePath != null">SAVE_PATH = #{savePath}</if>
     </set>
-    WHERE IMG_ID = #{imgId}
+    WHERE COFFEE_ID = #{coffeeId}
   </update>
 
   <!-- 커피 삭제 -->
