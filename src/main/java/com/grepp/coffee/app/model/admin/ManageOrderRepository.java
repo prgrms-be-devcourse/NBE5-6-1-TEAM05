@@ -17,12 +17,12 @@ public interface ManageOrderRepository {
     @Select("select * from DETAIL where order_num=#{orderId}")
     List<DetailedOrderDto> selectAllDetailedOrdersById(Integer orderId);
 
-    @Delete("delete from ORDERS where order_id = #{orderId}")
+    @Delete("delete from ORDERS where order_num = #{orderId}")
     boolean deleteOrder(Integer orderId);
 
     @Delete("DELETE FROM DETAIL WHERE order_num = #{orderId}")
     boolean deleteDetailedOrder(Integer orderId);
 
-    @Update("UPDATE ORDERS SET is_delivered = TRUE WHERE order_id = #{orderId}")
+    @Update("UPDATE ORDERS SET is_delivered = TRUE WHERE order_num = #{orderId}")
     boolean updateDelivery(Integer orderId);
 }
