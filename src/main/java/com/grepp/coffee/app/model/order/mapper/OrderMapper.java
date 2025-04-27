@@ -3,6 +3,7 @@ package com.grepp.coffee.app.model.order.mapper;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -41,4 +42,9 @@ public interface OrderMapper {
     int deleteOrdersByIsDelivered(@Param("isDelivered") Boolean isDelivered);
 
     List<MyPageOrderDto> selectMyPageOrdersByEmail(@Param("email") String email);
+
+    int countOrdersByOrderTime(@Param("today") LocalDateTime today);
+
+    int countDeliveredOrder();
+    int countUndeliveredOrder();
 }

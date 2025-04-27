@@ -4,6 +4,7 @@ import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import com.grepp.coffee.app.model.order.mapper.OrderMapper;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -67,4 +68,18 @@ public class OrderRepository {
     public List<MyPageOrderDto> getDetailedOrdersByEmail(String email) {
         return orderMapper.selectMyPageOrdersByEmail(email);
     }
+
+    // 오늘의 주문 수 조회
+    public int getTodayOrderCount(LocalDateTime today) {
+        return orderMapper.countOrdersByOrderTime(today);
+    }
+
+    public int getDeliveredOrderCount() {
+        return orderMapper.countDeliveredOrder();
+    }
+
+    public int getUndeliveredOrderCount() {
+        return orderMapper.countUndeliveredOrder();
+    }
+
 }

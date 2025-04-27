@@ -103,4 +103,24 @@
     WHERE o.email = #{email}
     ORDER BY o.order_time DESC, d.detail_num ASC
   </select>
+
+  <!-- 오늘 들어온 주문 수  -->
+  <select id="countOrdersByOrderTime" resultType="int">
+    SELECT count(*)
+    FROM ORDERS
+    WHERE DATE(order_time) = DATE(#{today})
+  </select>
+
+  <select id="countDeliveredOrder" resultType="int">
+    SELECT count(*)
+    FROM ORDERS
+    WHERE is_delivered = true;
+  </select>
+
+  <select id="countUndeliveredOrder" resultType="int">
+    SELECT count(*)
+    FROM ORDERS
+    WHERE is_delivered = false;
+  </select>
+
 </mapper>
