@@ -1,0 +1,73 @@
+body {
+  background-color: #f9f7f4;
+}
+.form-container {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.form-container h4 {
+  margin-bottom: 0.5rem;
+}
+.form-container p {
+  margin-bottom: 2rem; /* ✨ 간격 늘리기 */
+  color: #666;
+}
+.input-field {
+  background: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1.2rem;
+  height: 50px; /* ✨ input 박스 높이 고정 */
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* ✨ 아이콘과 입력칸 간격 */
+}
+.input-field i {
+  font-size: 1.5rem;
+  color: #555;
+}
+.custom-input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+  background: transparent;
+  padding: 0;
+}
+.custom-input::placeholder {
+  color: #aaa;
+}
+.input-field input[type=text],
+.input-field input[type=email],
+.input-field input[type=password] {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent;
+  line-height: 50px;
+}
+.btn.custom-btn {
+  display: block; /* ✨ block으로 만들어 div안에서 꽉 채우기 */
+  width: 100%;
+  background-color: #e2cdb2;
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 0; /* ✨ padding 제거 */
+  height: 50px; /* ✨ 버튼 높이 고정 */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  box-shadow: none;
+  font-size: 1rem;
+  line-height: 50px; /* ✨ 높이와 일치시켜 글자 세로 중앙 정렬 */
+  box-sizing: border-box;
+}
+.btn.custom-btn:hover {
+  background-color: #d8bfa7;
+}
