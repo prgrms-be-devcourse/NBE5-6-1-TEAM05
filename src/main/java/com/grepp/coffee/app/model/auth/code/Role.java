@@ -5,6 +5,6 @@ import org.apache.ibatis.type.Alias;
 @Alias("MEMBER_ROLE")
 public enum Role {
     ANONYMOUS,
-    USER,
-    ADMIN
+    ROLE_USER,
+    ROLE_ADMIN
 }

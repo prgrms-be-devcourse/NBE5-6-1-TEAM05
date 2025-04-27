@@ -49,7 +49,7 @@ public class MemberService{
         if(!member.getPassword().equals(password))
             return PrincipalDto.ANONYMOUS;
 
-        return new PrincipalDto(userId, List.of(Role.USER), LocalDateTime.now());
+        return new PrincipalDto(userId, List.of(Role.ROLE_USER), LocalDateTime.now());
     }
 
     public Boolean isDuplicatedId(String id) {
