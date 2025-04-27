@@ -105,6 +105,12 @@
         font-weight: bold;
       }
 
+      .big-num{
+        font-size: 2rem;
+        font-weight: bold;
+        margin-top: 0.5rem;
+      }
+
     </style>
 </head>
 <body>
@@ -117,11 +123,11 @@
     <div class="section">
         <div class="section-title">주문 현황</div>
         <div class="status-box">
-            <div class="status-item">일일 주문수</div>
+            <div class="status-item">일일 주문수 <div class="big-num">${todayOrder}</div></div>
             <div class="divider-vertical"></div>
-            <div class="status-item">대기중인 주문</div>
+            <div class="status-item">대기중인 주문 <div class="big-num">${undeliveredOrder}</div></div>
             <div class="divider-vertical"></div>
-            <div class="status-item">완료된 주문</div>
+            <div class="status-item">완료된 주문 <div class="big-num">${deliveredOrder}</div></div>
         </div>
         <button class="manage-btn" onclick="location.href='/admin/order/list'">주문 관리 페이지로 이동</button>
     </div>

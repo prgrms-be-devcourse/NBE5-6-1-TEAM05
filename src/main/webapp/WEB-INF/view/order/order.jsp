@@ -76,6 +76,11 @@
         color: #666;
       }
 
+      .product-stock {
+        margin-top: 0.3rem;
+        color: #666;
+      }
+
       .add-btn {
         padding: 0.5rem 1rem;
         border: 1px solid #333;
@@ -169,14 +174,16 @@
                     <div class="product-info">
                         <div class="product-name">${coffee.coffeeName}</div>
                         <div class="product-price">${coffee.price}원</div>
-                        <c:if test="${coffee.stock}>0">
+                        <c:if test="${coffee.stock>0}">
                             <div class="product-stock">${coffee.stock}개</div>
                         </c:if>
-                        <c:if test="${coffee.stock}<=0">
+                        <c:if test="${coffee.stock<=0}">
                             <div class="product-stock">품절</div>
                         </c:if>
                     </div>
-                    <button class="add-btn" data-coffeeId="${coffee.coffeeId}">추가</button>
+                    <c:if test="${coffee.stock>0}">
+                        <button class="add-btn" data-coffeeId="${coffee.coffeeId}">추가</button>
+                    </c:if>
                 </div>
             </c:forEach>
 
@@ -187,13 +194,25 @@
             <div>
                 <div class="cart-title">장바구니</div>
                 <hr class="divider">
-                <c:forEach items="${coffeeCart}" var="entry">
-                    <div class="cart-item">
-                        <span>${entry.value.name}</span>
-                        <span class="badge">${entry.value.count}개</span>
-                    </div>
-                </c:forEach>
+                <div class="coffee-list">
+                    <c:forEach items="${coffeeCart}" var="entry">
+                        <div class="cart-item coffee-li" data-coffeeId="${entry.value.id}">
+                            <span>${entry.value.name}</span>
+                            <span class="badge" data-coffeeId="${entry.value.id}">${entry.value.count}개</span>
+                            <button class="delete-btn" data-coffeeId="${coffee.coffeeId}">X</button>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
+
+            <div id="coffeeCartListTemplate" style="display:none;">
+                <div class="cart-item coffee-li" data-coffeeId="0">
+                    <span class="coffee-name">커피 이름</span>
+                    <span class="badge coffee-count" data-coffeeId="0">0개</span>
+                    <button class="delete-btn" data-coffeeId="${coffee.coffeeId}">X</button>
+                </div>
+            </div>
+
 
             <form:form modelAttribute="orderRequest" class="col s12" action="/order" method="post" id="orderRequest">
                 <button class="purchase-btn">구매하기</button>
