@@ -2,6 +2,8 @@ package com.grepp.coffee.infra.util.file;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileUtil {
 
     @Value("${upload.path}")
-    private String filePath;
+    private String uploadPath;
 
     public List<FileDto> upload(List<MultipartFile> files, String depth) throws IOException {
         List<FileDto> fileDtos = new ArrayList<>();
@@ -36,13 +38,15 @@ public class FileUtil {
     }
 
     private void uploadFile(MultipartFile file, FileDto fileDto) throws IOException {
-        File path = new File(filePath + fileDto.savePath());
+        Path projectRoot = Paths.get("").toAbsolutePath(); // 현재 프로젝트 실행 경로
+        Path fullUploadPath = projectRoot.resolve(uploadPath).resolve(fileDto.savePath());
 
-        if (!path.exists()) {
-            path.mkdirs();
+        File directory = fullUploadPath.toFile();
+        if (!directory.exists()) {
+            directory.mkdirs();
         }
 
-        File target = new File(filePath + fileDto.savePath() + fileDto.renameFileName());
+        File target = new File(fullUploadPath.toFile(), fileDto.renameFileName());
         file.transferTo(target);
 
     }
@@ -54,9 +58,9 @@ public class FileUtil {
 
     private String createSavePath(String depth) {
         LocalDate now = LocalDate.now();
-        return depth + depth + "/" +
+        return depth + "/" +
             now.getYear() + "/" +
-            now.getMonth() + "/" +
+            now.getMonthValue() + "/" +
             now.getDayOfMonth() + "/";
     }
 }
