@@ -30,8 +30,8 @@ public class CoffeeRepository {
     }
 
     // 모든 커피 목록 조회
-    public List<CoffeeDto> selectAllCoffee() {
-        return coffeeMapper.selectAllCoffee();
+    public List<CoffeeDto> selectAll() {
+        return coffeeMapper.selectAll();
     }
 
     // 커피 추가

@@ -45,7 +45,7 @@ public class CoffeeService {
 
     /** DB로부터 모든 커피 메뉴들을 가져옵니다. */
     public List<CoffeeDto> getAllCoffee() {
-        return coffeeRepository.selectAllCoffee();
+        return coffeeRepository.selectAll();
     }
 
     /** DB로부터 특정 커피 메뉴에 대한 데이터를 가져옵니다. */
@@ -78,7 +78,7 @@ public class CoffeeService {
     /** DB에 저장된 커피메뉴를 삭제합니다. */
     @Transactional
     public boolean deleteMenu(CoffeeDto coffeeDto) {
-        return coffeeRepository.deleteCoffee(coffeeDto.getCoffeeId()) &&
-            coffeeRepository.deleteCoffeeImg(coffeeDto.getCoffeeId());
+        return coffeeRepository.deleteCoffeeImg(coffeeDto.getCoffeeId()) &&
+            coffeeRepository.deleteCoffee(coffeeDto.getCoffeeId());
     }
 }

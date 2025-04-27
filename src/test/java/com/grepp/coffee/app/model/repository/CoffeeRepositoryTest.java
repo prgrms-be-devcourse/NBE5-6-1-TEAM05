@@ -26,8 +26,8 @@ class CoffeeRepositoryTest {
     }
 
     @Test
-    public void selectAllCoffee() {
-        log.info("{}", coffeeRepository.selectAllCoffee());
+    public void selectAll() {
+        log.info("{}", coffeeRepository.selectAll());
     }
 
     @Test

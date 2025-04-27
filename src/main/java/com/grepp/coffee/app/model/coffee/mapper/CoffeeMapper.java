@@ -13,7 +13,7 @@ public interface CoffeeMapper {
     CoffeeDto selectByCoffeeId(@Param("coffeeId") Integer coffeeId);
 
     // 모든 커피 목록 조회
-    List<CoffeeDto> selectAllCoffee();
+    List<CoffeeDto> selectAll();
 
     // 커피 등록
     int insertCoffee(CoffeeDto coffeeDto);
