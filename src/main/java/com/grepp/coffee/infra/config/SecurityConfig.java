@@ -49,7 +49,7 @@ public class SecurityConfig {
                 boolean isAdmin = authentication.getAuthorities()
                                       .stream()
                                       .anyMatch(authority ->
-                                                    authority.getAuthority().equals("ADMIN"));
+                                                    authority.getAuthority().equals("ROLE_ADMIN"));
                 
                 if(isAdmin){
                     response.sendRedirect("/admin");
