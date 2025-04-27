@@ -5,6 +5,7 @@ import com.grepp.coffee.app.model.admin.ManageOrderService;
 import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.app.model.coffee.CoffeeService;
+import com.grepp.coffee.app.model.order.OrderService;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import com.grepp.coffee.infra.error.exceptions.CommonException;
@@ -33,9 +34,21 @@ public class AdminController {
     private final MemberService memberService;
     private final ManageOrderService manageOrderService;
     private final CoffeeService coffeeService;
+    private final OrderService orderService;
 
     @GetMapping
     public String admin(Model model) {
+
+        List<CoffeeDto> coffeeDtos = coffeeService.getAllCoffee();
+        model.addAttribute("coffeeDtos", coffeeDtos);
+
+        int todayOrder=orderService.getTodayOrderCount();
+        int delivered = orderService.getDeliveredOrderCount();
+        int undelivered = orderService.getUndeliveredOrderCount();
+
+        model.addAttribute("todayOrder", todayOrder);
+        model.addAttribute("deliveredOrder", delivered);
+        model.addAttribute("undeliveredOrder", undelivered);
 
         return "admin/adminpage";
     }
