@@ -78,7 +78,7 @@ public class CoffeeService {
     /** DB에 저장된 커피메뉴를 삭제합니다. */
     @Transactional
     public boolean deleteMenu(CoffeeDto coffeeDto) {
-        return coffeeRepository.deleteCoffee(coffeeDto.getCoffeeId()) &&
-            coffeeRepository.deleteCoffeeImg(coffeeDto.getCoffeeId());
+        return coffeeRepository.deleteCoffeeImg(coffeeDto.getCoffeeId()) &&
+            coffeeRepository.deleteCoffee(coffeeDto.getCoffeeId());
     }
 }
