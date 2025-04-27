@@ -24,13 +24,11 @@ public class CoffeeRepository {
         this.coffeeMapper = coffeeMapper;
     }
 
-    // TODO : 커피 이미지도 가져오도록 해주세요. (완료)
     // 커피 한 건 조회
     public CoffeeDto selectByCoffeeId(int coffeeId) {
         return coffeeMapper.selectByCoffeeId(coffeeId);
     }
 
-    // TODO : 커피 이미지도 가져오도록 해주세요. (완료)
     // 모든 커피 목록 조회
     public List<CoffeeDto> selectAllCoffee() {
         return coffeeMapper.selectAllCoffee();
@@ -51,7 +49,6 @@ public class CoffeeRepository {
         return coffeeMapper.updateCoffee(dto) > 0;
     }
 
-    // TODO : 커피 이미지 업데이트 매서드 (완료)
     public boolean updateCoffeeImg(CoffeeImgDto dto) {
         return coffeeMapper.updateCoffeeImg(dto) > 0;
     }
@@ -61,7 +58,6 @@ public class CoffeeRepository {
         return coffeeMapper.deleteCoffee(coffeeId) > 0;
     }
 
-    // TODO : 커피 이미지 삭제 매서드 (완료)
     public boolean deleteCoffeeImg(int coffeeId) {
         return coffeeMapper.deleteCoffeeImg(coffeeId) > 0;
     }
