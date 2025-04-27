@@ -129,7 +129,20 @@
             <tbody>
             <c:forEach items="${coffeeDtos}" var="coffee">
                 <tr>
-                    <td><img src="${coffee.images}" alt="커피 사진" class="product-img" /></td>
+                    <td>
+                        <c:choose>
+                            <c:when test="${not empty coffee.images}">
+                                <c:forEach items="${coffee.images}" var="image">
+                                    <c:if test="${image.type.name() == 'THUMBNAIL'}">
+                                        <img src="${image.url}" alt="커피 이미지" class="product-img" />
+                                    </c:if>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="이미지 없음" class="product-img" />
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
                     <td><c:out value="${coffee.coffeeId}" /></td>
                     <td><c:out value="${coffee.coffeeName}" /></td>
                     <td><c:out value="${coffee.price}" />원</td>

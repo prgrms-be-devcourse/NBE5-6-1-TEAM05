@@ -3,6 +3,7 @@ package com.grepp.coffee.app.controller.web.admin;
 import com.grepp.coffee.app.controller.web.admin.payload.CoffeeRegistRequest;
 import com.grepp.coffee.app.model.admin.ManageOrderService;
 import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeImgDto;
 import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.app.model.coffee.CoffeeService;
 import com.grepp.coffee.app.model.order.OrderService;
@@ -111,6 +112,10 @@ public class AdminController {
         request.setCoffeeName(update.getCoffeeName());
         request.setPrice(update.getPrice());
         request.setStock(update.getStock());
+
+        if(update.getImages() != null && !update.getImages().isEmpty()){
+            model.addAttribute("image",update.getImages().getFirst());
+        }
         model.addAttribute("coffeeDto", update);
         model.addAttribute("method", "update");
 
@@ -122,11 +127,10 @@ public class AdminController {
         ,Model model){
 
         if(bindingResult.hasErrors()){
-            return "menu/update/{id}";
+            return "redirect:menu/menu-update";
         }
 
-        log.info("{}",request.getStock());
-
+        request.setCoffeeId(id);
         if(coffeeService.updateMenu(request.getThumbnail(),request.toDto())){
             return "redirect:/admin/menu/list";
         }else{
