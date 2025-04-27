@@ -3,7 +3,10 @@ package com.grepp.coffee.app.controller.web.order;
 import com.grepp.coffee.app.controller.session.CoffeeSessionData;
 import com.grepp.coffee.app.controller.web.order.payload.OrderRequest;
 
+import com.grepp.coffee.app.model.admin.ManageOrderService;
 import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
+import com.grepp.coffee.app.model.member.MemberService;
+import com.grepp.coffee.app.model.member.dto.MemberDto;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import com.grepp.coffee.app.model.coffee.CoffeeService;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,6 +35,7 @@ public class OrderController {
 
     private final OrderService orderService;
     private final CoffeeService coffeeService;
+    private final MemberService memberService;
 
     @GetMapping
     public String getOrder(OrderRequest request, HttpSession session, Model model) {
@@ -60,11 +65,11 @@ public class OrderController {
     @PostMapping
     public String getOrder(OrderRequest request) {
 
-        return "order/payment";
+        return "redirect:order/payment";
     }
 
     @GetMapping("payment")
-    public String payment(OrderRequest request, HttpSession session, Model model) {
+    public String payment(Authentication authentication ,OrderRequest orderRequest, HttpSession session, Model model) {
 
         // 커피 데이터 가져오기
         List<CoffeeDto> coffeeDtos = coffeeService.getAllCoffee();
@@ -83,6 +88,18 @@ public class OrderController {
 
         model.addAttribute("total", count);
         model.addAttribute("coffeeCart", coffeeCart);
+
+        // 미리 입력할 데이터 넣기
+        String email= authentication.getName();
+        log.info(email);
+        MemberDto user = memberService.findById(email);
+        orderRequest.setEmail(email);
+        orderRequest.setAddress(user.getAddress());
+        orderRequest.setPostNum(user.getPostNum());
+        log.info("address: {}");
+
+
+        model.addAttribute("orderRequest", orderRequest);
         return "order/payment";
     }
 
@@ -90,7 +107,7 @@ public class OrderController {
     @PostMapping("payment")
     public String postOrder(
         @Valid
-        OrderRequest request,
+        OrderRequest orderRequest,
         BindingResult bindingResult,
         HttpSession session,
         Model model){
@@ -101,7 +118,7 @@ public class OrderController {
         }
 
         // OrderDto 만들기
-        OrderDto orderDto = request.toOrderDto();
+        OrderDto orderDto = orderRequest.toOrderDto();
 
         log.info("{}",orderDto.getPostNum());
 
@@ -132,7 +149,7 @@ public class OrderController {
                 String key = "coffee"+coffee.getCoffeeId();
                 session.removeAttribute(key);
             });
-            return "redirect:/";  // 임시 페이지
+            return "order/endorder";
         }
 
         else{
