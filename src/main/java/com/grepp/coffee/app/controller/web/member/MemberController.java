@@ -1,16 +1,21 @@
 package com.grepp.coffee.app.controller.web.member;
 
 
+import com.grepp.coffee.app.controller.web.member.payload.MypageRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SigninRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SignupRequest;
 import com.grepp.coffee.app.controller.web.member.payload.UpdateAddressRequest;
 import com.grepp.coffee.app.model.auth.code.Role;
+import com.grepp.coffee.app.model.coffee.CoffeeService;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import com.grepp.coffee.app.model.member.dto.MemberDto;
 import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
     
     private final MemberService memberService;
+    private final CoffeeService coffeeService;
 
     @GetMapping("signup")
     public String signup(SignupRequest signupRequest){
@@ -64,12 +70,23 @@ public class MemberController {
         MemberDto memberDto = memberService.findById(userId);
         model.addAttribute("member", memberDto);
 
+        List<MypageRequest> requests = new LinkedList<>();
 
-        List<OrderDto> orderDtos= memberService.orderListByEmail(userId);
-        List<MyPageOrderDto> detailedOrderDtos = memberService.detailedOrderListByEmail(userId);
+        List<MyPageOrderDto> myPageOrderDtos = memberService.detailedOrderListByEmail(userId);
+        myPageOrderDtos.forEach(orderDto -> {
+            orderDto.getDetailedOrders().forEach(detailedOrderDto -> {
+                MypageRequest request = new MypageRequest();
+                CoffeeDto coffee = coffeeService.getCoffee(detailedOrderDto.getCoffeeId());
+                request.setCoffeeName(coffee.getCoffeeName());
+                request.setQuantity(detailedOrderDto.getQuantity());
+                request.setThumbnail(coffee.getImages());
 
-        model.addAttribute("orders", orderDtos);
-        model.addAttribute("detailedOrders", detailedOrderDtos);
+                requests.add(request);
+            });
+        });
+
+        model.addAttribute("myPageOrderDtos", myPageOrderDtos);
+        model.addAttribute("requests", requests);
 
         return "member/mypage";
     }
