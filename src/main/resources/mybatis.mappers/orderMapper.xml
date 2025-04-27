@@ -3,6 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.grepp.coffee.app.model.order.mapper.OrderMapper">
+
+  <resultMap id="MyPageOrderMap" type="com.grepp.coffee.app.model.order.dto.MyPageOrderDto">
+    <id property="orderId" column="order_id"/>
+    <result property="address" column="address"/>
+    <result property="postNum" column="post_num"/>
+    <result property="orderTime" column="order_time"/>
+    <collection property="detailedOrders" ofType="com.grepp.coffee.app.model.order.dto.DetailedOrderDto">
+      <id property="detailNum" column="detail_num"/>
+      <result property="coffeeId" column="coffee_id"/>
+      <result property="quantity" column="quantity"/>
+    </collection>
+  </resultMap>
+
   <!-- 주문 등록 -->
   <insert id="insertOrder" parameterType="OrderDto" useGeneratedKeys="true" keyProperty="orderNum">
     INSERT INTO ORDERS (email, address, post_num, order_time, is_delivered)
