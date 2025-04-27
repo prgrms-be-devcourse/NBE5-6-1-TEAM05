@@ -69,4 +69,20 @@ public class OrderService {
     public List<MyPageOrderDto> getDetailedOrderList(String email) {
         return orderRepository.getDetailedOrdersByEmail(email);
     }
+
+    @Transactional
+    public int getTodayOrderCount(){
+        return orderRepository.getTodayOrderCount(LocalDateTime.now());
+    }
+
+    @Transactional
+    public int getDeliveredOrderCount(){
+        return orderRepository.getDeliveredOrderCount();
+    }
+
+    @Transactional
+    public int getUndeliveredOrderCount(){
+        return orderRepository.getUndeliveredOrderCount();
+    }
+
 }
