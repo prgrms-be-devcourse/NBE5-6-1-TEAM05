@@ -49,8 +49,8 @@ public class CoffeeService {
     }
 
     /** DB로부터 특정 커피 메뉴에 대한 데이터를 가져옵니다. */
-    public CoffeeDto getCoffee(CoffeeDto coffeeDto) {
-        return coffeeRepository.selectByCoffeeId(coffeeDto.getCoffeeId());
+    public CoffeeDto getCoffee(int coffeeId) {
+        return coffeeRepository.selectByCoffeeId(coffeeId);
     }
 
     /** DB에 저장된 커피 메뉴를 수정합니다. */

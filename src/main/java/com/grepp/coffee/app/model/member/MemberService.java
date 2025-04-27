@@ -1,7 +1,9 @@
 package com.grepp.coffee.app.model.member;
 
 import com.grepp.coffee.app.model.auth.code.Role;
+import com.grepp.coffee.app.model.order.OrderRepository;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
+import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import com.grepp.coffee.app.model.member.dto.MemberDto;
 import com.grepp.coffee.app.model.member.dto.PrincipalDto;
@@ -23,6 +25,7 @@ public class MemberService{
 
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
+    private final OrderRepository orderRepository;
 
     // ==================== 인증 및 가입 관련 ==================== //
     @Transactional
@@ -73,7 +76,7 @@ public class MemberService{
     }
 
     // Get member's order details
-    public List<DetailedOrderDto> detailedOrderListByEmail(String email) {
-        return null;
+    public List<MyPageOrderDto> detailedOrderListByEmail(String email) {
+        return orderRepository.getDetailedOrdersByEmail(email);
     }
 }
