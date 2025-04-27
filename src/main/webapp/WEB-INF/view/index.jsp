@@ -8,6 +8,14 @@
     <title>Grids & Circles</title>
 
     <%@include file="/WEB-INF/view/include/static.jsp" %>
+    <style>
+      .coffee-thumbnail {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+    </style>
+
 </head>
 <body>
 
@@ -27,11 +35,16 @@
             <div class="col s12 m6 l4">
                 <div class="card hoverable">
                     <div class="card-image" style="padding-top: 1rem;">
-                        <img src="/resources/images/coffee-icon.png" alt="커피 아이콘" style="width: 50px; margin: auto;">
+                        <c:if test="${not empty coffee.images}">
+                            <c:forEach items="${coffee.images}" var="image">
+                                <c:if test="${image.type.name() == 'THUMBNAIL'}">
+                                    <img src="${image.url}" alt="커피 아이콘" class="coffee-thumbnail">
+                                </c:if>
+                            </c:forEach>
+                        </c:if>
                     </div>
                     <div class="card-content">
                         <h5 class="black-text">${coffee.coffeeName}</h5>
-                        <p class="grey-text">짧은 설명</p>
                         <p class="black-text" style="margin-top: 0.5rem;">€ ${coffee.price}</p>
                     </div>
                     <div class="card-action">

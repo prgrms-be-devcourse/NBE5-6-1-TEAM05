@@ -70,7 +70,7 @@
     <div class="order-complete-subtitle">감사합니다</div>
     <div class="button-group">
         <a href="/" class="btn-black">홈으로 돌아가기</a>
-        <a href="/order/list" class="btn-black">주문 내역 확인하기</a>
+        <a href="/member/mypage" class="btn-black">주문 내역 확인하기</a>
     </div>
 </main>
 

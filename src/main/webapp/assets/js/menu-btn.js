@@ -9,10 +9,12 @@ document.querySelectorAll(".delete-btn")
         url, {
           method: 'DELETE'
         });
-
-    if (response.ok) {
+    if(response.data) {
       alert("삭제되었습니다.");
       window.location.reload();
+    }
+    else{
+      alert("해당 상품 관련 주문을 처리한 후 삭제 가능합니다.")
     }
   });
 });
