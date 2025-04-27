@@ -37,6 +37,10 @@ public class OrderController {
         // 커피 데이터 가져오기
         List<CoffeeDto> coffeeDtos = coffeeService.getAllCoffee();
 
+        coffeeDtos.forEach(coffeeDto -> {
+            log.info("{}", coffeeDto.getCoffeeName());
+        });
+
         //세션 데이터 가져오기
         Map<String, CoffeeSessionData> coffeeCart = new HashMap<>();
         for(CoffeeDto coffee : coffeeDtos) {
@@ -51,6 +55,12 @@ public class OrderController {
         model.addAttribute("coffeeCart", coffeeCart);
 
         return "order/order";
+    }
+
+    @PostMapping
+    public String getOrder(OrderRequest request) {
+
+        return "order/payment";
     }
 
     @GetMapping("payment")
