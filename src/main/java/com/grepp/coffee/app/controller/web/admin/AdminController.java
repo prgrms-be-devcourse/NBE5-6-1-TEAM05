@@ -79,7 +79,7 @@ public class AdminController {
             return "admin/menu-regist";
         }
 
-        coffeeService.addMenu(form.toDto());
+        coffeeService.addMenu(form.getThumbnail(),form.toDto());
         return "redirect:/admin/menu/list";
     }
 
@@ -108,7 +108,7 @@ public class AdminController {
 
         log.info("{}",request.getStock());
 
-        coffeeService.updateMenu(request.toDto());
+        coffeeService.updateMenu(request.getThumbnail(),request.toDto());
 
         return "redirect:/admin/menu/list";
     }
