@@ -9,7 +9,9 @@ document.querySelectorAll(".delete-btn")
         url, {
           method: 'DELETE'
         });
-    if(response.data) {
+    const data = await response.json();
+
+    if(data.data) {
       alert("삭제되었습니다.");
       window.location.reload();
     }

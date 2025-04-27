@@ -9,8 +9,9 @@ document.querySelectorAll(".delivery-btn")
         url, {
           method: 'PUT'
         });
+    const data = await response.json();
 
-    if (response.data) {
+    if (data.data) {
       alert("배송 완료 처리되었습니다..");
       window.location.reload();
     }
@@ -32,7 +33,7 @@ document.querySelectorAll(".delete-btn")
           method: 'DELETE'
         });
 
-    if (response.data) {
+    if (response.data.data) {
       alert("취소 처리 되었습니다.");
       window.location.reload();
     }
