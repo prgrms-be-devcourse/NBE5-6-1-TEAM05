@@ -42,10 +42,6 @@ public class OrderController {
         // 커피 데이터 가져오기
         List<CoffeeDto> coffeeDtos = coffeeService.getAllCoffee();
 
-        coffeeDtos.forEach(coffeeDto -> {
-            log.info("{}", coffeeDto.getCoffeeName());
-        });
-
         //세션 데이터 가져오기
         Map<String, CoffeeSessionData> coffeeCart = new HashMap<>();
         for(CoffeeDto coffee : coffeeDtos) {
@@ -113,7 +109,6 @@ public class OrderController {
         Model model){
 
         if(bindingResult.hasErrors()){
-            // TODO valid 걸릴 때 어떻게 처리하징
             return "order/order";
         }
 
