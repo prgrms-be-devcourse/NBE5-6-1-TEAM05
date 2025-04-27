@@ -47,7 +47,7 @@
   </update>
 
   <!-- 커피 이미지 수정 (동적 SQL로 null 방지) -->
-  <update id="updateCoffeeImg" parameterType="CoffeeImgDto">
+  <update id="updateCoffeeImg" parameterType="CoffeeImgDto" useGeneratedKeys="true" keyProperty="imgId">
     UPDATE COFFEE_IMG
     <set>
       <if test="type != null">TYPE = #{type},</if>
