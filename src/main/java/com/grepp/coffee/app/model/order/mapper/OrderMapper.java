@@ -25,11 +25,20 @@ public interface OrderMapper {
     // 이메일, 주소번호 기준으로 상세 주문 목록 조회
     List<DetailedOrderDto> findDetailedOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
 
+    // 배송 상태 수정
+    int updateAllOrdersToDelivered();
+
     // 이메일, 주소번호 기준으로 주문 삭제
     int deleteOrderByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
 
     // 이메일, 주소번호 기준으로 상세 주문 삭제
     int deleteDetailedOrdersByEmailAndPostNum(@Param("email") String email, @Param("postNum") Integer postNum);
+
+    // 배송 완료된 detailed order 삭제
+    int deleteDetailedOrdersByIsDelivered(@Param("isDelivered") Boolean isDelivered);
+
+    // 배송 완료된 order 삭제
+    int deleteOrdersByIsDelivered(@Param("isDelivered") Boolean isDelivered);
 
     List<MyPageOrderDto> selectMyPageOrdersByEmail(@Param("email") String email);
 }

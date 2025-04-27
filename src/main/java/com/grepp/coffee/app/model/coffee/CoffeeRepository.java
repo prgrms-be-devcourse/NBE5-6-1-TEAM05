@@ -62,7 +62,7 @@ public class CoffeeRepository {
     }
 
     // TODO : 커피 이미지 삭제 매서드 (완료)
-    public boolean deleteCoffeeImg(int imgId){return coffeeMapper.deleteCoffeeImg(imgId) > 0;}
+    public boolean deleteCoffeeImg(int coffeeId){return coffeeMapper.deleteCoffeeImg(coffeeId) > 0;}
 
     // 재고 증가
     public boolean increaseStock(int coffeeId, int quantity) {

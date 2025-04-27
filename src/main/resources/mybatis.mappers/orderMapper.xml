@@ -49,6 +49,11 @@
     )
   </select>
 
+  <update id="updateAllOrdersToDelivered">
+    UPDATE ORDERS
+    SET is_delivered = TRUE
+  </update>
+
   <delete id="deleteOrderByEmailAndPostNum">
     DELETE FROM ORDERS
     WHERE email = #{email} AND post_num = #{postNum}
@@ -60,6 +65,21 @@
     SELECT order_num FROM ORDERS
     WHERE email = #{email} AND post_num = #{postNum}
     )
+  </delete>
+
+  <!-- 배송 상태가 TRUE인 Detail 삭제 -->
+  <delete id="deleteDetailedOrdersByIsDelivered">
+    DELETE FROM DETAIL
+    WHERE order_num IN (
+    SELECT order_num FROM ORDERS
+    WHERE is_delivered = #{isDelivered}
+    )
+  </delete>
+
+  <!-- 배송 상태가 TRUE인 Order 삭제 -->
+  <delete id="deleteOrdersByIsDelivered">
+    DELETE FROM ORDERS
+    WHERE is_delivered = #{isDelivered}
   </delete>
 
   <select id="selectMyPageOrdersByEmail" parameterType="string" resultMap="MyPageOrderMap">
