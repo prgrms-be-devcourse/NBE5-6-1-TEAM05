@@ -20,7 +20,7 @@
   </select>
 
   <!-- 커피 등록 -->
-  <insert id="insertCoffee" parameterType="CoffeeDto">
+  <insert id="insertCoffee" parameterType="CoffeeDto" useGeneratedKeys="true" keyProperty="coffeeId">
     INSERT INTO COFFEE (COFFEE_NAME, PRICE, STOCK)
     VALUES (#{coffeeName}, #{price}, #{stock})
   </insert>
