@@ -107,7 +107,7 @@ public class AdminController {
     public String updateMenu(@PathVariable Integer id, CoffeeRegistRequest request
         ,Model model){
 
-        CoffeeDto update = coffeeService.getCoffee(new CoffeeDto(id,null,null,null));
+        CoffeeDto update = coffeeService.getCoffee(id);
         request.setCoffeeId(update.getCoffeeId());
         request.setCoffeeName(update.getCoffeeName());
         request.setPrice(update.getPrice());
