@@ -93,7 +93,7 @@ public class SecurityConfig {
                                      .successHandler(successHandler())
                                      .permitAll()
             )
-//            .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
+            .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
             .logout(LogoutConfigurer::permitAll);
         
         return http.build();
