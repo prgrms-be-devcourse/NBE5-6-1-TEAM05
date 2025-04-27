@@ -85,6 +85,9 @@ public class OrderController {
         model.addAttribute("total", count);
         model.addAttribute("coffeeCart", coffeeCart);
 
+        if(authentication==null){
+            return "order/payment";
+        }
         // 미리 입력할 데이터 넣기
         String email= authentication.getName();
         log.info(email);
@@ -148,7 +151,7 @@ public class OrderController {
         }
 
         else{
-            return "order/payment";
+            return "redirect:order/payment";
         }
     }
 
