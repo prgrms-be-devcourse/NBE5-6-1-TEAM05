@@ -1,6 +1,7 @@
 package com.grepp.coffee.app.controller.web.admin;
 
 import com.grepp.coffee.app.controller.web.admin.payload.CoffeeRegistRequest;
+import com.grepp.coffee.app.controller.web.admin.payload.DetailOrderRequest;
 import com.grepp.coffee.app.model.admin.ManageOrderService;
 import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import com.grepp.coffee.app.model.coffee.dto.CoffeeImgDto;
@@ -11,7 +12,9 @@ import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import com.grepp.coffee.infra.error.exceptions.CommonException;
 import com.grepp.coffee.infra.response.ResponseCode;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Order;
 import jakarta.validation.Valid;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,16 +62,31 @@ public class AdminController {
     public String showOrders(Model model){
 
         List<OrderDto> orderDtos= manageOrderService.getOrders();
-
-        Map<OrderDto, List<DetailedOrderDto>> orderMap = new LinkedHashMap<>();
-        orderDtos.forEach(orderDto -> {
-            List<DetailedOrderDto> detailedOrderDtos = manageOrderService.getDetailedOrders(orderDto.getOrderNum());
-            orderMap.put(orderDto, detailedOrderDtos);
-        });
-
-        model.addAttribute("orderMap", orderMap);
+        model.addAttribute("orderDtos", orderDtos);
 
         return "admin/order-list";
+    }
+    @GetMapping("order/detail/{id}")
+    public String showOrders(@PathVariable int id,Model model, DetailOrderRequest request){
+
+        OrderDto order = manageOrderService.getOrders().get(id);
+        List<DetailOrderRequest> requests = new ArrayList<>();
+        List<DetailedOrderDto> detail = manageOrderService.getDetailedOrders(id);
+        detail.forEach(detailedOrderDto -> {
+            DetailOrderRequest detailOrderRequest = new DetailOrderRequest();
+            detailOrderRequest.setQuantity(detailedOrderDto.getQuantity());
+            detailOrderRequest.setCoffeeId(detailedOrderDto.getCoffeeId());
+            detailOrderRequest.setCoffeeName(coffeeService.getCoffee(detailedOrderDto.getCoffeeId()).getCoffeeName());
+
+            requests.add(detailOrderRequest);
+        });
+
+        model.addAttribute("order", order);
+        model.addAttribute("requests", requests);
+
+
+
+        return "admin/order-detail";
     }
 
 
