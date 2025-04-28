@@ -15,20 +15,23 @@
       }
       main.container {
         flex: 1;
+        padding: 2rem;
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 2rem;
       }
       .detail-box {
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 12px;
         width: 100%;
         max-width: 1100px;
-        height: 700px;
-        border: 2px solid black;
-        border-radius: 16px;
-        background: white;
-        padding: 2rem;
+        flex: 1;
         overflow-y: auto;
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        min-height: 400px;
       }
       .order-info {
         display: flex;
@@ -64,9 +67,8 @@
       .page-title {
         font-size: 1.8rem;
         font-weight: bold;
-        margin-bottom: 0.5rem;
         color: #333;
-        text-align: left;
+        align-self: flex-start;
       }
     </style>
 </head>
