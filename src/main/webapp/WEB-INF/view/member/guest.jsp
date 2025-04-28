@@ -10,9 +10,22 @@
     <style>
       body {
         background-color: #f9f7f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+      }
+
+      main.container{
+        flex: 1;
+        padding: 4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
 
       .search-box {
+        width: 100%;
         display: flex;
         gap: 1rem;
         margin-bottom: 2rem;
@@ -24,6 +37,7 @@
         width: 300px;
       }
       .search-box button {
+        width: 150px;
         padding: 0.5rem 1.2rem;
         background: black;
         color: white;
@@ -39,6 +53,7 @@
       }
 
       .order-card {
+        width: 100%;
         background: white;
         border: 1px solid #ccc;
         border-radius: 12px;
@@ -46,6 +61,7 @@
       }
 
       .order-header {
+        width: 100%;
         background-color: #ccc;
         border-radius: 8px;
         padding: 1rem;
@@ -56,6 +72,7 @@
       }
 
       .order-detail {
+        width: 100%;
         padding: 1rem 0.5rem;
         display: flex;
         align-items: center;
