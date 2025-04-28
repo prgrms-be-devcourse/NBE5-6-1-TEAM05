@@ -135,8 +135,8 @@
     <!-- 메뉴 관리 -->
     <div class="section">
         <div class="section-title">
-            메뉴 관리
-            <a href="/admin/menu/list" class="small-link">메뉴 관리로 이동</a>
+            상품 관리
+            <a href="/admin/menu/list" class="small-link">상품 관리로 이동</a>
         </div>
 
         <div class="menu-table-wrapper">
