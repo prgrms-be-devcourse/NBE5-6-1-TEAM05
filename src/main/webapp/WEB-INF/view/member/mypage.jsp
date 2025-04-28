@@ -12,13 +12,8 @@
         background-color: #f9f7f4;
       }
 
-      .main-container {
-        max-width: 900px;
-        margin: 2rem auto;
-        padding: 2rem;
-      }
-
       .profile-box {
+        width: 100%;
         background: white;
         border: 1px solid #ccc;
         border-radius: 12px;
@@ -99,7 +94,7 @@
 <body>
 <%@ include file="/WEB-INF/view/include/header.jsp" %>
 
-<main class="main-container">
+<main class="container">
     <!-- 프로필 영역 -->
     <div class="profile-box">
         <div class="profile-image">
