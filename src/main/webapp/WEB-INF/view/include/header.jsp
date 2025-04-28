@@ -21,7 +21,7 @@
             <!-- ✨ 로그인한 일반 사용자 -->
             <sec:authorize access="hasRole('USER')">
                 <li><a href="/" class="black-text">홈</a></li>
-                <li><a href="/order" class="black-text">상품 목록</a></li>
+                <li><a href="/order" class="black-text">구매하기</a></li>
                 <li><a href="/member/mypage" class="black-text">마이페이지</a></li>
                 <li><a href="#" id="logout" class="btn waves-effect waves-light brown lighten-1 white-text" style="margin-left: 1rem;">로그아웃</a></li>
             </sec:authorize>
