@@ -1,7 +1,6 @@
 package com.grepp.coffee.app.controller.web.member;
 
 
-import com.grepp.coffee.app.controller.web.member.payload.MypageRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SigninRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SignupRequest;
 import com.grepp.coffee.app.controller.web.member.payload.UpdateAddressRequest;
@@ -12,7 +11,6 @@ import com.grepp.coffee.app.model.member.dto.MemberDto;
 import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
-import com.grepp.coffee.app.model.order.dto.OrderDto;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,8 +111,8 @@ public class MemberController {
 
         String userId = authentication.getName();
 
-        if(memberService.updateAddressByEmail(userId, updateAddressRequest.getAddress()))
-            return "member/mypage";
+        if(memberService.updateAddress(userId, updateAddressRequest.getAddress(), updateAddressRequest.getPostNum()))
+            return "redirect:/member/mypage";
         else
             return "redirect:/member/mypage/update";
     }

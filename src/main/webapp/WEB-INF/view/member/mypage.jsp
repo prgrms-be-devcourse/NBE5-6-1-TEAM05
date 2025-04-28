@@ -39,7 +39,7 @@
         flex: 1;
       }
 
-      .order-section-title {
+      .title-section {
         margin: 3rem 0 1rem 0;
         font-size: 1.5rem;
         font-weight: bold;
@@ -95,6 +95,10 @@
 <%@ include file="/WEB-INF/view/include/header.jsp" %>
 
 <main class="container">
+    <div class="title-section">
+        내 정보
+    </div>
+
     <!-- 프로필 영역 -->
     <div class="profile-box">
         <div class="profile-image">
@@ -104,7 +108,7 @@
             <div style="font-size: 1.2rem; font-weight: bold;">
                 ${member.email}
             </div>
-            <div>${member.address}</div>
+            <div>[${member.postNum}] ${member.address}</div>
             <div style="margin-top: 0.5rem;">
                 <a href="/member/mypage/update" style="font-size: 0.9rem;">주소 수정</a>
             </div>
@@ -112,7 +116,7 @@
     </div>
 
     <!-- 주문 내역 제목 -->
-    <div class="order-section-title">
+    <div class="title-section">
         주문 내역
     </div>
 

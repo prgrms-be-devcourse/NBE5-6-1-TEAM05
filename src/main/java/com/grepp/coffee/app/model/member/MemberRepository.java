@@ -43,7 +43,7 @@ public class MemberRepository {
     }
 
     // 회원의 주소를 수정
-    public boolean updateAddressByEmail(String email, String address) {
-        return memberMapper.updateAddressByEmail(email, address);
+    public boolean updateAddress(String email, String address, int postNum) {
+        return memberMapper.updateAddress(email, address, postNum);
     }
 }
