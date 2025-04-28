@@ -147,6 +147,6 @@
 
 <%@ include file="/WEB-INF/view/include/footer.jsp" %>
 </body>
-<script src="${context}/assets/js/mypage-delete.js" defer></script>
+<script src="${context}/assets/js/guest-delete.js" defer></script>
 
 </html>
