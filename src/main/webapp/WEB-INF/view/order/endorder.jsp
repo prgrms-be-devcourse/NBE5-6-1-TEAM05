@@ -70,7 +70,12 @@
     <div class="order-complete-subtitle">감사합니다</div>
     <div class="button-group">
         <a href="/" class="btn-black">홈으로 돌아가기</a>
-        <a href="/member/mypage" class="btn-black">주문 내역 확인하기</a>
+        <sec:authorize access="hasRole('USER')">
+            <a href="/member/mypage" class="btn-black">주문 내역 확인하기</a>
+        </sec:authorize>
+        <sec:authorize access="isAnonymous()">
+            <a href="/member/guest" class="btn-black">주문 내역 확인하기</a>
+        </sec:authorize>
     </div>
 </main>
 
