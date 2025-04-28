@@ -5,7 +5,7 @@
 <mapper namespace="com.grepp.coffee.app.model.order.mapper.OrderMapper">
 
   <resultMap id="MyPageOrderMap" type="com.grepp.coffee.app.model.order.dto.MyPageOrderDto">
-    <id property="orderId" column="order_id"/>
+    <id property="orderId" column="order_num"/>
     <result property="address" column="address"/>
     <result property="postNum" column="post_num"/>
     <result property="orderTime" column="order_time"/>
@@ -96,10 +96,10 @@
   </delete>
 
   <select id="selectMyPageOrdersByEmail" parameterType="string" resultMap="MyPageOrderMap">
-    SELECT o.order_id, o.address, o.post_num, o.order_time,
+    SELECT o.order_num, o.address, o.post_num, o.order_time,
     d.detail_num, d.coffee_id, d.quantity
     FROM ORDERS o
-    LEFT JOIN DETAIL d ON o.order_id = d.order_id
+    LEFT JOIN DETAIL d ON o.order_num = d.order_num
     WHERE o.email = #{email}
     ORDER BY o.order_time DESC, d.detail_num ASC
   </select>

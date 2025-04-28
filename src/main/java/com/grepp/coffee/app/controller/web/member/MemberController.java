@@ -15,8 +15,9 @@ import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -70,23 +71,28 @@ public class MemberController {
         MemberDto memberDto = memberService.findById(userId);
         model.addAttribute("member", memberDto);
 
-        List<MypageRequest> requests = new LinkedList<>();
+        // 1. email 로 주문 목록 가져오기
+        List<MyPageOrderDto> myPageOrders = memberService.detailedOrderListByEmail(userId);
 
-        List<MyPageOrderDto> myPageOrderDtos = memberService.detailedOrderListByEmail(userId);
-        myPageOrderDtos.forEach(orderDto -> {
-            orderDto.getDetailedOrders().forEach(detailedOrderDto -> {
-                MypageRequest request = new MypageRequest();
-                CoffeeDto coffee = coffeeService.getCoffee(detailedOrderDto.getCoffeeId());
-                request.setCoffeeName(coffee.getCoffeeName());
-                request.setQuantity(detailedOrderDto.getQuantity());
-                request.setThumbnail(coffee.getImages());
+        // 2. 화면에 넘길 데이터 구조 만들기
+        Map<Integer, List<Map<String, Object>>> orderDetailMap = new HashMap<>();
 
-                requests.add(request);
-            });
-        });
+        for(MyPageOrderDto order : myPageOrders){
+            List<Map<String, Object>> details = new ArrayList<>();
+            for (DetailedOrderDto detail : order.getDetailedOrders()){
+                CoffeeDto coffee = coffeeService.getCoffee(detail.getCoffeeId());
+                Map<String, Object> detailInfo = new HashMap<>();
+                detailInfo.put("coffeeName", coffee.getCoffeeName());
+                detailInfo.put("coffeeImage", coffee.getImages());
+                detailInfo.put("quantity", detail.getQuantity());
+                details.add(detailInfo);
+            }
+            orderDetailMap.put(order.getOrderId(), details);
+        }
 
-        model.addAttribute("myPageOrderDtos", myPageOrderDtos);
-        model.addAttribute("requests", requests);
+        // 3. model 에 같이 담아서 jsp 로 넘김
+        model.addAttribute("orders", myPageOrders);
+        model.addAttribute("detailedOrders", orderDetailMap);
 
         return "member/mypage";
     }

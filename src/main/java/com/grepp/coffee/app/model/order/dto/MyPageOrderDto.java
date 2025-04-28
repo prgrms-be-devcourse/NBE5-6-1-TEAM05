@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MyPageOrderDto {
     private Integer orderId;
-    private Integer address;
+    private String address;
     private Integer postNum;
     private LocalDateTime orderTime;
     private List<DetailedOrderDto> detailedOrders;
