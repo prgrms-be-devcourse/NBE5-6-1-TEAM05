@@ -75,7 +75,7 @@
         margin-right: 1rem;
       }
 
-      .order-cancel-btn {
+      .delete-btn {
         background-color: #000;
         color: white;
         border: none;
@@ -85,7 +85,7 @@
         cursor: pointer;
       }
 
-      .order-cancel-btn:hover {
+      .delete-btn:hover {
         background-color: #555;
       }
     </style>
