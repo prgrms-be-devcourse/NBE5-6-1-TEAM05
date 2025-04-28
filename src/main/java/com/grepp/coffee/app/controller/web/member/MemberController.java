@@ -5,13 +5,18 @@ import com.grepp.coffee.app.controller.web.member.payload.SigninRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SignupRequest;
 import com.grepp.coffee.app.controller.web.member.payload.UpdateAddressRequest;
 import com.grepp.coffee.app.model.auth.code.Role;
+import com.grepp.coffee.app.model.coffee.CoffeeService;
+import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import com.grepp.coffee.app.model.member.dto.MemberDto;
 import com.grepp.coffee.app.model.member.MemberService;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import jakarta.validation.Valid;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -31,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
     
     private final MemberService memberService;
+    private final CoffeeService coffeeService;
 
     @GetMapping("signup")
     public String signup(SignupRequest signupRequest){
@@ -64,12 +70,28 @@ public class MemberController {
         MemberDto memberDto = memberService.findById(userId);
         model.addAttribute("member", memberDto);
 
+        // 1. email 로 주문 목록 가져오기
+        List<MyPageOrderDto> myPageOrders = memberService.detailedOrderListByEmail(userId);
 
-        List<OrderDto> orderDtos= memberService.orderListByEmail(userId);
-        List<MyPageOrderDto> detailedOrderDtos = memberService.detailedOrderListByEmail(userId);
+        // 2. 화면에 넘길 데이터 구조 만들기
+        Map<Integer, List<Map<String, Object>>> orderDetailMap = new HashMap<>();
 
-        model.addAttribute("orders", orderDtos);
-        model.addAttribute("detailedOrders", detailedOrderDtos);
+        for(MyPageOrderDto order : myPageOrders){
+            List<Map<String, Object>> details = new ArrayList<>();
+            for (DetailedOrderDto detail : order.getDetailedOrders()){
+                CoffeeDto coffee = coffeeService.getCoffee(detail.getCoffeeId());
+                Map<String, Object> detailInfo = new HashMap<>();
+                detailInfo.put("coffeeName", coffee.getCoffeeName());
+                detailInfo.put("coffeeImage", coffee.getImages());
+                detailInfo.put("quantity", detail.getQuantity());
+                details.add(detailInfo);
+            }
+            orderDetailMap.put(order.getOrderId(), details);
+        }
+
+        // 3. model 에 같이 담아서 jsp 로 넘김
+        model.addAttribute("orders", myPageOrders);
+        model.addAttribute("detailedOrders", orderDetailMap);
 
         return "member/mypage";
     }
