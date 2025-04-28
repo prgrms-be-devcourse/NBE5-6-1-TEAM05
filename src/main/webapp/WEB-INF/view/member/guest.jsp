@@ -130,4 +130,6 @@
 
 <%@ include file="/WEB-INF/view/include/footer.jsp" %>
 </body>
+<script src="${context}/assets/js/mypage-delete.js" defer></script>
+
 </html>
