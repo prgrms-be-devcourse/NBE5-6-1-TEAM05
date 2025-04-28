@@ -16,30 +16,41 @@
         <h4 style="font-weight: bold;">Login</h4>
 
         <c:if test="${not empty param.error}">
-            <div class="card-panel red lighten-2 text-white" style="margin-bottom: 2rem;">이메일이나 비밀번호를 확인하세요</div>
+            <div class="card-panel red lighten-2 text-white" style="margin-bottom: 2rem;">이메일이나
+                비밀번호를 확인하세요
+            </div>
         </c:if>
 
         <form:form modelAttribute="signinRequest" action="/member/signin" method="post">
             <div class="input-field">
                 <i class="material-icons prefix">email</i>
-                <form:input path="email" class="custom-input" placeholder="Email Address" />
+                <form:input path="email" class="custom-input" placeholder="Email Address"/>
             </div>
 
             <div class="input-field">
                 <i class="material-icons prefix">lock</i>
-                <form:input path="password" class="custom-input" placeholder="Password" type="password" />
+                <form:input path="password" class="custom-input" placeholder="Password"
+                            type="password"/>
             </div>
 
             <div class="row">
                 <p>
                     <label>
-                        <input type="checkbox" name="remember-me" />
+                        <input type="checkbox" name="remember-me"/>
                         <span>로그인 상태 유지</span>
                     </label>
                 </p>
             </div>
 
             <div style="margin-top: 2rem;">
+                <div style="text-align: center; margin-bottom: 0.5rem">
+                    <a href="/member/signup"
+                       style="font-size: 0.9rem; color: #757575; text-decoration: none;"
+                       onmouseover="this.style.textDecoration='underline';"
+                       onmouseout="this.style.textDecoration='none';">
+                        회원가입
+                    </a>
+                </div>
                 <button type="submit" class="btn custom-btn">로그인</button>
             </div>
         </form:form>
