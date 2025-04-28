@@ -127,7 +127,7 @@
                         주소: ${order.address}
                     </div>
                     <form action="/order/cancel/${order.orderId}" method="post" style="margin:0;">
-                        <button type="submit" class="order-cancel-btn">주문 취소</button>
+                        <button type="submit" class="delete-btn" data-orderNum="${order.orderId}">주문 취소</button>
                     </form>
                 </div>
 
