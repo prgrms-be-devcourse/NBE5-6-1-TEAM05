@@ -2,82 +2,102 @@
 <%@ include file="/WEB-INF/view/include/page.jsp" %>
 <html lang='ko'>
 <head>
-    <title>Title</title>
+    <title>주문 관리</title>
     <%@ include file="/WEB-INF/view/include/static.jsp" %>
+    <style>
+      .order-box {
+        width: 100%;
+        max-width: 1100px;
+        height: 700px;
+        border: 2px solid black;
+        border-radius: 16px;
+        background: white;
+        padding: 2rem;
+        overflow-y: auto;
+      }
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+      .order-content {
+        width: 100%;
+      }
 
+      .list-header, .list-row {
+        display: flex;
+        padding: 0.8rem 0;
+        border-bottom: 1px solid #eee;
+        font-size: 0.95rem;
+      }
+
+      .list-header {
+        font-weight: bold;
+        border-bottom: 2px solid #ccc;
+      }
+
+      .list-row:hover {
+        background: #f9f9f9;
+        cursor: pointer;
+      }
+
+      .col {
+        flex: 1;
+        text-align: center;
+      }
+      .page-title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #333;
+        text-align: left;
+      }
+
+    </style>
 </head>
+
 <body>
 <%@ include file="/WEB-INF/view/include/header.jsp" %>
 
 <main class="container">
+    <div class="page-title">주문 관리</div>
 
-    <div class="row justify-content-center m-4">
-        <h6 class="col text-center"><a class="btn title fs-1" href="http://localhost:8080/">Grids & Circle</a></h6>
-    </div>
-    <div class="card">
-        <div class="row m-0">
-            <div class="w-100">
-                <h5 class="text-center"><b>주문 목록</b></h5>
-                <ul class="list-group products collapsible" style="width:100%;">
-                    <div class="list-group-item d-flex w-100">
-                        <div class="col text-center"><c:out value="주문 번호"/></div>
-                        <div class="col text-center"><c:out value="이메일"/></div>
-                        <div class="col text-center"><c:out value="주소"/></div>
-                        <div class="col text-center"><c:out value="우편번호"/></div>
-                        <div class="col text-center"><c:out value="주문 시각"/></div>
-                    </div>
-                    <c:if test="${not empty orderMap}">
-                        <c:forEach items="${orderMap}" var="entry">
-                            <li>
-                                <div class="list-group-item d-flex w-100">
-                                    <div class="collapsible-header">
-                                    <div class="col text-center"><c:out value="${entry.key.orderNum}"/></div>
-                                    <div class="col text-center"><c:out value="${entry.key.email}"/></div>
-                                    <div class="col text-center"><c:out value="${entry.key.address}"/></div>
-                                    <div class="col text-center"><c:out value="${entry.key.postNum}"/></div>
-                                    <div class="col text-center"><c:out value="${entry.key.orderTime}"/></div>
-
-                                    <c:if test="${entry.key.isDelivered}">
-                                        <div class="col text-center">배송 완료</div>
-                                    </c:if>
-                                    <c:if test="${entry.key.isDelivered==false}">
-                                    <div class="col text-center">배송 전</div>
-                                    </div>
-                                    <div class="col text-end">
-                                        <a class="btn btn-small btn-outline-dark delivery-btn" href="#" data-orderNum="${entry.key.orderNum}">배송 완료 처리</a>
-                                    </div>
-                                    <div class="col text-end">
-                                        <a class="btn btn-small btn-outline-dark delete-btn" href="#" data-orderNum="${entry.key.orderNum}">주문 취소</a>
-                                    </div>
-                                </div>
-                                </c:if>
-
-                                <div class="collapsible-body">
-                                    <div class="list-group-item d-flex w-100">
-                                        <div class="col text-center">커피 아이디</div>
-                                        <div class="col text-center">수량</div>
-                                    </div>
-                                    <c:forEach items="${entry.value}" var="datail">
-                                        <div class="list-group-item d-flex w-100">
-                                            <div class="col text-center"><c:out value="${datail.coffeeId}"/></div>
-                                            <div class="col text-center"><c:out value="${datail.quantity}"/></div>
-                                        </div>
-                                    </c:forEach>
-                                </div>
-                            </li>
-                        </c:forEach>
-                    </c:if>
-                </ul>
+    <div class="order-box">
+        <div style="width: 95%;">
+            <!-- 헤더 -->
+            <div class="list-header" style="display: flex; border-bottom: 1px solid #ccc; padding: 0.5rem 0; font-weight: bold;">
+                <div class="col text-center" style="flex:1;">주문 번호</div>
+                <div class="col text-center" style="flex:1;">이메일</div>
+                <div class="col text-center" style="flex:2;">주소</div>
+                <div class="col text-center" style="flex:1;">우편번호</div>
+                <div class="col text-center" style="flex:1;">주문 시각</div>
+                <div class="col text-center" style="flex:1;">배송 상태</div>
             </div>
+
+            <!-- 주문 목록 -->
+            <c:if test="${not empty orderDtos}">
+                <c:forEach items="${orderDtos}" var="order">
+                    <div class="list-row"
+                         style="display: flex; padding: 0.5rem 0; border-bottom: 1px solid #eee; cursor: pointer;"
+                         onclick="location.href='/admin/order/detail/${order.orderNum}'">
+                        <div class="col text-center" style="flex:1;"><c:out value="${order.orderNum}"/></div>
+                        <div class="col text-center" style="flex:1;"><c:out value="${order.email}"/></div>
+                        <div class="col text-center" style="flex:2;"><c:out value="${order.address}"/></div>
+                        <div class="col text-center" style="flex:1;"><c:out value="${order.postNum}"/></div>
+                        <div class="col text-center" style="flex:1;"><c:out value="${order.orderTime}"/></div>
+                        <div class="col text-center" style="flex:1;">
+                            <c:choose>
+                                <c:when test="${order.isDelivered}">
+                                    배송 완료
+                                </c:when>
+                                <c:otherwise>
+                                    배송 전
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </div>
+                </c:forEach>
+            </c:if>
         </div>
     </div>
-
 </main>
+
 <%@ include file="/WEB-INF/view/include/footer.jsp" %>
 </body>
-<script src="${context}/assets/js/manage-order.js" defer></script>
 </html>

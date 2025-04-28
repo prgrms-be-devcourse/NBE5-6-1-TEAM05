@@ -1,6 +1,7 @@
 package com.grepp.coffee.app.controller.web.member;
 
 
+import com.grepp.coffee.app.controller.web.member.payload.MypageRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SigninRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SignupRequest;
 import com.grepp.coffee.app.controller.web.member.payload.UpdateAddressRequest;
