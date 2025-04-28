@@ -75,7 +75,7 @@ public class SecurityConfig {
                                     .requestMatchers(PUT, "/api/add/**", "/api/sub/**").permitAll()
                                     .requestMatchers(DELETE, "/api/delete/**").permitAll()
                                     .requestMatchers(GET, "/api/member/exists/*").permitAll()
-                                    .requestMatchers(GET, "/member/signup","/member/signin").permitAll()
+                                    .requestMatchers(GET, "/member/signup","/member/signin", "/member/guest").permitAll()
                                     .requestMatchers(POST, "/member/signin", "/member/signup").permitAll()
                                     .requestMatchers(GET, "admin/menu/**","admin/order/**").permitAll()
                     .requestMatchers(POST, "admin/menu/**").permitAll()

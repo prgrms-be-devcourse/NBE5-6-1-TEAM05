@@ -1,14 +1,18 @@
 package com.grepp.coffee.app.controller.web.member;
 
 
+import com.grepp.coffee.app.controller.web.admin.payload.DetailOrderRequest;
+import com.grepp.coffee.app.controller.web.member.payload.MypageRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SigninRequest;
 import com.grepp.coffee.app.controller.web.member.payload.SignupRequest;
 import com.grepp.coffee.app.controller.web.member.payload.UpdateAddressRequest;
+import com.grepp.coffee.app.model.admin.ManageOrderService;
 import com.grepp.coffee.app.model.auth.code.Role;
 import com.grepp.coffee.app.model.coffee.CoffeeService;
 import com.grepp.coffee.app.model.coffee.dto.CoffeeDto;
 import com.grepp.coffee.app.model.member.dto.MemberDto;
 import com.grepp.coffee.app.model.member.MemberService;
+import com.grepp.coffee.app.model.order.OrderService;
 import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.MyPageOrderDto;
 import jakarta.validation.Valid;
@@ -27,6 +31,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -36,6 +41,8 @@ public class MemberController {
     
     private final MemberService memberService;
     private final CoffeeService coffeeService;
+    private final OrderService orderService;
+    private final ManageOrderService manageOrderService;
 
     @GetMapping("signup")
     public String signup(SignupRequest signupRequest){
@@ -126,4 +133,41 @@ public class MemberController {
 
         return "member/mypage";
     }
+
+    @GetMapping("guest")
+    public String searchGuestOrder(@RequestParam(required = false) String email, Model model) {
+
+        if(email==null)
+            return "member/guest";
+
+        // 1. email 로 주문 목록 가져오기
+        List<MyPageOrderDto> myPageOrders = memberService.detailedOrderListByEmail(email);
+
+        // 2. 화면에 넘길 데이터 구조 만들기
+        Map<Integer, List<Map<String, Object>>> orderDetailMap = new HashMap<>();
+
+        for(MyPageOrderDto order : myPageOrders){
+            List<Map<String, Object>> details = new ArrayList<>();
+            for (DetailedOrderDto detail : order.getDetailedOrders()){
+                CoffeeDto coffee = coffeeService.getCoffee(detail.getCoffeeId());
+                Map<String, Object> detailInfo = new HashMap<>();
+                detailInfo.put("coffeeName", coffee.getCoffeeName());
+                detailInfo.put("coffeeImage", coffee.getImages());
+                detailInfo.put("quantity", detail.getQuantity());
+                details.add(detailInfo);
+            }
+            orderDetailMap.put(order.getOrderId(), details);
+        }
+
+        // 3. model 에 같이 담아서 jsp 로 넘김
+        model.addAttribute("orders", myPageOrders);
+        model.addAttribute("detailedOrders", orderDetailMap);
+
+
+
+        return "member/guest";
+    }
+
+
+
 }
