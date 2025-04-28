@@ -11,6 +11,7 @@ import com.grepp.coffee.app.model.order.dto.DetailedOrderDto;
 import com.grepp.coffee.app.model.order.dto.OrderDto;
 import com.grepp.coffee.app.model.coffee.CoffeeService;
 import com.grepp.coffee.app.model.order.OrderService;
+import com.grepp.coffee.infra.response.ApiResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
@@ -19,11 +20,13 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -37,7 +40,41 @@ public class OrderController {
     private final CoffeeService coffeeService;
     private final MemberService memberService;
 
-    @GetMapping
+    @GetMapping("/{coffeeId}")
+    public String getOrder(@PathVariable Integer coffeeId, OrderRequest request, HttpSession session, Model model) {
+        // 커피 데이터 가져오기
+        List<CoffeeDto> coffeeDtos = coffeeService.getAllCoffee();
+
+
+        String prekey = "coffee"+coffeeId;
+        CoffeeSessionData preData = new CoffeeSessionData();
+
+        if(coffeeService.getCoffee(coffeeId).getStock()>0) {
+
+        preData.setId(coffeeId);
+        preData.setName(coffeeService.getCoffee(coffeeId).getCoffeeName());
+        preData.setCoffeeCount(1);
+        session.setAttribute(prekey,preData);
+
+        }
+        //세션 데이터 가져오기
+        Map<String, CoffeeSessionData> coffeeCart = new HashMap<>();
+        for(CoffeeDto coffee : coffeeDtos) {
+            String key = "coffee"+coffee.getCoffeeId();
+            Object value = session.getAttribute(key);
+            if(value !=null){
+                coffeeCart.put(key, (CoffeeSessionData) value);
+            }
+        }
+
+        model.addAttribute("coffeeDtos", coffeeDtos);
+        model.addAttribute("coffeeCart", coffeeCart);
+
+        return "order/order";
+    }
+
+
+        @GetMapping
     public String getOrder(OrderRequest request, HttpSession session, Model model) {
         // 커피 데이터 가져오기
         List<CoffeeDto> coffeeDtos = coffeeService.getAllCoffee();
@@ -151,7 +188,7 @@ public class OrderController {
         }
 
         else{
-            return "redirect:order/payment";
+            return "redirect:order";
         }
     }
 

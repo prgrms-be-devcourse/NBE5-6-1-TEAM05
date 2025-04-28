@@ -48,7 +48,7 @@
                         <p class="black-text" style="margin-top: 0.5rem;">₩ ${coffee.price}</p>
                     </div>
                     <div class="card-action">
-                        <a class="btn brown lighten-1 white-text" href="#">구매하기</a>
+                        <a class="btn brown lighten-1 white-text" href="/order/${coffee.coffeeId}">구매하기</a>
                     </div>
                 </div>
             </div>
