@@ -125,11 +125,11 @@
       }
 
       .badge {
-        background-color: black;
         color: white;
         border-radius: 10px;
         padding: 0.2rem 0.5rem;
         font-size: 0.8rem;
+        align-self: flex-start;
       }
 
       .purchase-btn {
@@ -144,8 +144,18 @@
         cursor: pointer;
       }
 
+      .delete-btn{
+        align-self: flex-end;
+      }
+
       .purchase-btn:hover {
         background-color: #555;
+      }
+
+      .cart-item-actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
     </style>
@@ -198,8 +208,12 @@
                     <c:forEach items="${coffeeCart}" var="entry">
                         <div class="cart-item coffee-li" data-coffeeId="${entry.value.id}">
                             <span>${entry.value.name}</span>
-                            <span class="badge" data-coffeeId="${entry.value.id}">${entry.value.count}개</span>
-                            <button class="delete-btn" data-coffeeId="${coffee.coffeeId}">X</button>
+                            <div>
+                                <div class="cart-item-actions">
+                                    <span class="badge" data-coffeeId="${entry.value.id}">${entry.value.count}개</span>
+                                </div>
+                                <button class="delete-btn" data-coffeeId="${coffee.coffeeId}">X</button>
+                            </div>
                         </div>
                     </c:forEach>
                 </div>
@@ -208,8 +222,11 @@
             <div id="coffeeCartListTemplate" style="display:none;">
                 <div class="cart-item coffee-li" data-coffeeId="0">
                     <span class="coffee-name">커피 이름</span>
-                    <span class="badge coffee-count" data-coffeeId="0">0개</span>
-                    <button class="delete-btn" data-coffeeId="${coffee.coffeeId}">X</button>
+                    <div class="cart-item-actions">
+                        <span class="badge coffee-count" data-coffeeId="0">0개</span>
+                        <button class="delete-btn" data-coffeeId="${coffee.coffeeId}">X</button>
+                    </div>
+
                 </div>
             </div>
 
