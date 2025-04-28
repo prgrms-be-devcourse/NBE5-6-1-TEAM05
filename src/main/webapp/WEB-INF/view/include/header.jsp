@@ -11,7 +11,7 @@
             <sec:authorize access="isAnonymous()">
                 <li><a href="/" class="black-text">홈</a></li>
                 <li><a href="/order" class="black-text">구매하기</a></li>
-                <li><a href="/member/signup" class="black-text">회원가입</a></li>
+                <li><a href="/member/mypage" class="black-text">주문조회</a></li>
                 <li><a href="/member/signin"
                        class="btn-flat waves-effect black-text"
                        style="border: 1px solid black; border-radius: 8px; padding: 0 1.5rem;">로그인</a></li>

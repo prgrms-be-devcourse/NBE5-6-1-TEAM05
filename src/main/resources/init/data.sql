@@ -15,7 +15,8 @@ INSERT INTO COFFEE (COFFEE_NAME, PRICE, STOCK) VALUES
 
 -- === ORDERS ===
 INSERT INTO ORDERS (EMAIL, ADDRESS, POST_NUM, ORDER_TIME) VALUES
-('john@example.com', '서울시 강남구', 12345, NOW()),
+('member@test.com', '서울시 강남구', 12345, NOW()),
+('member@test.com', '서울시 강남구', 12345, DATE_SUB(NOW(), INTERVAL 1 DAY)),
 ('emma@example.com', '부산시 해운대구', 54321, NOW());
 
 -- === DETAIL ===
@@ -23,4 +24,6 @@ INSERT INTO DETAIL (ORDER_NUM, COFFEE_ID, QUANTITY) VALUES
 (1, 1, 2),   -- john 주문: 예가체프 2개
 (1, 3, 1),   -- john 주문: 케냐 AA 1개
 (2, 2, 1),   -- emma 주문: 수프리모 1개
-(2, 4, 3);   -- emma 주문: 산토스 3개
+(2, 4, 3),   -- emma 주문: 산토스 3개
+(3, 2, 1),  -- 콜롬비아 수프리모 1개
+(3, 3, 2);  -- 케냐 AA 2개
