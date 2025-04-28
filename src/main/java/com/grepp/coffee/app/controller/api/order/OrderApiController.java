@@ -48,6 +48,10 @@ public class OrderApiController {
             session.setAttribute(key, coffeeSessionData);
         }else{
             CoffeeSessionData count = (CoffeeSessionData) session.getAttribute("coffee"+id);
+
+            if(coffeeDto.getStock()<=count.getCoffeeCount()) {
+                return ResponseEntity.ok(ApiResponse.noContent());
+            }
             count.setCoffeeCount(count.getCoffeeCount()+1);
             String key = "coffee"+id;
             session.setAttribute(key, count);
