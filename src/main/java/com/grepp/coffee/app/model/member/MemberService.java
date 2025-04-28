@@ -66,8 +66,8 @@ public class MemberService{
 
     // ==================== 마이페이지 관련 ==================== //
     // Update address
-    public boolean updateAddressByEmail(String email, String address) {
-        return memberRepository.updateAddressByEmail(email, address);
+    public boolean updateAddress(String email, String address, int postNum) {
+        return memberRepository.updateAddress(email, address, postNum);
     }
 
     // Get member's order lists

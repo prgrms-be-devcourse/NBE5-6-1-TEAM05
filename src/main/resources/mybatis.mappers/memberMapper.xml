@@ -48,7 +48,10 @@
   <!-- update address -->
   <update id="updateAddress">
     update member
-    set address = #{address}
+    <set>
+      <if test="address != null">address = #{address},</if>
+      <if test="postNum != null">post_num = #{postNum}</if>
+    </set>
     where email = #{email}
   </update>
 </mapper>

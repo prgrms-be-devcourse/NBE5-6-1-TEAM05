@@ -84,6 +84,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers("/api/**")
                 .ignoringRequestMatchers("/admin/menu/regist","/admin/menu/update/**")
+                .ignoringRequestMatchers("/member/mypage/update")
             )
             .formLogin((form) -> form
                                      .loginPage("/member/signin")
