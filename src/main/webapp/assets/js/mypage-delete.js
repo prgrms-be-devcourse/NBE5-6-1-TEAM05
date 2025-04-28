@@ -5,7 +5,7 @@ document.querySelectorAll(".delete-btn")
     event.preventDefault();
     const orderNum = this.getAttribute("data-orderNum");
 
-    const url = `http://localhost:8080/api/admin/order/delete/${orderNum}`;
+    const url = `http://localhost:8080/api/member/order/delete/${orderNum}`;
     const response = await fetch(
         url, {
           method: 'DELETE'
