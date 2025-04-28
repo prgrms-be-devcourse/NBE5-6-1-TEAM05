@@ -28,16 +28,16 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-    
+
     @Value("${remember-me.key}")
     private String rememberMeKey;
-    
+
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         return http.getSharedObject(AuthenticationManagerBuilder.class)
                    .build();
     }
-    
+
     @Bean
     public AuthenticationSuccessHandler successHandler(){
         return new AuthenticationSuccessHandler() {
@@ -45,42 +45,41 @@ public class SecurityConfig {
             public void onAuthenticationSuccess(HttpServletRequest request,
                 HttpServletResponse response, Authentication authentication)
                 throws IOException, ServletException {
-                
+
                 boolean isAdmin = authentication.getAuthorities()
                                       .stream()
                                       .anyMatch(authority ->
                                                     authority.getAuthority().equals("ROLE_ADMIN"));
-                
+
                 if(isAdmin){
                     response.sendRedirect("/admin");
                     return;
                 }
-                
+
                 response.sendRedirect("/");
             }
         };
     }
-    
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        
+
         // * : 1depth 아래 모든 경로
         // ** : 모든 depth 의 모든 경로
         // Security Config 에는 인증과 관련된 설정만 지정 (PermitAll or Authenticated)
         http
             .authorizeHttpRequests(
                 (requests) -> requests
-                                    .requestMatchers(PUT, "api/admin/**").hasRole("ADMIN")
-                                    .requestMatchers(DELETE, "api/admin/**").hasRole("ADMIN")
                                     .requestMatchers(GET, "admin/**").hasRole("ADMIN")
                                     .requestMatchers(POST, "admin/**").hasRole("ADMIN")
                                     .requestMatchers(GET, "member/mypage/**").authenticated()
                                     .requestMatchers(POST, "member/mypage/**").authenticated()
-
                                     .anyRequest().permitAll()
             )
             .csrf(csrf -> csrf
                 .ignoringRequestMatchers("api/**")
+                .ignoringRequestMatchers("api/member/**")
+                .ignoringRequestMatchers("api/admin/**")
                 .ignoringRequestMatchers("admin/menu/regist","admin/menu/update/**")
                 .ignoringRequestMatchers("member/mypage/update")
             )
@@ -94,10 +93,10 @@ public class SecurityConfig {
             )
             .rememberMe(rememberMe -> rememberMe.key(rememberMeKey))
             .logout(LogoutConfigurer::permitAll);
-        
+
         return http.build();
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder(){
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
