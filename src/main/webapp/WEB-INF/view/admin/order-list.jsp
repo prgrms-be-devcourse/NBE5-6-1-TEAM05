@@ -5,19 +5,41 @@
     <title>주문 관리</title>
     <%@ include file="/WEB-INF/view/include/static.jsp" %>
     <style>
-      .order-box {
-        width: 100%;
-        max-width: 1100px;
-        height: 700px;
-        border: 2px solid black;
-        border-radius: 16px;
-        background: white;
-        padding: 2rem;
-        overflow-y: auto;
+      body{
+        background-color: #f9f7f4;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
 
-      .order-content {
+      main.container {
+        flex: 1;
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      table {
         width: 100%;
+        border-collapse: collapse;
+        min-width: 900px;
+      }
+
+      .order-table-wrapper{
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 1100px;
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        min-height: 400px;
       }
 
       .list-header, .list-row {
@@ -44,9 +66,8 @@
       .page-title {
         font-size: 1.8rem;
         font-weight: bold;
-        margin-bottom: 0.5rem;
         color: #333;
-        text-align: left;
+        align-self: flex-start;
       }
 
     </style>
@@ -56,9 +77,10 @@
 <%@ include file="/WEB-INF/view/include/header.jsp" %>
 
 <main class="container">
+
     <div class="page-title">주문 관리</div>
 
-    <div class="order-box">
+    <div class="order-table-wrapper">
         <div style="width: 95%;">
             <!-- 헤더 -->
             <div class="list-header" style="display: flex; border-bottom: 1px solid #ccc; padding: 0.5rem 0; font-weight: bold;">

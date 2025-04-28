@@ -69,7 +69,7 @@ public class AdminController {
     @GetMapping("order/detail/{id}")
     public String showOrders(@PathVariable int id,Model model, DetailOrderRequest request){
 
-        OrderDto order = manageOrderService.getOrders().get(id);
+        OrderDto order = manageOrderService.getOrders().get(id-1);
         List<DetailOrderRequest> requests = new ArrayList<>();
         List<DetailedOrderDto> detail = manageOrderService.getDetailedOrders(id);
         detail.forEach(detailedOrderDto -> {
