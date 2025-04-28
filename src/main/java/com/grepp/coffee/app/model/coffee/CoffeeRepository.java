@@ -61,14 +61,4 @@ public class CoffeeRepository {
     public boolean deleteCoffeeImg(int coffeeId) {
         return coffeeMapper.deleteCoffeeImg(coffeeId) > 0;
     }
-
-    // 재고 증가
-    public boolean increaseStock(int coffeeId, int quantity) {
-        return coffeeMapper.increaseStock(coffeeId, quantity) > 0;
-    }
-
-    // 재고 감소
-    public boolean decreaseStock(int coffeeId, int quantity) {
-        return coffeeMapper.decreaseStock(coffeeId, quantity) > 0;
-    }
 }

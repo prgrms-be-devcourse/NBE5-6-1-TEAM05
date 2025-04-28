@@ -37,12 +37,6 @@ public class CoffeeService {
         return true;
     }
 
-    // test
-    @Transactional
-    public boolean addMenu(CoffeeDto coffeeDto) {
-        return coffeeRepository.insertCoffee(coffeeDto);
-    }
-
     /** DB로부터 모든 커피 메뉴들을 가져옵니다. */
     public List<CoffeeDto> getAllCoffee() {
         return coffeeRepository.selectAll();
@@ -60,19 +54,15 @@ public class CoffeeService {
             List<FileDto> fileDtos = fileUtil.upload(thumbnail, "coffee");
             if(!fileDtos.isEmpty()) {
                 CoffeeImgDto coffeeImg = new CoffeeImgDto(coffeeDto.getCoffeeId(), CoffeeImgType.THUMBNAIL, fileDtos.getFirst());
-                coffeeRepository.updateCoffeeImg(coffeeImg);
+                if(!coffeeRepository.updateCoffeeImg(coffeeImg)){
+                    coffeeRepository.insertCoffeeImg(coffeeImg);
+                }
             }
             coffeeRepository.updateCoffee(coffeeDto);
             return true;
         } catch (IOException e) {
             throw new CommonException(ResponseCode.INTERNAL_SERVER_ERROR, e);
         }
-    }
-
-    // test
-    @Transactional
-    public boolean updateMenu(CoffeeDto coffeeDto) {
-        return coffeeRepository.updateCoffee(coffeeDto);
     }
 
     /** DB에 저장된 커피메뉴를 삭제합니다. */
