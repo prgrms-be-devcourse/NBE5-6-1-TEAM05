@@ -12,8 +12,8 @@ document.querySelectorAll(".delivery-btn")
     const data = await response.json();
 
     if (data.data) {
-      alert("배송 완료 처리되었습니다..");
-      window.location.reload();
+      alert("배송 완료 처리되었습니다.");
+      window.location.href = "http://localhost:8080/admin/order/list"
     }
     else{
       alert("문제가 발생하였습니다.");
@@ -33,9 +33,11 @@ document.querySelectorAll(".delete-btn")
           method: 'DELETE'
         });
 
-    if (response.data.data) {
+    const data = await response.json();
+
+    if (data.data) {
       alert("취소 처리 되었습니다.");
-      window.location.reload();
+      window.location.href = "http://localhost:8080/admin/order/list"
     }
     else{
       alert("문제가 발생하였습니다.")
