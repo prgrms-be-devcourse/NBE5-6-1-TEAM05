@@ -141,7 +141,7 @@ public class AdminController {
     }
 
     @PostMapping("menu/update/{id}")
-    public String registMenu(@PathVariable Integer id, CoffeeRegistRequest request, BindingResult bindingResult
+    public String updateMenu(@PathVariable Integer id, CoffeeRegistRequest request, BindingResult bindingResult
         ,Model model){
 
         if(bindingResult.hasErrors()){
