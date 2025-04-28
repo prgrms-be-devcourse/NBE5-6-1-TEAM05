@@ -160,6 +160,7 @@
 
     </style>
 
+
 </head>
 
 <body>
@@ -210,9 +211,9 @@
                             <span>${entry.value.name}</span>
                             <div>
                                 <div class="cart-item-actions">
-                                    <span class="badge coffee-count" data-coffeeId="${entry.value.id}">${entry.value.coffeeCount}개</span>
+                                    <span class="badge coffee-count" data-coffeeId="${entry.value.id}">${entry.value.coffeeCount}</span>
+                                    <button class="delete-btn" data-coffeeId="${entry.value.id}">X</button>
                                 </div>
-                                <button class="delete-btn" data-coffeeId="${entry.value.id}">X</button>
                             </div>
                         </div>
                     </c:forEach>
@@ -223,7 +224,7 @@
                 <div class="cart-item coffee-li" data-coffeeId="0">
                     <span class="coffee-name">커피 이름</span>
                     <div class="cart-item-actions">
-                        <span class="badge coffee-count" data-coffeeId="0">0개</span>
+                        <span class="badge coffee-count" data-coffeeId="0">0</span>
                         <button class="delete-btn" data-coffeeId="0">X</button>
                     </div>
 

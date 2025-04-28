@@ -54,7 +54,7 @@ document.querySelectorAll(".add-btn")
 
     // 커피 아이디가 없으면 생성 있으면 개수 +1
     if(e!==null){
-      e.textContent = (coffeeCart.coffeeCount+"개");
+      e.textContent = (coffeeCart.coffeeCount);
     }else{
       const clone = createOrder(coffeeCart);
       document.querySelector('.coffee-list').appendChild(clone);
@@ -93,7 +93,7 @@ document.querySelectorAll(".sub-btn")
       coffeeLi.remove();
       return;
     }
-    count.textContent = (coffeeCart.coffeeCount+"개");
+    count.textContent = (coffeeCart.coffeeCount);
   });
 });
 
