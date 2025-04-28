@@ -134,7 +134,7 @@
                 <!-- 상세 주문 목록 -->
                 <c:forEach var="detail" items="${detailedOrders[order.orderId]}">
                     <div class="order-detail">
-                        <img src="${detail.coffeeImage[0].uploadPath}" alt="상품 이미지">
+                        <img src="${detail.coffeeImage[0].url}" alt="상품 이미지">
                         <div style="flex:1;">${detail.coffeeName}</div>
                         <div>${detail.quantity}개</div>
                     </div>
